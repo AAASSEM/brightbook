@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f5fced",
+                        "surface-variant": "#dee5d6",
+                        "secondary-fixed": "#ffdf9e",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#5b4300",
+                        "on-primary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#0061a4",
+                        "on-tertiary-container": "#00355d",
+                        "on-background": "#171d14",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#6f7a6b",
+                        "primary-fixed": "#94f990",
+                        "surface": "#f5fced",
+                        "secondary": "#785900",
+                        "secondary-container": "#fdc003",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#4caf50",
+                        "inverse-surface": "#2c3228",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-secondary-container": "#6c5000",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e3ebdc",
+                        "surface-container": "#e9f0e1",
+                        "on-surface-variant": "#3f4a3c",
+                        "background": "#f5fced",
+                        "surface-dim": "#d5dcce",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#006e1c",
+                        "on-surface": "#171d14",
+                        "surface-container-low": "#eff6e7",
+                        "on-primary-container": "#003c0b",
+                        "inverse-on-surface": "#ecf3e4",
+                        "outline-variant": "#becab9",
+                        "on-secondary-fixed": "#261a00",
+                        "primary": "#006e1c",
+                        "tertiary-fixed": "#d1e4ff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#fabd00",
+                        "on-primary-fixed-variant": "#005313",
+                        "inverse-primary": "#78dc77",
+                        "tertiary-container": "#33a0fe",
+                        "on-tertiary-fixed": "#001d36",
+                        "surface-container-highest": "#dee5d6",
+                        "on-tertiary-fixed-variant": "#00497d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "kid-margin": "24px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "unit": "8px",
+                        "touch-target-min": "48px",
+                        "parent-margin": "16px",
+                        "gutter": "16px",
+                        "stack-lg": "40px"
+                    },
+                    "fontFamily": {
+                        "admin-label-xs": ["Inter"],
+                        "parent-headline-md": ["Plus Jakarta Sans"],
+                        "kid-body-md": ["Lexend"],
+                        "parent-body-sm": ["Plus Jakarta Sans"],
+                        "kid-headline-lg": ["Lexend"]
+                    },
+                    "fontSize": {
+                        "admin-label-xs": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "parent-headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "kid-body-md": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "parent-body-sm": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "kid-headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 110, 28, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-parent-body-sm overflow-hidden flex h-screen">
+<!-- Sidebar Navigation (Desktop only as requested) -->
+<aside class="w-72 bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-800 flex flex-col z-20 shrink-0">
+<div class="px-6 py-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="auto_stories" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+</div>
+<span class="text-xl font-black text-green-700 dark:text-green-400 font-lexend tracking-tight">BrightBook</span>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<p class="px-4 text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2">Main Menu</p>
+<a class="flex items-center gap-3 px-4 py-3 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 rounded-2xl font-bold font-lexend transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Users &amp; Students
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                AI Content Engine
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Financials
+            </a>
+<div class="pt-6">
+<p class="px-4 text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2">System Health</p>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+                    Audits &amp; Logs
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    System Settings
+                </a>
+</div>
+</nav>
+<div class="p-4 mt-auto border-t border-zinc-100 dark:border-zinc-800">
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded-2xl">
+<img alt="Admin Avatar" class="w-10 h-10 rounded-full border-2 border-white" data-alt="Professional headshot of a smiling administrator in a business casual outfit, clean studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0usN2qX8NHTAeuB3_NEnMJXGj_V7L6gD8HKZcmuXr4dWfE1GMy3Hzgqenu8IHTkWMkFJXmZRRIbbOa5xRlBU0jmwxPPUd7W6Rln61VQnLn2bDY-1d44crxLoF_l1QadvaX52N_ddL1Wda5C2-KwdRjaswxgSQj3-I1U8LbtPnXxaI-RccbemanJBNS3KFf4iO9qplunQ-WkGX5dQEDbt6i3gUWLKpkOm5VGY5NVD7kQ_01VjwTgQ-N0i4taccap1dl9fz5ES9smQ"/>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-sm truncate">Admin User</p>
+<p class="text-[10px] text-zinc-500 uppercase font-bold tracking-tight">Super Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-surface-bright flex flex-col h-screen">
+<!-- Header -->
+<header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md sticky top-0 z-10 border-b border-zinc-100 dark:border-zinc-800 shadow-sm flex justify-between items-center px-8 py-4">
+<div class="flex items-center gap-4">
+<h1 class="text-parent-headline-md font-parent-headline-md text-on-surface">System Overview</h1>
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold border border-green-200">Production Live</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-zinc-500 hover:text-green-600 cursor-pointer" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<div class="h-8 w-[1px] bg-zinc-200 mx-2"></div>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-2 rounded-xl font-bold transition-all shadow-md active:scale-95">Generate Report</button>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="p-8 space-y-8">
+<!-- Health Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Active Users -->
+<div class="bento-card bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-green-50 rounded-2xl text-green-600">
+<span class="material-symbols-outlined" data-icon="person_play" style="font-variation-settings: 'FILL' 1;">person_play</span>
+</div>
+<span class="text-green-600 text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +12.5%
+                        </span>
+</div>
+<p class="text-zinc-500 font-admin-label-xs text-admin-label-xs uppercase tracking-wider mb-1">Active Users</p>
+<h3 class="text-3xl font-lex font-extrabold text-on-surface">42,892</h3>
+<div class="mt-4 h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[78%] rounded-full"></div>
+</div>
+</div>
+<!-- Active Subscriptions -->
+<div class="bento-card bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container/10 rounded-2xl text-secondary">
+<span class="material-symbols-outlined" data-icon="card_membership" style="font-variation-settings: 'FILL' 1;">card_membership</span>
+</div>
+<span class="text-green-600 text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +4.2%
+                        </span>
+</div>
+<p class="text-zinc-500 font-admin-label-xs text-admin-label-xs uppercase tracking-wider mb-1">Subscriptions</p>
+<h3 class="text-3xl font-lex font-extrabold text-on-surface">18,204</h3>
+<div class="mt-4 h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[62%] rounded-full"></div>
+</div>
+</div>
+<!-- AI Accuracy -->
+<div class="bento-card bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-container/10 rounded-2xl text-tertiary">
+<span class="material-symbols-outlined" data-icon="psychology" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<span class="text-tertiary text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                            Stable
+                        </span>
+</div>
+<p class="text-zinc-500 font-admin-label-xs text-admin-label-xs uppercase tracking-wider mb-1">AI Accuracy</p>
+<h3 class="text-3xl font-lex font-extrabold text-on-surface">98.4%</h3>
+<div class="mt-4 h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[98%] rounded-full"></div>
+</div>
+</div>
+<!-- Support Tickets -->
+<div class="bento-card bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-error-container rounded-2xl text-error">
+<span class="material-symbols-outlined" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+</div>
+<span class="text-error text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm" data-icon="priority_high">priority_high</span>
+                            12 Critical
+                        </span>
+</div>
+<p class="text-zinc-500 font-admin-label-xs text-admin-label-xs uppercase tracking-wider mb-1">Open Tickets</p>
+<h3 class="text-3xl font-lex font-extrabold text-on-surface">142</h3>
+<div class="mt-4 h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+<div class="h-full bg-error w-[40%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- AI Audit & Activity Log Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- AI Audit Chart Section -->
+<div class="lg:col-span-2 bg-white rounded-[2.5rem] border border-zinc-100 shadow-sm p-8">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="text-xl font-bold font-lexend mb-1">AI Audit Engine Performance</h2>
+<p class="text-zinc-500 text-sm">Real-time content generation &amp; safety scoring</p>
+</div>
+<select class="bg-zinc-50 border-zinc-200 rounded-xl text-sm focus:ring-green-500 focus:border-green-500 font-bold px-4 py-2">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+</select>
+</div>
+<!-- Mock Chart Visualization -->
+<div class="relative h-64 w-full flex items-end justify-between px-4">
+<!-- Background Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-2">
+<div class="border-b border-zinc-50 w-full h-0"></div>
+<div class="border-b border-zinc-50 w-full h-0"></div>
+<div class="border-b border-zinc-50 w-full h-0"></div>
+<div class="border-b border-zinc-50 w-full h-0"></div>
+</div>
+<!-- Bars -->
+<div class="group relative flex flex-col items-center gap-2">
+<div class="w-10 bg-green-100 rounded-t-lg h-32 group-hover:bg-green-200 transition-all"></div>
+<div class="w-10 bg-green-500 rounded-t-lg h-40 absolute bottom-6 group-hover:h-44 transition-all"></div>
+<span class="text-[10px] font-bold text-zinc-400">MON</span>
+</div>
+<div class="group relative flex flex-col items-center gap-2">
+<div class="w-10 bg-green-100 rounded-t-lg h-36 group-hover:bg-green-200 transition-all"></div>
+<div class="w-10 bg-green-500 rounded-t-lg h-48 absolute bottom-6 group-hover:h-52 transition-all"></div>
+<span class="text-[10px] font-bold text-zinc-400">TUE</span>
+</div>
+<div class="group relative flex flex-col items-center gap-2">
+<div class="w-10 bg-green-100 rounded-t-lg h-28 group-hover:bg-green-200 transition-all"></div>
+<div class="w-10 bg-green-500 rounded-t-lg h-32 absolute bottom-6 group-hover:h-36 transition-all"></div>
+<span class="text-[10px] font-bold text-zinc-400">WED</span>
+</div>
+<div class="group relative flex flex-col items-center gap-2">
+<div class="w-10 bg-green-100 rounded-t-lg h-40 group-hover:bg-green-200 transition-all"></div>
+<div class="w-10 bg-green-500 rounded-t-lg h-52 absolute bottom-6 group-hover:h-56 transition-all"></div>
+<span class="text-[10px] font-bold text-zinc-400">THU</span>
+</div>
+<div class="group relative flex flex-col items-center gap-2">
+<div class="w-10 bg-green-100 rounded-t-lg h-32 group-hover:bg-green-200 transition-all"></div>
+<div class="w-10 bg-green-500 rounded-t-lg h-38 absolute bottom-6 group-hover:h-42 transition-all"></div>
+<span class="text-[10px] font-bold text-zinc-400">FRI</span>
+</div>
+<div class="group relative flex flex-col items-center gap-2">
+<div class="w-10 bg-green-100 rounded-t-lg h-24 group-hover:bg-green-200 transition-all"></div>
+<div class="w-10 bg-green-500 rounded-t-lg h-28 absolute bottom-6 group-hover:h-32 transition-all"></div>
+<span class="text-[10px] font-bold text-zinc-400">SAT</span>
+</div>
+<div class="group relative flex flex-col items-center gap-2">
+<div class="w-10 bg-green-100 rounded-t-lg h-30 group-hover:bg-green-200 transition-all"></div>
+<div class="w-10 bg-green-500 rounded-t-lg h-34 absolute bottom-6 group-hover:h-38 transition-all"></div>
+<span class="text-[10px] font-bold text-zinc-400">SUN</span>
+</div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-zinc-100">
+<div>
+<p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Latency</p>
+<p class="text-xl font-bold">240ms</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Success Rate</p>
+<p class="text-xl font-bold">99.9%</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Safety Rejects</p>
+<p class="text-xl font-bold text-error">0.02%</p>
+</div>
+</div>
+</div>
+<!-- Recent Activity Log -->
+<div class="bg-white rounded-[2.5rem] border border-zinc-100 shadow-sm p-8 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-bold font-lexend">Activity Log</h2>
+<button class="text-primary text-sm font-bold hover:underline">View All</button>
+</div>
+<div class="space-y-6 overflow-y-auto pr-2 custom-scrollbar">
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="add_circle">add_circle</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">New Account: Lily Chen</p>
+<p class="text-xs text-zinc-500">Premium plan activation via iOS</p>
+<p class="text-[10px] font-bold text-zinc-400 mt-1 uppercase">2 minutes ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Safety Flag Raised</p>
+<p class="text-xs text-zinc-500">AI content moderation flagged entry #1289</p>
+<p class="text-[10px] font-bold text-zinc-400 mt-1 uppercase">15 minutes ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="terminal">terminal</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">System Update: v2.4.1</p>
+<p class="text-xs text-zinc-500">ML core update successfully deployed</p>
+<p class="text-[10px] font-bold text-zinc-400 mt-1 uppercase">1 hour ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="support_agent">support_agent</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Support Resolution</p>
+<p class="text-xs text-zinc-500">Ticket #882 marked resolved by Support-2</p>
+<p class="text-[10px] font-bold text-zinc-400 mt-1 uppercase">3 hours ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-zinc-100 text-zinc-600 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="login">login</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Admin Login</p>
+<p class="text-xs text-zinc-500">User 'k_smith' logged into admin panel</p>
+<p class="text-[10px] font-bold text-zinc-400 mt-1 uppercase">4 hours ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Data Table Section -->
+<div class="bg-white rounded-[2.5rem] border border-zinc-100 shadow-sm overflow-hidden">
+<div class="px-8 py-6 border-b border-zinc-100 flex justify-between items-center">
+<h2 class="text-xl font-bold font-lexend">Top Performing Content</h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-zinc-100 rounded-lg text-zinc-500">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-2 hover:bg-zinc-100 rounded-lg text-zinc-500">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-zinc-50">
+<th class="px-8 py-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Story Title</th>
+<th class="px-8 py-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Category</th>
+<th class="px-8 py-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Reads</th>
+<th class="px-8 py-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Avg Completion</th>
+<th class="px-8 py-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-100">
+<tr class="hover:bg-green-50/30 transition-colors">
+<td class="px-8 py-4 font-bold text-on-surface">The Brave Little Sprout</td>
+<td class="px-8 py-4 text-sm text-zinc-600">Adventure</td>
+<td class="px-8 py-4 text-sm font-mono">12,402</td>
+<td class="px-8 py-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold">92%</span>
+<div class="w-24 h-2 bg-zinc-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[92%]"></div>
+</div>
+</div>
+</td>
+<td class="px-8 py-4">
+<span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-tight">Active</span>
+</td>
+</tr>
+<tr class="hover:bg-green-50/30 transition-colors">
+<td class="px-8 py-4 font-bold text-on-surface">Moonlight Orchestra</td>
+<td class="px-8 py-4 text-sm text-zinc-600">Musical</td>
+<td class="px-8 py-4 text-sm font-mono">9,812</td>
+<td class="px-8 py-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold">85%</span>
+<div class="w-24 h-2 bg-zinc-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[85%]"></div>
+</div>
+</div>
+</td>
+<td class="px-8 py-4">
+<span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-tight">Active</span>
+</td>
+</tr>
+<tr class="hover:bg-green-50/30 transition-colors">
+<td class="px-8 py-4 font-bold text-on-surface">Deep Sea Discovery</td>
+<td class="px-8 py-4 text-sm text-zinc-600">Educational</td>
+<td class="px-8 py-4 text-sm font-mono">8,245</td>
+<td class="px-8 py-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold">78%</span>
+<div class="w-24 h-2 bg-zinc-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[78%]"></div>
+</div>
+</div>
+</td>
+<td class="px-8 py-4">
+<span class="px-3 py-1 rounded-full bg-zinc-100 text-zinc-500 text-[10px] font-bold uppercase tracking-tight">Reviewing</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t border-zinc-100 bg-zinc-50 flex justify-between items-center text-xs text-zinc-400 font-bold">
+<span>Showing 3 of 124 results</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-white border border-zinc-200 rounded-lg hover:bg-zinc-100 text-zinc-600 disabled:opacity-50">Prev</button>
+<button class="px-3 py-1 bg-white border border-zinc-200 rounded-lg hover:bg-zinc-100 text-zinc-600">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Margin for scrolling -->
+<div class="h-12 w-full"></div>
+</main>
+</body></html>

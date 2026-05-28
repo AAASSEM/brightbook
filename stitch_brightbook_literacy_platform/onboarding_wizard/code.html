@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-tertiary": "#ffffff",
+                "surface-bright": "#f5fced",
+                "surface-variant": "#dee5d6",
+                "secondary-fixed": "#ffdf9e",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed-variant": "#5b4300",
+                "on-primary-fixed": "#002204",
+                "surface-container-lowest": "#ffffff",
+                "tertiary": "#0061a4",
+                "on-tertiary-container": "#00355d",
+                "on-background": "#171d14",
+                "tertiary-fixed-dim": "#9ecaff",
+                "on-secondary": "#ffffff",
+                "outline": "#6f7a6b",
+                "primary-fixed": "#94f990",
+                "surface": "#f5fced",
+                "secondary": "#785900",
+                "secondary-container": "#fdc003",
+                "on-error-container": "#93000a",
+                "primary-container": "#4caf50",
+                "inverse-surface": "#2c3228",
+                "primary-fixed-dim": "#78dc77",
+                "on-secondary-container": "#6c5000",
+                "on-primary": "#ffffff",
+                "surface-container-high": "#e3ebdc",
+                "surface-container": "#e9f0e1",
+                "on-surface-variant": "#3f4a3c",
+                "background": "#f5fced",
+                "surface-dim": "#d5dcce",
+                "on-error": "#ffffff",
+                "surface-tint": "#006e1c",
+                "on-surface": "#171d14",
+                "surface-container-low": "#eff6e7",
+                "on-primary-container": "#003c0b",
+                "inverse-on-surface": "#ecf3e4",
+                "outline-variant": "#becab9",
+                "on-secondary-fixed": "#261a00",
+                "primary": "#006e1c",
+                "tertiary-fixed": "#d1e4ff",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#fabd00",
+                "on-primary-fixed-variant": "#005313",
+                "inverse-primary": "#78dc77",
+                "tertiary-container": "#33a0fe",
+                "on-tertiary-fixed": "#001d36",
+                "surface-container-highest": "#dee5d6",
+                "on-tertiary-fixed-variant": "#00497d"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "kid-margin": "24px",
+                "stack-md": "24px",
+                "stack-sm": "12px",
+                "unit": "8px",
+                "touch-target-min": "48px",
+                "parent-margin": "16px",
+                "gutter": "16px",
+                "stack-lg": "40px"
+            },
+            "fontFamily": {
+                "admin-label-xs": ["Inter"],
+                "parent-headline-md": ["Plus Jakarta Sans"],
+                "kid-body-md": ["Lexend"],
+                "parent-body-sm": ["Plus Jakarta Sans"],
+                "kid-headline-lg": ["Lexend"]
+            },
+            "fontSize": {
+                "admin-label-xs": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                "parent-headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "kid-body-md": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "parent-body-sm": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "kid-headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .liquid-fill {
+            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+        }
+        .kid-button-3d {
+            box-shadow: 0 4px 0 0 #2e7d32;
+        }
+        .kid-button-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #2e7d32;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-kid-body-md min-h-screen">
+<!-- Top Navigation Bar (Suppressed Shell - Simple Header for Focus) -->
+<header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 px-6 py-4 border-b border-zinc-100 flex justify-between items-center">
+<h1 class="text-xl font-black text-primary font-lexend tracking-tight">BrightBook</h1>
+<button class="w-10 h-10 flex items-center justify-center text-zinc-400 hover:bg-zinc-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<main class="max-w-md mx-auto px-kid-margin py-stack-md pb-32">
+<!-- Step Indicator & Progress Bar -->
+<div class="mb-stack-lg">
+<div class="flex justify-between items-end mb-2">
+<span class="font-kid-body-md text-primary font-bold">Step 1 of 3</span>
+<span class="text-admin-label-xs font-admin-label-xs text-outline capitalize">Creating Profile</span>
+</div>
+<div class="h-4 w-full bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full w-1/3 bg-primary-container rounded-full relative liquid-fill transition-all duration-500">
+<div class="absolute right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-50"></div>
+</div>
+</div>
+</div>
+<!-- STEP 1 CONTENT: CREATE PROFILE -->
+<section class="space-y-stack-md" id="step-1">
+<div class="text-center space-y-2">
+<h2 class="font-kid-headline-lg text-kid-headline-lg text-on-surface">Welcome! Who is learning today?</h2>
+<p class="font-kid-body-md text-on-surface-variant">Let's set up your child's magical library.</p>
+</div>
+<!-- Avatar Picker Grid -->
+<div class="grid grid-cols-3 gap-4 py-4">
+<div class="relative group">
+<div class="aspect-square rounded-full border-4 border-primary bg-primary-fixed-dim flex items-center justify-center overflow-hidden shadow-[0_4px_12px_rgba(0,110,28,0.2)]">
+<img alt="Fox avatar" class="w-2/3 h-2/3" data-alt="Playful orange fox cartoon character with friendly eyes and a soft rounded illustration style for children" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSiZxjt-8E5tjqZngKfJmAygbTQ5L4D4NR_18AH7H_iechru6kMlvZO_l-eKvuLVzfJXXjSRio6aD_GrKbft0NFhs1o-va5ul4QXEHZj_OP34Ldjdw4cLbpZTE0VphBAFFKl7FnYzayVROeb0WgSWuwSxQ7av6y0j_8u7n_ccub-PTZMGpMy2ln0WjBxkEN5XQtX-VNdY50gCv1YkIVHRSAsII9ZuWAUXK66BNxvDelS_aNC1QEAFJ2Id5EeNGpypDqDucdVTZYIg"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white rounded-full p-1 shadow-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<div class="aspect-square rounded-full border-4 border-white bg-surface-variant flex items-center justify-center overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+<img alt="Panda avatar" class="w-2/3 h-2/3 grayscale opacity-70" data-alt="Friendly panda bear cartoon character with soft rounded edges and a gentle expression for kids" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4dkGYctvmUaT1kBHm-ksjbDOQGrZiCLDeaJ1a8p6abPq6vs-xUYe6wtHuHUpaqSESAh8MYId6Wt9INdgI6Sf5L-zx4VX5wzxtbI34jLMFDSFLo0D3hGsGmX78BM4M-SOX6BRZezq2090O4zsV246fQq8FFN5XucLWWOHxzG_VP1-7G-wqcbrdLqerz1AwFGjBHo37NgDo7Y30mgQE-zPzOzFx2iaMMNS7rUSoMY35_LEX7ZkWU6EoF-A6ofO4lQxsfjDIkNTRPxs"/>
+</div>
+<div class="aspect-square rounded-full border-4 border-white bg-surface-variant flex items-center justify-center overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+<img alt="Lion avatar" class="w-2/3 h-2/3 grayscale opacity-70" data-alt="Cute lion cub with a small mane and friendly face in a playful storybook illustration style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0I1xXu6zKPnsTsJunXGsxGqNAlf5fSfTLDDUM6n4PdJD66IkaadgwxO_stqaN8YNYdeIrY18os6hjQ5GR0aftPEuVAHObRBpX_09qBTFR_J8c4jglvY1UbNwg5P9MuAq3VWWPHokFspN3YYGB5uSrbDxmHaMPgjfeHues23kvwX1tuj9SyHgMJD7X0nJEb6lVzhQRQ2vBpRgaJgfV8ZymxjS2xWYqnHbBFAdDfoNpUjQy3Cv3zWlQLNjKiIW6f6xLNyT0SsT5VUQ"/>
+</div>
+</div>
+<!-- Profile Form Fields -->
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="font-admin-label-xs text-outline px-2">CHILD'S NAME</label>
+<input class="w-full h-14 px-6 rounded-2xl border-2 border-outline-variant focus:border-primary focus:ring-0 text-kid-body-md font-kid-body-md bg-white shadow-sm transition-all" placeholder="e.g. Leo" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-admin-label-xs text-outline px-2">BIRTHDAY</label>
+<input class="w-full h-14 px-4 rounded-2xl border-2 border-outline-variant focus:border-primary focus:ring-0 text-parent-body-sm font-parent-body-sm bg-white shadow-sm" type="date"/>
+</div>
+<div class="space-y-2">
+<label class="font-admin-label-xs text-outline px-2">LANGUAGE</label>
+<select class="w-full h-14 px-4 rounded-2xl border-2 border-outline-variant focus:border-primary focus:ring-0 text-parent-body-sm font-parent-body-sm bg-white shadow-sm appearance-none">
+<option>English</option>
+<option>Spanish</option>
+<option>French</option>
+</select>
+</div>
+</div>
+</div>
+<button class="w-full py-5 bg-primary text-white font-kid-body-md font-bold rounded-2xl kid-button-3d transition-all mt-4 flex items-center justify-center gap-2">
+<span>Continue</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</section>
+<!-- STEP 2 CONTENT: SKILL ASSESSMENT (Preview State) -->
+<section class="hidden space-y-stack-md mt-12 pt-12 border-t-4 border-dotted border-zinc-200" id="step-2">
+<div class="bg-surface-container-low rounded-[32px] p-6 text-center space-y-6 relative overflow-hidden">
+<!-- Floating Blobs Background Deco -->
+<div class="absolute -top-10 -left-10 w-32 h-32 bg-secondary-container opacity-20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary-container opacity-20 rounded-full blur-3xl"></div>
+<div class="space-y-2 relative">
+<span class="inline-block px-4 py-1 bg-secondary-container text-on-secondary-container rounded-full text-admin-label-xs font-bold uppercase tracking-wider">Question 3 of 10</span>
+<h3 class="text-kid-body-md font-bold text-on-surface">Can you find the word that rhymes with "Cat"?</h3>
+</div>
+<div class="aspect-video bg-white rounded-2xl flex items-center justify-center shadow-inner relative overflow-hidden border-2 border-outline-variant">
+<div class="text-6xl">🐱</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="h-20 bg-white border-2 border-outline-variant hover:border-primary rounded-2xl font-bold text-on-surface hover:bg-primary-fixed-dim transition-all active:scale-95 flex items-center justify-center">
+                        Dog
+                    </button>
+<button class="h-20 bg-white border-4 border-primary rounded-2xl font-bold text-primary bg-primary-fixed-dim transition-all active:scale-95 flex items-center justify-center relative">
+                        Bat
+                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</button>
+<button class="h-20 bg-white border-2 border-outline-variant hover:border-primary rounded-2xl font-bold text-on-surface hover:bg-primary-fixed-dim transition-all active:scale-95 flex items-center justify-center">
+                        Sun
+                    </button>
+<button class="h-20 bg-white border-2 border-outline-variant hover:border-primary rounded-2xl font-bold text-on-surface hover:bg-primary-fixed-dim transition-all active:scale-95 flex items-center justify-center">
+                        Red
+                    </button>
+</div>
+</div>
+<div class="flex items-center justify-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined animate-pulse">auto_awesome</span>
+<span class="text-admin-label-xs">Great job, Leo! You're doing amazing!</span>
+</div>
+</section>
+<!-- STEP 3 CONTENT: RESULTS (Preview State) -->
+<section class="hidden space-y-stack-md mt-12 pt-12 border-t-4 border-dotted border-zinc-200" id="step-3">
+<div class="text-center space-y-8">
+<div class="relative inline-block">
+<!-- Badge Component -->
+<div class="w-48 h-48 mx-auto rounded-full bg-secondary-fixed border-[8px] border-white shadow-[0_12px_40px_rgba(253,192,3,0.3)] flex flex-col items-center justify-center space-y-2 p-6">
+<span class="material-symbols-outlined text-6xl text-secondary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<div class="font-lexend font-black text-secondary-container leading-none text-[48px] absolute -top-4 -right-4 drop-shadow-md">★</div>
+</div>
+<div class="mt-6">
+<h2 class="font-kid-headline-lg text-kid-headline-lg text-on-surface">Explorer Tier</h2>
+<p class="font-kid-body-md text-on-surface-variant max-w-[280px] mx-auto">Leo is ready for early phonics and short story adventures!</p>
+</div>
+</div>
+<div class="bg-white rounded-[24px] p-6 border-2 border-primary-container/20 space-y-4">
+<div class="flex items-center gap-4 text-left">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+</div>
+<div>
+<div class="text-admin-label-xs text-outline font-bold uppercase">Focus Area</div>
+<div class="text-parent-body-sm font-bold text-on-surface">Rhyming &amp; Phonemes</div>
+</div>
+</div>
+<div class="flex items-center gap-4 text-left">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">rocket_launch</span>
+</div>
+<div>
+<div class="text-admin-label-xs text-outline font-bold uppercase">Next Milestone</div>
+<div class="text-parent-body-sm font-bold text-on-surface">Level 1: Letter Sounds</div>
+</div>
+</div>
+</div>
+<button class="w-full py-6 bg-primary text-white font-kid-body-md font-black rounded-[24px] kid-button-3d text-2xl shadow-xl flex items-center justify-center gap-3 active:scale-95 transition-all">
+<span>START LEARNING</span>
+<span class="material-symbols-outlined text-3xl">play_circle</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Mock (Only for visual completeness as per Shell Visibility rules for top-level pages, but usually hidden for wizards. Here it's shown for design system adherence in "representative" screens) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-white border-t border-zinc-100 shadow-[0_-8px_24px_rgba(76,175,80,0.12)] rounded-t-[32px]">
+<div class="flex flex-col items-center justify-center bg-green-100 text-green-800 rounded-2xl px-6 py-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-lexend text-[12px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 px-6 py-2 hover:text-green-500 transition-colors">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-lexend text-[12px] font-semibold">Progress</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 px-6 py-2 hover:text-green-500 transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-lexend text-[12px] font-semibold">Profile</span>
+</div>
+</nav>
+<!-- Illustrative Background elements -->
+<div class="fixed top-20 -left-16 w-64 h-64 bg-primary-container/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-40 -right-20 w-80 h-80 bg-secondary-container/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+<!-- Toggle scripts would go here for interactivity, but we remain static as per instructions -->
+<!-- Displaying the three steps sequentially in this view for the user to see the flow -->
+<style>
+        /* This ensures the user sees all three steps for the design showcase since JS is prohibited */
+        #step-2, #step-3 {
+            display: block !important;
+            opacity: 0.8;
+            filter: blur(0.5px);
+            pointer-events: none;
+        }
+    </style>
+</body></html>

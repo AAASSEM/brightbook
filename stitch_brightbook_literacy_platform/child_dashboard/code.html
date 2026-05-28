@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#f5fced",
+                      "surface-variant": "#dee5d6",
+                      "secondary-fixed": "#ffdf9e",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#5b4300",
+                      "on-primary-fixed": "#002204",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#0061a4",
+                      "on-tertiary-container": "#00355d",
+                      "on-background": "#171d14",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "on-secondary": "#ffffff",
+                      "outline": "#6f7a6b",
+                      "primary-fixed": "#94f990",
+                      "surface": "#f5fced",
+                      "secondary": "#785900",
+                      "secondary-container": "#fdc003",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#4caf50",
+                      "inverse-surface": "#2c3228",
+                      "primary-fixed-dim": "#78dc77",
+                      "on-secondary-container": "#6c5000",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#e3ebdc",
+                      "surface-container": "#e9f0e1",
+                      "on-surface-variant": "#3f4a3c",
+                      "background": "#f5fced",
+                      "surface-dim": "#d5dcce",
+                      "on-error": "#ffffff",
+                      "surface-tint": "#006e1c",
+                      "on-surface": "#171d14",
+                      "surface-container-low": "#eff6e7",
+                      "on-primary-container": "#003c0b",
+                      "inverse-on-surface": "#ecf3e4",
+                      "outline-variant": "#becab9",
+                      "on-secondary-fixed": "#261a00",
+                      "primary": "#006e1c",
+                      "tertiary-fixed": "#d1e4ff",
+                      "error": "#ba1a1a",
+                      "secondary-fixed-dim": "#fabd00",
+                      "on-primary-fixed-variant": "#005313",
+                      "inverse-primary": "#78dc77",
+                      "tertiary-container": "#33a0fe",
+                      "on-tertiary-fixed": "#001d36",
+                      "surface-container-highest": "#dee5d6",
+                      "on-tertiary-fixed-variant": "#00497d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "kid-margin": "24px",
+                      "stack-md": "24px",
+                      "stack-sm": "12px",
+                      "unit": "8px",
+                      "touch-target-min": "48px",
+                      "parent-margin": "16px",
+                      "gutter": "16px",
+                      "stack-lg": "40px"
+              },
+              "fontFamily": {
+                      "admin-label-xs": ["Inter"],
+                      "parent-headline-md": ["Plus Jakarta Sans"],
+                      "kid-body-md": ["Lexend"],
+                      "parent-body-sm": ["Plus Jakarta Sans"],
+                      "kid-headline-lg": ["Lexend"]
+              },
+              "fontSize": {
+                      "admin-label-xs": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "parent-headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "kid-body-md": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "parent-body-sm": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "kid-headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-bg-blobs {
+            background-image: radial-gradient(circle at 10% 20%, rgba(148, 249, 144, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(51, 160, 254, 0.1) 0%, transparent 40%),
+                              radial-gradient(circle at 50% 50%, rgba(253, 192, 3, 0.05) 0%, transparent 60%);
+        }
+        .kid-button-3d {
+            box-shadow: 0 4px 0 0 #388e3c;
+        }
+        .kid-button-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #388e3c;
+        }
+        .glossy-bar {
+            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen font-kid-body-md text-on-surface overflow-x-hidden soft-bg-blobs pb-32">
+<header class="bg-white/90 backdrop-blur-md font-lexend tracking-tight font-bold shadow-sm border-b border-zinc-100 docked full-width top-0 sticky flex justify-between items-center w-full px-6 py-4 z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden bg-surface-container">
+<img alt="Child Avatar" data-alt="Close-up portrait of a cheerful cartoon child with bright eyes and a friendly smile in a soft 3D illustrative style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMbWzNFtIUlE8kCpSPlgMTHg4hkqwRKxt6DAPqfgfVvP5iJv6qfMccgx8QjqO_tEI_QBxdlyxBXZuWM-5g9QoWgkwQkof_X00J2E2NC2PZbWd361WEaqUAdWssMWBO-x43Ql2Bnx1N4QcN977qhBdB8wyOpx006SM1dV3pBjfKmEa7e9lsxWfTKH9YPHJN1Jy9RM2kBCPp5PKnw85XFJSY9AqqaJzQTapsBT9CNAAKgpSit-fmvYqCK23OtQOYeAuzwXfiKDF9d1I"/>
+</div>
+<span class="text-xl font-black text-green-700">BrightBook</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-green-50 rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-green-600">settings</span>
+</button>
+</header>
+<main class="px-kid-margin pt-stack-md flex flex-col gap-stack-md max-w-md mx-auto">
+<div class="flex justify-between items-end">
+<div class="flex flex-col">
+<span class="text-admin-label-xs font-admin-label-xs text-on-surface-variant uppercase tracking-widest">Your Growth</span>
+<div class="flex items-center gap-2 mt-1">
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-bold text-lg">5 days</span>
+</div>
+<div class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-lg">Level 4</span>
+</div>
+</div>
+</div>
+</div>
+<section class="relative bg-white rounded-[32px] p-6 shadow-[0_12px_32px_rgba(0,110,28,0.12)] border border-white overflow-hidden active:scale-[0.98] transition-transform duration-200">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-full -mr-12 -mt-12"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary-container text-white px-4 py-1 rounded-full text-sm font-bold shadow-sm uppercase tracking-wider">Featured Activity</span>
+</div>
+<h2 class="font-kid-headline-lg text-kid-headline-lg text-on-surface mb-2">Read with Rusty!</h2>
+<p class="text-on-surface-variant mb-6">Rusty is waiting for you to finish the forest story.</p>
+<div class="aspect-video w-full rounded-2xl mb-6 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Friendly orange fox wearing reading glasses sitting on a log in a sunlit watercolor forest, holding a book" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1eXpbEXihR14K3euzNzY-oFo8l-pJEPxObaf_5crsdE7do9fLevYKtdAOtRrLWnJeG-0xtqNdmXxDkXTKS85mvclpdpE-20Rt44HRytxi9-o3Twxx1iCALkMB2eFJSHVbo71N1K2YqrP06NnMsw0TYBTkfDiR2AWeE3V1osXh4ylI9LphunNSMn1N78RKQvpyW8GbVZDAWlxYzi0LKYVwp2OZJXvnpOGJ0696Tildd3XmGv_sXKvS0-_s_vkwqEmGVBQEWkv9hJw"/>
+</div>
+<div class="flex flex-col gap-2 mb-6">
+<div class="flex justify-between items-center text-sm font-bold text-on-surface-variant">
+<span>Daily Star Progress</span>
+<span>80%</span>
+</div>
+<div class="h-6 w-full bg-surface-container rounded-full overflow-hidden relative shadow-inner">
+<div class="h-full w-[80%] bg-primary-container rounded-full relative">
+<div class="absolute inset-0 glossy-bar"></div>
+<div class="absolute right-1 top-1 w-4 h-4 bg-white/40 rounded-full blur-[2px]"></div>
+</div>
+<div class="absolute left-[80%] -ml-3 -mt-1 transform">
+<span class="material-symbols-outlined text-secondary-container drop-shadow-md text-[28px]" style="font-variation-settings: 'FILL' 1;">grade</span>
+</div>
+</div>
+</div>
+<button class="w-full py-5 bg-primary-container text-white rounded-2xl font-bold text-xl kid-button-3d tracking-wide transition-all">
+                    START READING
+                </button>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="font-kid-headline-lg text-[24px] text-on-surface">Achievements</h3>
+<button class="text-primary font-bold text-sm">See all</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-kid-margin px-kid-margin no-scrollbar">
+<div class="flex-shrink-0 w-32 flex flex-col items-center gap-2">
+<div class="w-24 h-24 rounded-full bg-white border-[6px] border-secondary-fixed shadow-md flex items-center justify-center p-4">
+<img alt="Bookworm Badge" class="w-full h-full" data-alt="A stylized 3D gold medal with an open book icon in the center, glowing with soft amber light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDELe3h1gDvi-nM6gF6x9aaSGpkbQaP9Y10EqNwJa8kqW1xupmJKM8_sN96rZTfbvIuv4UmdVrGrPFStXBbQ8aEV6QDiosZJGHWOPGo9_HtCfI5RbfEAocZ2GhOZ0IhCBBQyQ6Lw6kANM6k_l3KL68CgxN5kT5KYISbWw31cqbBbLgUgdmoTShh65nt63iSAJuu2wT4reJJpnBCfnQEBJoAL0efrRMC1t-dZuFi5H-gnnGenOeMAhIUeaAyiankvLvDdV5e0ACp4Ew"/>
+</div>
+<span class="text-sm font-bold text-center">Bookworm</span>
+</div>
+<div class="flex-shrink-0 w-32 flex flex-col items-center gap-2">
+<div class="w-24 h-24 rounded-full bg-white border-[6px] border-tertiary-fixed shadow-md flex items-center justify-center p-4">
+<img alt="Star Student Badge" class="w-full h-full" data-alt="A glowing blue hexagonal badge with a shimmering silver star in the center, cool blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAQwdIXKFPDtzrt4rHHrGKjjwKtGLjvjCCJ6FTlQXE8jODOzLLCPVEvoM0kDwpmOubHc83LQiUyu2EfeU2MhJRriaPyWYesnTAecj9eRLP8ywe6r5N7kKCAUXwVHF5b4JlfiIfb5T3cG-iDAzItkHFssIYW0rcSx0UJv7ZG2FzYWiVBI5ySUWRLiqeO83Bgm20TZnpDYb5IpB_w_r8F4i7oY9X6E5dok6X2EscTSO02WUDX6IW4zVjFI_gHCSVPClSdL0ICyJmYt0"/>
+</div>
+<span class="text-sm font-bold text-center">Star Student</span>
+</div>
+<div class="flex-shrink-0 w-32 flex flex-col items-center gap-2 opacity-50 grayscale">
+<div class="w-24 h-24 rounded-full bg-white border-[6px] border-surface-variant shadow-sm flex items-center justify-center p-4">
+<span class="material-symbols-outlined text-4xl text-outline-variant">lock</span>
+</div>
+<span class="text-sm font-bold text-center">Fast Learner</span>
+</div>
+<div class="flex-shrink-0 w-32 flex flex-col items-center gap-2 opacity-50 grayscale">
+<div class="w-24 h-24 rounded-full bg-white border-[6px] border-surface-variant shadow-sm flex items-center justify-center p-4">
+<span class="material-symbols-outlined text-4xl text-outline-variant">lock</span>
+</div>
+<span class="text-sm font-bold text-center">Story Teller</span>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-high rounded-[32px] p-6 flex items-center gap-4 border-2 border-white/50">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-3xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-lg">Next Goal</h4>
+<p class="text-sm text-on-surface-variant">Read for 10 minutes today to unlock a new sticker!</p>
+</div>
+</section>
+</main>
+<nav class="bg-white fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 rounded-t-[32px] border-t-2 border-green-50 shadow-[0_-8px_24px_rgba(76,175,80,0.12)]">
+<a class="flex flex-col items-center justify-center bg-green-100 text-green-800 rounded-2xl px-6 py-2 font-lex text-[12px] font-semibold active:scale-90 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span>Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 px-6 py-2 font-lex text-[12px] font-semibold hover:text-green-500 active:scale-90 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span>Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 px-6 py-2 font-lex text-[12px] font-semibold hover:text-green-500 active:scale-90 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Profile</span>
+</a>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

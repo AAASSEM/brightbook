@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f5fced",
+                    "surface-variant": "#dee5d6",
+                    "secondary-fixed": "#ffdf9e",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#5b4300",
+                    "on-primary-fixed": "#002204",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#0061a4",
+                    "on-tertiary-container": "#00355d",
+                    "on-background": "#171d14",
+                    "tertiary-fixed-dim": "#9ecaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#6f7a6b",
+                    "primary-fixed": "#94f990",
+                    "surface": "#f5fced",
+                    "secondary": "#785900",
+                    "secondary-container": "#fdc003",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#4caf50",
+                    "inverse-surface": "#2c3228",
+                    "primary-fixed-dim": "#78dc77",
+                    "on-secondary-container": "#6c5000",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e3ebdc",
+                    "surface-container": "#e9f0e1",
+                    "on-surface-variant": "#3f4a3c",
+                    "background": "#f5fced",
+                    "surface-dim": "#d5dcce",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#006e1c",
+                    "on-surface": "#171d14",
+                    "surface-container-low": "#eff6e7",
+                    "on-primary-container": "#003c0b",
+                    "inverse-on-surface": "#ecf3e4",
+                    "outline-variant": "#becab9",
+                    "on-secondary-fixed": "#261a00",
+                    "primary": "#006e1c",
+                    "tertiary-fixed": "#d1e4ff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#fabd00",
+                    "on-primary-fixed-variant": "#005313",
+                    "inverse-primary": "#78dc77",
+                    "tertiary-container": "#33a0fe",
+                    "on-tertiary-fixed": "#001d36",
+                    "surface-container-highest": "#dee5d6",
+                    "on-tertiary-fixed-variant": "#00497d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "kid-margin": "24px",
+                    "stack-md": "24px",
+                    "stack-sm": "12px",
+                    "unit": "8px",
+                    "touch-target-min": "48px",
+                    "parent-margin": "16px",
+                    "gutter": "16px",
+                    "stack-lg": "40px"
+            },
+            "fontFamily": {
+                    "admin-label-xs": ["Inter"],
+                    "parent-headline-md": ["Plus Jakarta Sans"],
+                    "kid-body-md": ["Lexend"],
+                    "parent-body-sm": ["Plus Jakarta Sans"],
+                    "kid-headline-lg": ["Lexend"]
+            },
+            "fontSize": {
+                    "admin-label-xs": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "parent-headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "kid-body-md": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "parent-body-sm": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "kid-headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-parent-body-sm text-parent-body-sm antialiased pb-32">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md text-green-600 dark:text-green-400 font-lexend tracking-tight font-bold docked full-width top-0 sticky border-b border-zinc-100 dark:border-zinc-800 shadow-sm z-40">
+<div class="flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center border-2 border-white overflow-hidden">
+<img alt="Leo Avatar" class="w-full h-full object-cover" data-alt="Stylized avatar of a young boy with curly hair and a green shirt in a minimal vector style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwmk1dcSz2BgfA5744iJYmasieJSJc_h0y387On3lplPg9oVaZ55TXgH8JQ3jlRs-zl1MN2-BZHT1Uvn0DtTGzfd4gI8zyiO58CML6y70486lO5cOeurIXxtSeFVx6o2ohs1194ITkCn0Fsiid5499_yUzPGLoNtFk58WtAJULA2COoPkODyOPhwTzcHSKVAPZQPxvGOoOHMwFhtr1DXb0jf6SJwgVRbc1ig2nK2qWmCCeItSWHv2KixkaYCNtH9qHrZzjmZ2iDI8"/>
+</div>
+<span class="text-xl font-black text-green-700 dark:text-green-400">BrightBook</span>
+</div>
+<button class="hover:bg-green-50 dark:hover:bg-green-900/20 rounded-full transition-colors active:scale-95 duration-200 p-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-zinc-500">settings</span>
+</button>
+</div>
+</header>
+<main class="px-kid-margin pt-stack-md space-y-stack-md max-w-md mx-auto">
+<!-- Child Switcher -->
+<section class="flex items-center gap-4 p-2 bg-surface-container-low rounded-full">
+<button class="flex-1 flex items-center gap-2 py-2 px-4 rounded-full bg-white shadow-sm border-2 border-primary-container transition-all">
+<img alt="Leo" class="w-8 h-8 rounded-full bg-green-100" data-alt="Minimalist avatar of a young child with brown hair and a friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd6YvqZjJxt2MLP_L8gp_3iWyMyLCCU9neGtLY148xgH317_tSJq3KCQX26vs1w0_ruhFUPNqkKkPe50mxQI_urUpAVSpscoyYs2gwTWxerFg7ztOtRtXwPxOGXnnr2_I1NiobUIxR7g37S73vKuceGUCAtEbPhEYPGb1u0M4Cg8-lEZvliDwM-S1nPTQdeqZ9KyUtbralEihgeEoRQbiV9R48Uw0Fx0Wo4cNg0xpu69TJYYhXyLcYttCGbVlQ0ljZvoVNi0rD1Z4"/>
+<span class="font-parent-headline-md text-sm text-on-surface">Leo</span>
+<span class="ml-auto material-symbols-outlined text-green-600 fill-icon text-[20px]">check_circle</span>
+</button>
+<button class="flex-1 flex items-center gap-2 py-2 px-4 rounded-full hover:bg-white/50 transition-all opacity-60">
+<img alt="Maya" class="w-8 h-8 rounded-full bg-orange-100" data-alt="Minimalist avatar of a young girl with pigtails and a bright yellow shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSp9oHfewLKsPfWq2UkOkcJRAHAEAfNYS2V3YO8YKFesku2K13v9ytShXVszvbnfKkw9BMNjw6GeqIMm-nP0mUBANOl1lXwxnWtStDVggoXTE7w0hVtMO2LOf0FJsh5CKxZST-k_DZKN0WjalbI5QBM-d3Q2_X0Ac-hdgfeYO1i-nM-bzyka9g7nHa0iJy2hcbZfhCEunc4X-jN0r6wJrB92vNRgznRz2gpcLCSd4Q_7cDpbrGd-lvB8jQvWq-PXKavOzBuUZAXpI"/>
+<span class="font-parent-headline-md text-sm text-on-surface">Maya</span>
+</button>
+</section>
+<!-- Summary Stats Cards -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Streak Card -->
+<div class="bg-white p-4 rounded-[24px] border border-outline-variant shadow-sm flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center mb-2 animate-pulse">
+<span class="material-symbols-outlined text-secondary fill-icon text-[28px]">local_fire_department</span>
+</div>
+<div class="font-lexend font-extrabold text-2xl text-on-surface">5 Days</div>
+<div class="text-admin-label-xs text-on-surface-variant uppercase tracking-wider">Current Streak</div>
+</div>
+<!-- Activities Card -->
+<div class="bg-white p-4 rounded-[24px] border border-outline-variant shadow-sm flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-tertiary-container fill-icon text-[28px]">task_alt</span>
+</div>
+<div class="font-lexend font-extrabold text-2xl text-on-surface">12</div>
+<div class="text-admin-label-xs text-on-surface-variant uppercase tracking-wider">Activities</div>
+</div>
+</div>
+<!-- Weekly Progress Bar Chart -->
+<section class="bg-white p-6 rounded-[32px] border border-outline-variant shadow-sm">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-parent-headline-md text-on-surface">Weekly Progress</h2>
+<p class="text-admin-label-xs text-on-surface-variant">Leo's learning activity this week</p>
+</div>
+<span class="material-symbols-outlined text-green-600">insights</span>
+</div>
+<div class="flex items-end justify-between h-40 gap-2">
+<!-- Mon -->
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-green-50 rounded-t-xl h-[40%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">M</span>
+</div>
+<!-- Tue -->
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-green-100 rounded-t-xl h-[65%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">T</span>
+</div>
+<!-- Wed -->
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-green-200 rounded-t-xl h-[55%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">W</span>
+</div>
+<!-- Thu -->
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-primary-container rounded-t-xl h-[90%] shadow-[0_0_15px_rgba(76,175,80,0.3)]"></div>
+<span class="text-[10px] font-bold text-green-700">T</span>
+</div>
+<!-- Fri -->
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-green-100 rounded-t-xl h-[30%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">F</span>
+</div>
+<!-- Sat -->
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-green-50 rounded-t-xl h-[0%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">S</span>
+</div>
+<!-- Sun -->
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-green-50 rounded-t-xl h-[0%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">S</span>
+</div>
+</div>
+</section>
+<!-- AI Recommendation Card -->
+<section class="relative overflow-hidden bg-on-tertiary-container text-on-tertiary p-6 rounded-[32px] shadow-lg">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-tertiary-container/20 rounded-full blur-2xl"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-secondary-container fill-icon">smart_toy</span>
+<span class="text-admin-label-xs font-bold uppercase tracking-widest opacity-80">AI Learning Tip</span>
+</div>
+<p class="font-parent-headline-md text-lg leading-snug mb-2">
+                    "Try focusing on <span class="text-secondary-container underline underline-offset-4">phonemes</span> this week."
+                </p>
+<p class="text-xs opacity-70">Leo is showing great interest in vocal sounds! These exercises will boost his reading readiness.</p>
+</div>
+</section>
+<!-- Achievement Preview -->
+<section class="bg-surface-container-high p-6 rounded-[32px] border border-outline-variant">
+<h3 class="font-parent-headline-md text-sm mb-4">Latest Achievement</h3>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-md border-2 border-white">
+<span class="material-symbols-outlined text-[40px] text-orange-400 fill-icon">workspace_premium</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">Sound Master</div>
+<div class="text-sm text-on-surface-variant">Completed all vowel sounds</div>
+</div>
+<button class="ml-auto p-2 bg-white rounded-full shadow-sm text-green-600">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<div class="fixed bottom-32 left-1/2 -translate-x-1/2 w-full max-w-md px-6 z-40">
+<button class="w-full bg-primary-container text-on-primary py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 font-parent-headline-md text-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined">download</span>
+            Download Progress Report
+        </button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-white dark:bg-zinc-900 rounded-t-[32px] border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-8px_24px_rgba(76,175,80,0.12)]">
+<button class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-6 py-2 hover:text-green-500 dark:hover:text-green-300 active:scale-90 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined">home</span>
+<span class="font-lexend text-[12px] font-semibold mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 rounded-2xl px-6 py-2 active:scale-90 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined fill-icon">insights</span>
+<span class="font-lexend text-[12px] font-semibold mt-1">Progress</span>
+</button>
+<button class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-6 py-2 hover:text-green-500 dark:hover:text-green-300 active:scale-90 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined">person</span>
+<span class="font-lexend text-[12px] font-semibold mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

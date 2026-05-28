@@ -1,0 +1,549 @@
+[
+  {
+    "id": 1,
+    "order": 1,
+    "group": "letter_word_recognition",
+    "type": "capital_to_lowercase_match",
+    "title_en": "Match Capital to Lowercase Letter",
+    "title_ar": "طابق الحرف الكبير بالحرف الصغير",
+    "instruction_en": "Click the letter to hear its sound, then select the matching lowercase letter.",
+    "instruction_ar": "انقر على الحرف لسماع صوته، ثم اختر الحرف الصغير المطابق.",
+    "stimulus": {
+      "display": "A",
+      "type": "capital_letter",
+      "audio_key": "letter_A"
+    },
+    "options": [
+      { "value": "a", "is_correct": true },
+      { "value": "b", "is_correct": false },
+      { "value": "d", "is_correct": false },
+      { "value": "q", "is_correct": false }
+    ],
+    "correct_answer": "a",
+    "depends_on": null
+  },
+  {
+    "id": 2,
+    "order": 2,
+    "group": "letter_word_recognition",
+    "type": "lowercase_to_capital_match",
+    "title_en": "Match Lowercase to Capital Letter",
+    "title_ar": "طابق الحرف الصغير بالحرف الكبير",
+    "instruction_en": "Click the letter to hear its sound, then select the matching capital letter.",
+    "instruction_ar": "انقر على الحرف لسماع صوته، ثم اختر الحرف الكبير المطابق.",
+    "stimulus": {
+      "display": "m",
+      "type": "lowercase_letter",
+      "audio_key": "letter_m"
+    },
+    "options": [
+      { "value": "M", "is_correct": true },
+      { "value": "N", "is_correct": false },
+      { "value": "W", "is_correct": false },
+      { "value": "H", "is_correct": false }
+    ],
+    "correct_answer": "M",
+    "depends_on": null
+  },
+  {
+    "id": 3,
+    "order": 3,
+    "group": "letter_word_recognition",
+    "type": "word_starts_with_letter",
+    "title_en": "Which Word Starts With This Letter?",
+    "title_ar": "أي كلمة تبدأ بهذا الحرف؟",
+    "instruction_en": "Select the word that starts with the letter shown.",
+    "instruction_ar": "اختر الكلمة التي تبدأ بالحرف المعروض.",
+    "stimulus": {
+      "display": "S",
+      "type": "capital_letter"
+    },
+    "options": [
+      { "value_en": "Sun",  "value_ar": "شمس", "is_correct": true },
+      { "value_en": "Cat",  "value_ar": "قطة", "is_correct": false },
+      { "value_en": "Ball", "value_ar": "كرة", "is_correct": false },
+      { "value_en": "Tree", "value_ar": "شجرة", "is_correct": false }
+    ],
+    "correct_answer_en": "Sun",
+    "correct_answer_ar": "شمس",
+    "depends_on": null
+  },
+  {
+    "id": 4,
+    "order": 4,
+    "group": "letter_word_recognition",
+    "type": "word_ends_with_letter",
+    "title_en": "Which Word Ends With This Letter?",
+    "title_ar": "أي كلمة تنتهي بهذا الحرف؟",
+    "instruction_en": "Select the word that ends with the letter shown.",
+    "instruction_ar": "اختر الكلمة التي تنتهي بالحرف المعروض.",
+    "stimulus": {
+      "display": "t",
+      "type": "lowercase_letter"
+    },
+    "options": [
+      { "value_en": "Cat",  "value_ar": "قط", "is_correct": true },
+      { "value_en": "Dog",  "value_ar": "كلب", "is_correct": false },
+      { "value_en": "Fish", "value_ar": "سمك", "is_correct": false },
+      { "value_en": "Bird", "value_ar": "طير", "is_correct": false }
+    ],
+    "correct_answer_en": "Cat",
+    "correct_answer_ar": "قط",
+    "depends_on": null
+  },
+  {
+    "id": 5,
+    "order": 5,
+    "group": "letter_word_recognition",
+    "type": "image_to_word_match",
+    "title_en": "Select the Correct Word for the Image",
+    "title_ar": "اختر الكلمة الصحيحة للصورة",
+    "instruction_en": "Look at the image and select the correct word.",
+    "instruction_ar": "انظر إلى الصورة واختر الكلمة الصحيحة.",
+    "stimulus": {
+      "image_key": "img_apple",
+      "type": "image"
+    },
+    "options": [
+      { "value_en": "Apple",  "value_ar": "تفاحة", "is_correct": true },
+      { "value_en": "Apply",  "value_ar": "يتقدم", "is_correct": false },
+      { "value_en": "Ample",  "value_ar": "واسع",  "is_correct": false },
+      { "value_en": "Maple",  "value_ar": "قيقب",  "is_correct": false }
+    ],
+    "correct_answer_en": "Apple",
+    "correct_answer_ar": "تفاحة",
+    "depends_on": null
+  },
+  {
+    "id": 6,
+    "order": 6,
+    "group": "letter_word_recognition",
+    "type": "heard_word_to_written",
+    "title_en": "Find the Word You Hear",
+    "title_ar": "اعثر على الكلمة التي تسمعها",
+    "instruction_en": "Listen to the spoken word and select it from the options below.",
+    "instruction_ar": "استمع إلى الكلمة المنطوقة واخترها من الخيارات أدناه.",
+    "stimulus": {
+      "audio_key": "word_man",
+      "spoken_word_en": "man",
+      "spoken_word_ar": "رجل",
+      "type": "audio"
+    },
+    "options": [
+      { "value_en": "can",  "value_ar": "علبة",  "is_correct": false },
+      { "value_en": "man",  "value_ar": "رجل",   "is_correct": true  },
+      { "value_en": "pan",  "value_ar": "مقلاة", "is_correct": false },
+      { "value_en": "wam",  "value_ar": "وام",   "is_correct": false }
+    ],
+    "correct_answer_en": "man",
+    "correct_answer_ar": "رجل",
+    "note": "Options are displayed as written text only; user cannot listen to them.",
+    "depends_on": null
+  },
+  {
+    "id": 7,
+    "order": 7,
+    "group": "letter_word_recognition",
+    "type": "written_word_to_sound",
+    "title_en": "Choose the Correct Sound for the Word",
+    "title_ar": "اختر الصوت الصحيح للكلمة",
+    "instruction_en": "Read the word, then listen to the sounds and choose the one that matches.",
+    "instruction_ar": "اقرأ الكلمة، ثم استمع إلى الأصوات واختر الصوت المطابق.",
+    "stimulus": {
+      "display_en": "dog",
+      "display_ar": "كلب",
+      "type": "written_word"
+    },
+    "options": [
+      { "audio_key": "sound_dog",  "label_en": "Sound 1", "label_ar": "صوت 1", "is_correct": true  },
+      { "audio_key": "sound_cat",  "label_en": "Sound 2", "label_ar": "صوت 2", "is_correct": false },
+      { "audio_key": "sound_bird", "label_en": "Sound 3", "label_ar": "صوت 3", "is_correct": false },
+      { "audio_key": "sound_fish", "label_en": "Sound 4", "label_ar": "صوت 4", "is_correct": false }
+    ],
+    "correct_answer": "sound_dog",
+    "depends_on": null
+  },
+  {
+    "id": 8,
+    "order": 8,
+    "group": "letter_word_recognition",
+    "type": "letter_to_image_sound_match",
+    "title_en": "Which Picture Starts With This Letter?",
+    "title_ar": "أي صورة تبدأ بهذا الحرف؟",
+    "instruction_en": "Click each picture to hear its name. Select the picture whose name starts with the letter shown.",
+    "instruction_ar": "انقر على كل صورة لسماع اسمها. اختر الصورة التي يبدأ اسمها بالحرف المعروض.",
+    "stimulus": {
+      "display": "B",
+      "type": "capital_letter"
+    },
+    "options": [
+      { "image_key": "img_ball",    "audio_key": "word_ball",    "name_en": "Ball",    "name_ar": "كرة",   "is_correct": true  },
+      { "image_key": "img_cat",     "audio_key": "word_cat",     "name_en": "Cat",     "name_ar": "قطة",   "is_correct": false },
+      { "image_key": "img_dog",     "audio_key": "word_dog",     "name_en": "Dog",     "name_ar": "كلب",   "is_correct": false },
+      { "image_key": "img_elephant","audio_key": "word_elephant","name_en": "Elephant","name_ar": "فيل",   "is_correct": false }
+    ],
+    "correct_answer": "img_ball",
+    "depends_on": null
+  },
+  {
+    "id": 9,
+    "order": 9,
+    "group": "image_comprehension",
+    "type": "image_adjective_selection",
+    "title_en": "Describe the Image",
+    "title_ar": "صف الصورة",
+    "instruction_en": "Look at the image carefully. Select THREE words that best describe it.",
+    "instruction_ar": "انظر إلى الصورة بعناية. اختر ثلاث كلمات تصفها أفضل وصف.",
+    "stimulus": {
+      "image_key": "img_bright_wide_road",
+      "type": "image"
+    },
+    "options": [
+      { "value_en": "Light",   "value_ar": "مضيء",   "is_correct": true  },
+      { "value_en": "Wide",    "value_ar": "واسع",   "is_correct": true  },
+      { "value_en": "Long",    "value_ar": "طويل",   "is_correct": true  },
+      { "value_en": "Dark",    "value_ar": "مظلم",   "is_correct": false },
+      { "value_en": "Narrow",  "value_ar": "ضيق",    "is_correct": false },
+      { "value_en": "Short",   "value_ar": "قصير",   "is_correct": false }
+    ],
+    "correct_answers_count": 3,
+    "correct_answers_en": ["Light", "Wide", "Long"],
+    "correct_answers_ar": ["مضيء", "واسع", "طويل"],
+    "depends_on": null
+  },
+  {
+    "id": 10,
+    "order": 10,
+    "group": "image_comprehension",
+    "type": "image_action_sentence",
+    "title_en": "What Is Happening in the Image?",
+    "title_ar": "ماذا يحدث في الصورة؟",
+    "instruction_en": "Look at the image and select the sentence that best describes what is happening.",
+    "instruction_ar": "انظر إلى الصورة واختر الجملة التي تصف ما يحدث بشكل أفضل.",
+    "stimulus": {
+      "image_key": "img_boy_playing_ball",
+      "type": "image"
+    },
+    "options": [
+      { "value_en": "A boy is playing with a ball.",     "value_ar": "يلعب ولد بكرة.",             "is_correct": true  },
+      { "value_en": "A girl is reading a book.",         "value_ar": "تقرأ فتاة كتابًا.",          "is_correct": false },
+      { "value_en": "A boy is eating an apple.",         "value_ar": "يأكل ولد تفاحة.",            "is_correct": false },
+      { "value_en": "A dog is running in the garden.",   "value_ar": "يركض كلب في الحديقة.",       "is_correct": false }
+    ],
+    "correct_answer_en": "A boy is playing with a ball.",
+    "correct_answer_ar": "يلعب ولد بكرة.",
+    "depends_on": null
+  },
+  {
+    "id": 11,
+    "order": 11,
+    "group": "reading_block_1",
+    "type": "reading_timed",
+    "title_en": "Read the Story",
+    "title_ar": "اقرأ القصة",
+    "instruction_en": "Read the text carefully. Press 'Finished' when you are done. Your reading time will be recorded.",
+    "instruction_ar": "اقرأ النص بعناية. اضغط على 'انتهيت' عندما تنتهي. سيتم تسجيل وقت قراءتك.",
+    "stimulus": {
+      "text_en": "Tom has a small red cat. The cat likes to play in the garden. One day, Tom and his cat saw a big bird. The bird flew up into the blue sky. Tom waved goodbye to the bird.",
+      "text_ar": "لدى سامي قطة صغيرة حمراء. تحب القطة اللعب في الحديقة. في يوم ما، رأى سامي وقطته طائرًا كبيرًا. حلّق الطائر في السماء الزرقاء. لوّح سامي للطائر مودّعًا.",
+      "word_count_en": 40,
+      "word_count_ar": 36,
+      "type": "reading_passage"
+    },
+    "measures": ["reading_time_seconds"],
+    "correct_answer": null,
+    "depends_on": null
+  },
+  {
+    "id": 12,
+    "order": 12,
+    "group": "reading_block_1",
+    "type": "comprehension_hero",
+    "title_en": "Who Is the Hero of the Story?",
+    "title_ar": "من هو بطل القصة؟",
+    "instruction_en": "Who is the main character of the story you just read?",
+    "instruction_ar": "من هو الشخصية الرئيسية في القصة التي قرأتها للتو؟",
+    "stimulus": null,
+    "options": [
+      { "value_en": "Tom",       "value_ar": "سامي",    "is_correct": true  },
+      { "value_en": "The bird",  "value_ar": "الطائر",  "is_correct": false },
+      { "value_en": "The cat",   "value_ar": "القطة",   "is_correct": false },
+      { "value_en": "The garden","value_ar": "الحديقة", "is_correct": false }
+    ],
+    "correct_answer_en": "Tom",
+    "correct_answer_ar": "سامي",
+    "depends_on": 11
+  },
+  {
+    "id": 13,
+    "order": 13,
+    "group": "reading_block_1",
+    "type": "comprehension_action",
+    "title_en": "What Did Tom See?",
+    "title_ar": "ماذا رأى سامي؟",
+    "instruction_en": "Select the correct answer based on the story.",
+    "instruction_ar": "اختر الإجابة الصحيحة بناءً على القصة.",
+    "stimulus": null,
+    "options": [
+      { "value_en": "He saw a big bird.",    "value_ar": "رأى طائرًا كبيرًا.",    "is_correct": true  },
+      { "value_en": "He saw a little dog.",  "value_ar": "رأى كلبًا صغيرًا.",    "is_correct": false },
+      { "value_en": "He saw a red flower.",  "value_ar": "رأى زهرة حمراء.",      "is_correct": false },
+      { "value_en": "He saw a green tree.",  "value_ar": "رأى شجرة خضراء.",      "is_correct": false }
+    ],
+    "correct_answer_en": "He saw a big bird.",
+    "correct_answer_ar": "رأى طائرًا كبيرًا.",
+    "depends_on": 11
+  },
+  {
+    "id": 14,
+    "order": 14,
+    "group": "reading_block_1",
+    "type": "comprehension_detail_color",
+    "title_en": "What Color Was the Sky?",
+    "title_ar": "ما لون السماء؟",
+    "instruction_en": "Based on the story, what color was the sky?",
+    "instruction_ar": "بناءً على القصة، ما لون السماء؟",
+    "stimulus": null,
+    "options": [
+      { "value_en": "Blue",   "value_ar": "أزرق",   "is_correct": true  },
+      { "value_en": "Red",    "value_ar": "أحمر",   "is_correct": false },
+      { "value_en": "Green",  "value_ar": "أخضر",   "is_correct": false },
+      { "value_en": "Grey",   "value_ar": "رمادي",  "is_correct": false }
+    ],
+    "correct_answer_en": "Blue",
+    "correct_answer_ar": "أزرق",
+    "depends_on": 11
+  },
+  {
+    "id": 15,
+    "order": 15,
+    "group": "reading_block_2",
+    "type": "reading_timed",
+    "title_en": "Read the Second Story",
+    "title_ar": "اقرأ القصة الثانية",
+    "instruction_en": "Read the text carefully. Press 'Finished' when you are done. Your reading time will be recorded.",
+    "instruction_ar": "اقرأ النص بعناية. اضغط على 'انتهيت' عندما تنتهي. سيتم تسجيل وقت قراءتك.",
+    "stimulus": {
+      "text_en": "Sara and her brother went to the park on a sunny morning. They ran across the soft green grass and climbed the tall trees. Sara found a yellow butterfly near the big old fountain. She watched it fly slowly over the bright flowers. Her brother called her name and they walked home together, happy and tired.",
+      "text_ar": "ذهبت سارة وأخوها إلى الحديقة في صباح مشمس. ركضا فوق العشب الأخضر الناعم وتسلّقا الأشجار الطويلة. وجدت سارة فراشة صفراء بالقرب من النافورة الكبيرة القديمة. راقبتها وهي تحلّق ببطء فوق الزهور المضيئة. ناداها أخوها باسمها فعادا معًا إلى المنزل، سعيدين ومتعبين.",
+      "word_count_en": 58,
+      "word_count_ar": 52,
+      "type": "reading_passage"
+    },
+    "measures": ["reading_time_seconds"],
+    "correct_answer": null,
+    "depends_on": null
+  },
+  {
+    "id": 16,
+    "order": 16,
+    "group": "reading_block_2",
+    "type": "word_location_in_text",
+    "title_en": "Find the Word in the Text",
+    "title_ar": "اعثر على الكلمة في النص",
+    "instruction_en": "The text is shown below. Click on the word 'butterfly' in the text.",
+    "instruction_ar": "النص معروض أدناه. انقر على كلمة 'فراشة' في النص.",
+    "stimulus": {
+      "text_ref": 15,
+      "target_word_en": "butterfly",
+      "target_word_ar": "فراشة",
+      "type": "text_reference"
+    },
+    "correct_answer_en": "butterfly",
+    "correct_answer_ar": "فراشة",
+    "depends_on": 15
+  },
+  {
+    "id": 17,
+    "order": 17,
+    "group": "reading_block_2",
+    "type": "adjective_location_in_text",
+    "title_en": "Find the Color or Adjective in the Text",
+    "title_ar": "اعثر على اللون أو الصفة في النص",
+    "instruction_en": "The text is shown below. Click on the word 'yellow' in the text.",
+    "instruction_ar": "النص معروض أدناه. انقر على كلمة 'صفراء' في النص.",
+    "stimulus": {
+      "text_ref": 15,
+      "target_word_en": "yellow",
+      "target_word_ar": "صفراء",
+      "type": "text_reference"
+    },
+    "correct_answer_en": "yellow",
+    "correct_answer_ar": "صفراء",
+    "depends_on": 15
+  },
+  {
+    "id": 18,
+    "order": 18,
+    "group": "reading_block_2",
+    "type": "grammatical_elements_selection",
+    "title_en": "Find Three Verbs in the Text",
+    "title_ar": "اعثر على ثلاثة أفعال في النص",
+    "instruction_en": "The text is shown below. Select any THREE verbs you can find.",
+    "instruction_ar": "النص معروض أدناه. اختر أي ثلاثة أفعال يمكنك إيجادها.",
+    "stimulus": {
+      "text_ref": 15,
+      "target_type": "verb",
+      "type": "text_reference"
+    },
+    "options": [
+      { "value_en": "ran",     "value_ar": "ركضا",    "is_correct": true  },
+      { "value_en": "climbed", "value_ar": "تسلّقا",  "is_correct": true  },
+      { "value_en": "found",   "value_ar": "وجدت",    "is_correct": true  },
+      { "value_en": "watched", "value_ar": "راقبتها", "is_correct": true  },
+      { "value_en": "called",  "value_ar": "ناداها",  "is_correct": true  },
+      { "value_en": "walked",  "value_ar": "عادا",    "is_correct": true  },
+      { "value_en": "sunny",   "value_ar": "مشمس",    "is_correct": false },
+      { "value_en": "soft",    "value_ar": "ناعم",    "is_correct": false },
+      { "value_en": "yellow",  "value_ar": "صفراء",   "is_correct": false }
+    ],
+    "correct_answers_count": 3,
+    "note": "Any 3 of the verb options are accepted as correct.",
+    "depends_on": 15
+  },
+  {
+    "id": 19,
+    "order": 19,
+    "group": "visual_discrimination_grammar",
+    "type": "letter_visual_discrimination",
+    "title_en": "Find the Correct Letter",
+    "title_ar": "اعثر على الحرف الصحيح",
+    "instruction_en": "Find the correctly oriented letter 'A' hidden among the distorted letters and click on it.",
+    "instruction_ar": "اعثر على الحرف 'A' الموجّه بشكل صحيح بين الحروف المشوّهة وانقر عليه.",
+    "stimulus": {
+      "target_letter": "A",
+      "grid_en": ["∀", "A", "Ʌ", "ɐ", "Å", "∧", "A", "4"],
+      "grid_ar": ["أ", "ء", "إ", "ا", "أ", "ئ", "أ", "ى"],
+      "type": "letter_grid"
+    },
+    "correct_answer": "A",
+    "note": "User must click on correctly oriented 'A' instances. Grid is randomized per session.",
+    "depends_on": null
+  },
+  {
+    "id": 20,
+    "order": 20,
+    "group": "visual_discrimination_grammar",
+    "type": "odd_letter_frequency",
+    "title_en": "Find the Letter That Appears Three Times",
+    "title_ar": "اعثر على الحرف الذي يظهر ثلاث مرات",
+    "instruction_en": "Every letter in the grid appears exactly twice, except one that appears three times. Find and select that letter.",
+    "instruction_ar": "كل حرف في الشبكة يظهر مرتين بالضبط، إلا حرف واحد يظهر ثلاث مرات. اعثر عليه واختره.",
+    "stimulus": {
+      "grid_en": ["B","M","T","K","B","P","M","T","R","P","K","R","T","X","X"],
+      "grid_ar": ["ب","م","ت","ك","ب","ص","م","ت","ر","ص","ك","ر","ت","خ","خ"],
+      "type": "letter_grid"
+    },
+    "correct_answer_en": "T",
+    "correct_answer_ar": "ت",
+    "depends_on": null
+  },
+  {
+    "id": 21,
+    "order": 21,
+    "group": "visual_discrimination_grammar",
+    "type": "identify_verb_in_sentence",
+    "title_en": "Find the Verb in the Sentence",
+    "title_ar": "اعثر على الفعل في الجملة",
+    "instruction_en": "Read the sentence and select the verb.",
+    "instruction_ar": "اقرأ الجملة واختر الفعل.",
+    "stimulus": {
+      "sentence_en": "The little dog runs fast in the park.",
+      "sentence_ar": "يركض الكلب الصغير بسرعة في الحديقة.",
+      "type": "sentence"
+    },
+    "options": [
+      { "value_en": "little", "value_ar": "الصغير", "is_correct": false },
+      { "value_en": "dog",    "value_ar": "الكلب",  "is_correct": false },
+      { "value_en": "runs",   "value_ar": "يركض",   "is_correct": true  },
+      { "value_en": "park",   "value_ar": "الحديقة","is_correct": false }
+    ],
+    "correct_answer_en": "runs",
+    "correct_answer_ar": "يركض",
+    "depends_on": null
+  },
+  {
+    "id": 22,
+    "order": 22,
+    "group": "visual_discrimination_grammar",
+    "type": "identify_subject_in_sentence",
+    "title_en": "Find the Subject of the Sentence",
+    "title_ar": "اعثر على فاعل الجملة",
+    "instruction_en": "Read the sentence and select the subject (who is doing the action).",
+    "instruction_ar": "اقرأ الجملة واختر الفاعل (من يقوم بالفعل).",
+    "stimulus": {
+      "sentence_en": "Every morning, the brave young girl walks alone to the old school.",
+      "sentence_ar": "كل صباح، تمشي الفتاة الشجاعة الصغيرة وحدها إلى المدرسة القديمة.",
+      "type": "sentence"
+    },
+    "options": [
+      { "value_en": "morning",      "value_ar": "صباح",     "is_correct": false },
+      { "value_en": "brave",        "value_ar": "الشجاعة",  "is_correct": false },
+      { "value_en": "the girl",     "value_ar": "الفتاة",   "is_correct": true  },
+      { "value_en": "school",       "value_ar": "المدرسة",  "is_correct": false }
+    ],
+    "correct_answer_en": "the girl",
+    "correct_answer_ar": "الفتاة",
+    "depends_on": null
+  },
+  {
+    "id": 23,
+    "order": 23,
+    "group": "reading_block_3",
+    "type": "reading_timed",
+    "title_en": "Read the Final Story",
+    "title_ar": "اقرأ القصة الأخيرة",
+    "instruction_en": "Read the text carefully. Press 'Finished' when you are done. Your reading time will be recorded.",
+    "instruction_ar": "اقرأ النص بعناية. اضغط على 'انتهيت' عندما تنتهي. سيتم تسجيل وقت قراءتك.",
+    "stimulus": {
+      "text_en": "One winter morning, Lily woke up early and looked outside. The ground was covered in white snow. She put on her warm coat and boots and went outside. First, she built a snowman with a big round head. Then, she threw snowballs with her little brother. Finally, they went inside and their mother made them hot chocolate. Lily smiled and said it was the best day ever.",
+      "text_ar": "في صباح شتوي، استيقظت ليلى مبكرًا ونظرت من النافذة. كانت الأرض مغطاة بالثلج الأبيض. ارتدت معطفها الدافئ وحذاءها وخرجت. أولًا، بنت رجل ثلج برأس كبير ومستدير. ثم رمت كرات الثلج مع أخيها الصغير. وأخيرًا، دخلا إلى المنزل فأعدّت لهما أمّهما الشوكولاتة الساخنة. ابتسمت ليلى وقالت إنه كان أجمل يوم في حياتها.",
+      "word_count_en": 72,
+      "word_count_ar": 66,
+      "type": "reading_passage"
+    },
+    "measures": ["reading_time_seconds"],
+    "correct_answer": null,
+    "depends_on": null
+  },
+  {
+    "id": 24,
+    "order": 24,
+    "group": "reading_block_3",
+    "type": "comprehension_sequence",
+    "title_en": "What Happened First?",
+    "title_ar": "ماذا حدث أولًا؟",
+    "instruction_en": "Based on the story, select the event that happened first.",
+    "instruction_ar": "بناءً على القصة، اختر الحدث الذي وقع أولًا.",
+    "stimulus": null,
+    "options": [
+      { "value_en": "Lily built a snowman.",              "value_ar": "بنت ليلى رجل ثلج.",                    "is_correct": false },
+      { "value_en": "Lily looked outside at the snow.",   "value_ar": "نظرت ليلى إلى الخارج وشاهدت الثلج.", "is_correct": true  },
+      { "value_en": "They drank hot chocolate.",          "value_ar": "شربا الشوكولاتة الساخنة.",            "is_correct": false },
+      { "value_en": "She threw snowballs.",               "value_ar": "رمت كرات الثلج.",                     "is_correct": false }
+    ],
+    "correct_answer_en": "Lily looked outside at the snow.",
+    "correct_answer_ar": "نظرت ليلى إلى الخارج وشاهدت الثلج.",
+    "depends_on": 23
+  },
+  {
+    "id": 25,
+    "order": 25,
+    "group": "reading_block_3",
+    "type": "comprehension_title_selection",
+    "title_en": "Choose the Best Title for the Story",
+    "title_ar": "اختر أفضل عنوان للقصة",
+    "instruction_en": "Which title best fits the story you just read?",
+    "instruction_ar": "أي عنوان يناسب القصة التي قرأتها للتو؟",
+    "stimulus": null,
+    "options": [
+      { "value_en": "Lily's Fun Snow Day",         "value_ar": "يوم الثلج الممتع لليلى",          "is_correct": true  },
+      { "value_en": "A Hot Summer Afternoon",      "value_ar": "بعد ظهر صيفي حار",               "is_correct": false },
+      { "value_en": "How to Build a Snowman",      "value_ar": "كيفية بناء رجل الثلج",           "is_correct": false },
+      { "value_en": "Lily and the Chocolate Shop", "value_ar": "ليلى ومحل الشوكولاتة",           "is_correct": false }
+    ],
+    "correct_answer_en": "Lily's Fun Snow Day",
+    "correct_answer_ar": "يوم الثلج الممتع لليلى",
+    "depends_on": 23
+  }
+]

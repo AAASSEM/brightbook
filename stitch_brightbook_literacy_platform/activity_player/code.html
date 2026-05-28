@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f5fced",
+                    "surface-variant": "#dee5d6",
+                    "secondary-fixed": "#ffdf9e",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#5b4300",
+                    "on-primary-fixed": "#002204",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#0061a4",
+                    "on-tertiary-container": "#00355d",
+                    "on-background": "#171d14",
+                    "tertiary-fixed-dim": "#9ecaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#6f7a6b",
+                    "primary-fixed": "#94f990",
+                    "surface": "#f5fced",
+                    "secondary": "#785900",
+                    "secondary-container": "#fdc003",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#4caf50",
+                    "inverse-surface": "#2c3228",
+                    "primary-fixed-dim": "#78dc77",
+                    "on-secondary-container": "#6c5000",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e3ebdc",
+                    "surface-container": "#e9f0e1",
+                    "on-surface-variant": "#3f4a3c",
+                    "background": "#f5fced",
+                    "surface-dim": "#d5dcce",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#006e1c",
+                    "on-surface": "#171d14",
+                    "surface-container-low": "#eff6e7",
+                    "on-primary-container": "#003c0b",
+                    "inverse-on-surface": "#ecf3e4",
+                    "outline-variant": "#becab9",
+                    "on-secondary-fixed": "#261a00",
+                    "primary": "#006e1c",
+                    "tertiary-fixed": "#d1e4ff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#fabd00",
+                    "on-primary-fixed-variant": "#005313",
+                    "inverse-primary": "#78dc77",
+                    "tertiary-container": "#33a0fe",
+                    "on-tertiary-fixed": "#001d36",
+                    "surface-container-highest": "#dee5d6",
+                    "on-tertiary-fixed-variant": "#00497d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "kid-margin": "24px",
+                    "stack-md": "24px",
+                    "stack-sm": "12px",
+                    "unit": "8px",
+                    "touch-target-min": "48px",
+                    "parent-margin": "16px",
+                    "gutter": "16px",
+                    "stack-lg": "40px"
+            },
+            "fontFamily": {
+                    "admin-label-xs": ["Inter"],
+                    "parent-headline-md": ["Plus Jakarta Sans"],
+                    "kid-body-md": ["Lexend"],
+                    "parent-body-sm": ["Plus Jakarta Sans"],
+                    "kid-headline-lg": ["Lexend"]
+            },
+            "fontSize": {
+                    "admin-label-xs": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "parent-headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "kid-body-md": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "parent-body-sm": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "kid-headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .squishy-button {
+            box-shadow: 0 6px 0 0 rgba(0,0,0,0.1);
+            transition: all 0.1s ease;
+        }
+        .squishy-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+        }
+        .glossy-progress {
+            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+        }
+        .organic-blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-kid-body-md selection:bg-primary-container/30 min-h-screen flex flex-col overflow-hidden">
+<!-- Activity Header (TopAppBar Context) -->
+<header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md font-lexend tracking-tight font-bold docked full-width top-0 sticky border-b border-zinc-100 dark:border-zinc-800 shadow-sm z-40">
+<div class="flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-high rounded-full hover:bg-green-50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary" data-icon="close">close</span>
+</button>
+<h1 class="text-xl font-black text-green-700 dark:text-green-400">Rhyming Fun</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-admin-label-xs font-bold text-primary">5/10</span>
+<span class="material-symbols-outlined text-secondary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<!-- Glossy Progress Bar -->
+<div class="px-6 pb-4">
+<div class="h-4 w-full bg-surface-container-highest rounded-full overflow-hidden relative">
+<div class="h-full w-1/2 bg-primary-container rounded-full relative transition-all duration-500 ease-out">
+<div class="absolute inset-0 glossy-progress"></div>
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center border-2 border-primary-container translate-x-1/2 z-10">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="auto_stories" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center relative p-kid-margin">
+<!-- Floating Organic Decorations -->
+<div class="absolute top-10 left-[-20px] w-32 h-32 bg-secondary-container/20 organic-blob -z-10 blur-xl"></div>
+<div class="absolute bottom-20 right-[-10px] w-40 h-40 bg-primary-container/10 organic-blob -z-10 blur-xl"></div>
+<div class="w-full max-w-md flex flex-col items-center gap-stack-md">
+<!-- Question Prompt Card -->
+<div class="w-full bg-white rounded-[32px] p-8 shadow-[0_12px_40px_rgba(76,175,80,0.1)] border-2 border-green-50 flex flex-col items-center text-center gap-6 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-primary-container"></div>
+<div class="w-48 h-48 bg-surface-container-low rounded-3xl overflow-hidden flex items-center justify-center p-4">
+<img alt="Cute cat illustration" class="w-full h-full object-contain rounded-2xl" data-alt="whimsical 3d illustration of a cute orange tabby cat sitting on a soft blue cushion, bright studio lighting, toy-like aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1tFVZNTfsPbpSozmSHBLA6W3faKBP4Xdgz69K4Pge1qqUfO-obltlowjFAzIMPxPZvVwA2-kyYuQe2ba9734YII-8KbyLV2pm1TE9intRDPzHgPKdmXt9RkCVKxV-S45IY9dOAwZV0OjqNPoaWHO00Dw-2uWmrt9zQ0otFPeI-u4zWcKPl2SCPrshsZOpVlL9P2LcITl5pyyFas-W1MmNSWAjfwciVFvsql9V1Cs3PmUk39yFADIKQvXArHnk2288DpvU6alue1o"/>
+</div>
+<div class="space-y-2">
+<p class="text-primary font-bold tracking-wide uppercase text-sm">Level 2: Word Match</p>
+<h2 class="font-kid-headline-lg text-on-surface">Which word rhymes with <span class="text-primary underline decoration-secondary decoration-4 underline-offset-4">Cat</span>?</h2>
+</div>
+</div>
+<!-- Answer Options Grid -->
+<div class="w-full grid grid-cols-1 gap-4">
+<!-- Option 1: Bat (Correct) -->
+<button class="squishy-button w-full bg-white hover:bg-surface-container-lowest border-b-4 border-zinc-200 active:border-b-0 py-touch-target-min px-6 rounded-[24px] flex items-center justify-between group transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-2xl flex items-center justify-center font-black text-primary text-xl">A</div>
+<span class="font-kid-headline-lg text-2xl">Bat</span>
+</div>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<!-- Option 2: Dog -->
+<button class="squishy-button w-full bg-white hover:bg-surface-container-lowest border-b-4 border-zinc-200 active:border-b-0 py-touch-target-min px-6 rounded-[24px] flex items-center justify-between group transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-2xl flex items-center justify-center font-black text-primary text-xl">B</div>
+<span class="font-kid-headline-lg text-2xl">Dog</span>
+</div>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<!-- Option 3: Sun -->
+<button class="squishy-button w-full bg-white hover:bg-surface-container-lowest border-b-4 border-zinc-200 active:border-b-0 py-touch-target-min px-6 rounded-[24px] flex items-center justify-between group transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-2xl flex items-center justify-center font-black text-primary text-xl">C</div>
+<span class="font-kid-headline-lg text-2xl">Sun</span>
+</div>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Celebration Modal (Hidden by default in logic, shown here for design) -->
+<!-- Removed "hidden" class to demonstrate the visual -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-kid-margin hidden">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="bg-white rounded-[40px] w-full max-w-sm p-8 shadow-2xl relative z-10 flex flex-col items-center text-center gap-6 border-4 border-secondary-container">
+<!-- Animated Star Icon (Pulsing simulated via design) -->
+<div class="w-24 h-24 bg-secondary-container rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(253,192,3,0.6)]">
+<span class="material-symbols-outlined text-5xl text-on-secondary-container" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-kid-headline-lg text-green-700">Woo-hoo!</h3>
+<p class="font-kid-body-md text-on-surface-variant">You finished the Rhyme Time activity and earned 50 sprout points!</p>
+</div>
+<!-- Achievement Badges Row -->
+<div class="flex gap-4 justify-center">
+<div class="w-16 h-16 rounded-full bg-sky-100 border-4 border-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-sky-500" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-amber-100 border-4 border-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-500" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+</div>
+<button class="squishy-button w-full bg-primary-container text-white py-4 rounded-[20px] font-lexend font-bold text-xl border-b-4 border-green-700 active:border-b-0 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Back to Dashboard
+            </button>
+</div>
+</div>
+<!-- Bottom Nav Bar Context (Suppressed for immersive activity) -->
+<!-- We omit it to focus on the Activity Player as per the "Task-Focused" Suppression Rule -->
+<!-- Instructional FAB (Contextual) -->
+<div class="fixed bottom-8 right-8 flex flex-col items-center gap-2">
+<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform hover:rotate-12">
+<span class="material-symbols-outlined text-3xl" data-icon="volume_up" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest bg-white/80 px-2 py-1 rounded-md backdrop-blur-sm">Read Aloud</span>
+</div>
+</body></html>

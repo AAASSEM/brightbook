@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f5fced",
+                        "surface-variant": "#dee5d6",
+                        "secondary-fixed": "#ffdf9e",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#5b4300",
+                        "on-primary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#0061a4",
+                        "on-tertiary-container": "#00355d",
+                        "on-background": "#171d14",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#6f7a6b",
+                        "primary-fixed": "#94f990",
+                        "surface": "#f5fced",
+                        "secondary": "#785900",
+                        "secondary-container": "#fdc003",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#4caf50",
+                        "inverse-surface": "#2c3228",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-secondary-container": "#6c5000",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e3ebdc",
+                        "surface-container": "#e9f0e1",
+                        "on-surface-variant": "#3f4a3c",
+                        "background": "#f5fced",
+                        "surface-dim": "#d5dcce",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#006e1c",
+                        "on-surface": "#171d14",
+                        "surface-container-low": "#eff6e7",
+                        "on-primary-container": "#003c0b",
+                        "inverse-on-surface": "#ecf3e4",
+                        "outline-variant": "#becab9",
+                        "on-secondary-fixed": "#261a00",
+                        "primary": "#006e1c",
+                        "tertiary-fixed": "#d1e4ff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#fabd00",
+                        "on-primary-fixed-variant": "#005313",
+                        "inverse-primary": "#78dc77",
+                        "tertiary-container": "#33a0fe",
+                        "on-tertiary-fixed": "#001d36",
+                        "surface-container-highest": "#dee5d6",
+                        "on-tertiary-fixed-variant": "#00497d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "kid-margin": "24px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "unit": "8px",
+                        "touch-target-min": "48px",
+                        "parent-margin": "16px",
+                        "gutter": "16px",
+                        "stack-lg": "40px"
+                    },
+                    "fontFamily": {
+                        "admin-label-xs": ["Inter"],
+                        "parent-headline-md": ["Plus Jakarta Sans"],
+                        "kid-body-md": ["Lexend"],
+                        "parent-body-sm": ["Plus Jakarta Sans"],
+                        "kid-headline-lg": ["Lexend"]
+                    },
+                    "fontSize": {
+                        "admin-label-xs": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "parent-headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "kid-body-md": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "parent-body-sm": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "kid-headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glossy-fill {
+            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-parent-body-sm selection:bg-primary-container selection:text-white">
+<!-- Top App Bar -->
+<header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md text-green-600 dark:text-green-400 font-lexend tracking-tight font-bold docked full-width top-0 sticky border-b border-zinc-100 dark:border-zinc-800 shadow-sm z-50 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a friendly smiling woman with warm lighting and a soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIPU_c8kANrTdAZoO0jOHDZu_Yw6eFyyXISutSdEROVNV2L8nOl_HIJodNC-4LdPfoKGjuzFPS5rpQISMQu3HeX9R4gKfWz0k8tZcb-TaWWu7StprnT76k-gzXflFTnGkJYDAgZ4ZPuZAZIWff3j9Jvsuo9gs94h8kp6AvnODMjSiFqS6hHpsDbc2bIszTBGebbxXdvqL31HclXnbiZxdz2YbTIpGyqI7vfJdMgMSBiHJpF0ORjXSFwCm3yU8zhbS5bO1YjMf-rqo"/>
+</div>
+<span class="text-xl font-black text-green-700 dark:text-green-400">BrightBook</span>
+</div>
+<button class="hover:bg-green-50 dark:hover:bg-green-900/20 rounded-full transition-colors active:scale-95 duration-200 transition-transform p-2">
+<span class="material-symbols-outlined text-green-700 dark:text-green-400" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="pb-32 px-parent-margin max-w-md mx-auto space-y-stack-md">
+<!-- Header Title -->
+<section class="mt-stack-md">
+<h1 class="font-parent-headline-md text-parent-headline-md text-on-background">Settings</h1>
+<p class="text-on-surface-variant font-parent-body-sm">Manage your family account</p>
+</section>
+<!-- Horizontal Tabs -->
+<nav class="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
+<button class="px-6 py-3 rounded-full bg-primary-container text-white font-bold whitespace-nowrap shadow-sm">Account</button>
+<button class="px-6 py-3 rounded-full bg-white text-on-surface-variant font-semibold whitespace-nowrap border border-outline-variant">Children</button>
+<button class="px-6 py-3 rounded-full bg-white text-on-surface-variant font-semibold whitespace-nowrap border border-outline-variant">Subscription</button>
+<button class="px-6 py-3 rounded-full bg-white text-on-surface-variant font-semibold whitespace-nowrap border border-outline-variant">Notifications</button>
+</nav>
+<!-- Account Section (Edit Profile) -->
+<section class="bg-white rounded-3xl p-6 border border-zinc-100 space-y-6">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-20 h-20 rounded-3xl overflow-hidden shadow-lg border-2 border-white">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Professional studio portrait of a woman with a confident expression and soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsgV4UXZyHx6s-8xrj1shtdAGvvBsAJdfKmPhh2dyEAzv3n5-mV2OJ_2Ef6HcuXYIsiY-G2_U1I-VRVt1PYOIM3hKN2QaJDhb7ouO_CFtLeRtGX20I4--gh5fpy5Cm9UEMQe2WkBjBQHR00U2jZ5jWsCOP2ONzTyyb1P5v3g7hJt8oDZOwAElV05uW4JZDKLrqXNAyWAm48M6iygZmhuvgPzThEzS48jo0CqaXfnfx6kb2CrynjPENVn5SmSkI_9M95_Qf2KvEwOw"/>
+</div>
+<button class="absolute -bottom-2 -right-2 bg-primary-container text-white p-2 rounded-xl shadow-lg hover:scale-105 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div>
+<h2 class="font-parent-headline-md text-on-background">Sarah Jenkins</h2>
+<p class="text-on-surface-variant">sarah.j@example.com</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="font-admin-label-xs text-admin-label-xs text-on-surface-variant uppercase tracking-wider ml-1">Full Name</label>
+<input class="w-full rounded-2xl border-2 border-zinc-100 p-4 font-parent-body-sm focus:border-primary-container focus:ring-0 outline-none transition-colors" type="text" value="Sarah Jenkins"/>
+</div>
+<div class="space-y-2">
+<label class="font-admin-label-xs text-admin-label-xs text-on-surface-variant uppercase tracking-wider ml-1">Email Address</label>
+<input class="w-full rounded-2xl border-2 border-zinc-100 p-4 font-parent-body-sm focus:border-primary-container focus:ring-0 outline-none transition-colors" type="email" value="sarah.j@example.com"/>
+</div>
+<div class="space-y-2">
+<label class="font-admin-label-xs text-admin-label-xs text-on-surface-variant uppercase tracking-wider ml-1">Password</label>
+<div class="relative">
+<input class="w-full rounded-2xl border-2 border-zinc-100 p-4 font-parent-body-sm focus:border-primary-container focus:ring-0 outline-none transition-colors" type="password" value="••••••••"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary-container text-white py-4 rounded-2xl font-bold shadow-md active:scale-[0.98] transition-transform">Save Profile Changes</button>
+</section>
+<!-- Children Section (Preview) -->
+<section class="space-y-4">
+<div class="flex justify-between items-center px-1">
+<h3 class="font-parent-headline-md text-on-background">Children</h3>
+<button class="text-primary font-bold text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                    Add Child
+                </button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-white border border-zinc-100 rounded-3xl">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-secondary-fixed flex items-center justify-center">
+<img alt="Child" class="w-full h-full object-cover rounded-2xl" data-alt="Young boy with messy hair laughing joyfully in a sunny backyard setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9A4NGoY_9pG6L2rCI81QRGA_mK9RfJ3986T9Om4UbJMZSzXTvniyInDgAEWTY04HjfS0LwOPMUlI2oQo_Szaers3TJzTBHX83x-0_MtxNXWwFgH6vx5Lbj-6fKfT2fardcKBXGlrroI0pzW3_ezb4T6SG75i1AzPoWUaBUVkBJ-CvY-YqakGs95glws3orhz9xNDmvpIbMXWat4Ny7FC-37vGr5de40wI62ED2xZisvRtw4X4nVX3TMVHdJ97ojpqJ_DvDBtcQYY"/>
+</div>
+<div>
+<p class="font-bold text-on-background">Leo</p>
+<p class="text-xs text-on-surface-variant">7 years old • Grade 2</p>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-zinc-50 rounded-xl transition-colors">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-white border border-zinc-100 rounded-3xl">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-fixed flex items-center justify-center">
+<img alt="Child" class="w-full h-full object-cover rounded-2xl" data-alt="Young girl with braided hair concentrating on a book in a library" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZvDa6fMqwWGwKW74WuDkbbonZZbMfyis8r5UKNBlC5RqDxhmofQWeTuuF7u2OUn8pbgU99IeuF19JS54InJEPt6F5GhWfByObpQAbYtB_3DA2WYrbAe8CatGvQID4Vuzm0iVY9eAMaWWjViNhj-GOlf4yf_SJReDRHHr7itUkx1qCOMRg95CdXlLW6unVL-2jdxobdDODpZCr_aVaaJAWIJ5Fxa6pIKjxPsp3Ui9yyuOsKvytCoClumJ9s_MTxo5J-o4Czq1WFZo"/>
+</div>
+<div>
+<p class="font-bold text-on-background">Maya</p>
+<p class="text-xs text-on-surface-variant">5 years old • Preschool</p>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-zinc-50 rounded-xl transition-colors">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Subscription Section -->
+<section class="bg-gradient-to-br from-green-600 to-green-800 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+<div class="relative z-10 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="bg-white/20 text-xs px-3 py-1 rounded-full font-bold backdrop-blur-sm uppercase tracking-widest">Active Plan</span>
+<h3 class="text-2xl font-lexend font-black mt-2">Premium Family</h3>
+</div>
+<span class="material-symbols-outlined text-4xl" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="space-y-1">
+<p class="text-white/80 text-sm">Next billing date</p>
+<p class="font-bold">October 12, 2024</p>
+</div>
+<div class="pt-2">
+<div class="w-full h-2 bg-white/20 rounded-full overflow-hidden">
+<div class="w-3/4 h-full bg-secondary shadow-[0_0_12px_rgba(253,192,3,0.5)] rounded-full glossy-fill"></div>
+</div>
+<p class="text-[10px] mt-2 text-white/70">3 of 5 Child Profiles Used</p>
+</div>
+<button class="w-full bg-white text-green-800 py-3 rounded-2xl font-bold mt-2 shadow-lg active:scale-95 transition-transform">Manage Subscription</button>
+</div>
+</section>
+<!-- Dangerous Zone -->
+<section class="space-y-3 pt-4">
+<button class="w-full flex items-center justify-between p-4 bg-error-container text-on-error-container rounded-2xl font-semibold">
+<span>Logout</span>
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+<button class="w-full text-error font-semibold text-sm py-2">Delete Family Account</button>
+</section>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-8px_24px_rgba(76,175,80,0.12)] rounded-t-[32px] flex justify-around items-center px-4 pb-8 pt-4">
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-6 py-2 hover:text-green-500 dark:hover:text-green-300 active:scale-90 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-lexend text-[12px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-6 py-2 hover:text-green-500 dark:hover:text-green-300 active:scale-90 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-lexend text-[12px] font-semibold">Progress</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 rounded-2xl px-6 py-2 active:scale-90 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-lexend text-[12px] font-semibold">Profile</span>
+</div>
+</nav>
+</body></html>

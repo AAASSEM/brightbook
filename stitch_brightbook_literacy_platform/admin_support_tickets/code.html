@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BrightBook Admin - Support Tickets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f5fced",
+                    "surface-variant": "#dee5d6",
+                    "secondary-fixed": "#ffdf9e",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#5b4300",
+                    "on-primary-fixed": "#002204",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#0061a4",
+                    "on-tertiary-container": "#00355d",
+                    "on-background": "#171d14",
+                    "tertiary-fixed-dim": "#9ecaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#6f7a6b",
+                    "primary-fixed": "#94f990",
+                    "surface": "#f5fced",
+                    "secondary": "#785900",
+                    "secondary-container": "#fdc003",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#4caf50",
+                    "inverse-surface": "#2c3228",
+                    "primary-fixed-dim": "#78dc77",
+                    "on-secondary-container": "#6c5000",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e3ebdc",
+                    "surface-container": "#e9f0e1",
+                    "on-surface-variant": "#3f4a3c",
+                    "background": "#f5fced",
+                    "surface-dim": "#d5dcce",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#006e1c",
+                    "on-surface": "#171d14",
+                    "surface-container-low": "#eff6e7",
+                    "on-primary-container": "#003c0b",
+                    "inverse-on-surface": "#ecf3e4",
+                    "outline-variant": "#becab9",
+                    "on-secondary-fixed": "#261a00",
+                    "primary": "#006e1c",
+                    "tertiary-fixed": "#d1e4ff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#fabd00",
+                    "on-primary-fixed-variant": "#005313",
+                    "inverse-primary": "#78dc77",
+                    "tertiary-container": "#33a0fe",
+                    "on-tertiary-fixed": "#001d36",
+                    "surface-container-highest": "#dee5d6",
+                    "on-tertiary-fixed-variant": "#00497d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "kid-margin": "24px",
+                    "stack-md": "24px",
+                    "stack-sm": "12px",
+                    "unit": "8px",
+                    "touch-target-min": "48px",
+                    "parent-margin": "16px",
+                    "gutter": "16px",
+                    "stack-lg": "40px"
+            },
+            "fontFamily": {
+                    "admin-label-xs": ["Inter"],
+                    "parent-headline-md": ["Plus Jakarta Sans"],
+                    "kid-body-md": ["Lexend"],
+                    "parent-body-sm": ["Plus Jakarta Sans"],
+                    "kid-headline-lg": ["Lexend"]
+            },
+            "fontSize": {
+                    "admin-label-xs": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "parent-headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "kid-body-md": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "parent-body-sm": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "kid-headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #dee5d6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #becab9; }
+    </style>
+</head>
+<body class="bg-surface-bright font-parent-body-sm text-on-surface h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar from JSON -->
+<header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center w-full px-6 py-4 top-0 sticky z-50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="professional portrait of a support administrator in a clean office setting, soft natural lighting, high quality photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9XQaouVXKnzThkk5-RBtP7uthcsY_SarYyB5LmjVVR0MNblwpJ0hsu6FIgi4SmmsJ8WIolF18IWJxFAYI5TpFl0yh6QpmIK1_nmB7MjHXHmyLX1FiSTffqAjB1hgTzeG-vZWJEkWlAqlqRJNBCEXOnKW_EPhDMgz0S9uZHw_JXWR3PiOZZM3Qq1bfE-79lfDgJzgKFleocqwCgFWLU80l7UM_Amk_V_LhM4EvKurTQezkzYpVe0GAcy4SbDh-pwXtK1TrXOaOvz4"/>
+</div>
+<h1 class="text-xl font-black text-green-700 dark:text-green-400 font-lexend tracking-tight">BrightBook</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-zinc-400 dark:text-zinc-500 font-parent-body-sm hover:text-green-500 transition-colors" href="#">Dashboard</a>
+<a class="text-zinc-400 dark:text-zinc-500 font-parent-body-sm hover:text-green-500 transition-colors" href="#">Users</a>
+<a class="text-green-700 dark:text-green-300 font-bold font-parent-body-sm" href="#">Support</a>
+</nav>
+<button class="material-symbols-outlined text-zinc-500 hover:bg-green-50 rounded-full p-2 transition-all active:scale-95" data-icon="settings">settings</button>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Panel: Ticket List -->
+<aside class="w-full md:w-[400px] border-r border-outline-variant bg-surface-container-low flex flex-col">
+<div class="p-parent-margin border-b border-outline-variant flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="font-parent-headline-md text-parent-headline-md text-on-surface">Tickets</h2>
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">12 New</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border-2 border-outline-variant rounded-xl text-parent-body-sm focus:border-primary focus:ring-0 transition-all outline-none" placeholder="Search tickets..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-1">
+<button class="bg-primary text-white px-4 py-1.5 rounded-full text-admin-label-xs whitespace-nowrap">All</button>
+<button class="bg-white text-on-surface-variant border border-outline-variant px-4 py-1.5 rounded-full text-admin-label-xs whitespace-nowrap hover:bg-surface-container-high transition-colors">Open</button>
+<button class="bg-white text-on-surface-variant border border-outline-variant px-4 py-1.5 rounded-full text-admin-label-xs whitespace-nowrap hover:bg-surface-container-high transition-colors">Pending</button>
+<button class="bg-white text-on-surface-variant border border-outline-variant px-4 py-1.5 rounded-full text-admin-label-xs whitespace-nowrap hover:bg-surface-container-high transition-colors">Closed</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Ticket Item Active -->
+<div class="p-4 bg-white border-l-4 border-primary flex flex-col gap-2 cursor-pointer transition-colors">
+<div class="flex justify-between items-start">
+<span class="font-bold text-on-surface font-parent-body-sm">Sarah Jenkins</span>
+<span class="text-admin-label-xs text-outline font-admin-label-xs">2m ago</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[18px]" data-icon="priority_high">priority_high</span>
+<span class="font-semibold text-on-surface-variant text-[14px] truncate">Subscription access issue on iPad</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-error-container text-on-error-container text-[10px] font-bold px-2 py-0.5 rounded uppercase">Urgent</span>
+<span class="text-admin-label-xs text-outline">#TK-2091</span>
+</div>
+</div>
+<!-- Ticket Item -->
+<div class="p-4 border-b border-outline-variant hover:bg-surface-container-high flex flex-col gap-2 cursor-pointer transition-colors">
+<div class="flex justify-between items-start">
+<span class="font-medium text-on-surface font-parent-body-sm">Mark Thompson</span>
+<span class="text-admin-label-xs text-outline font-admin-label-xs">1h ago</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+<span class="font-normal text-on-surface-variant text-[14px] truncate">Progress tracking not syncing</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-0.5 rounded uppercase">Medium</span>
+<span class="text-admin-label-xs text-outline">#TK-2088</span>
+</div>
+</div>
+<!-- Ticket Item -->
+<div class="p-4 border-b border-outline-variant hover:bg-surface-container-high flex flex-col gap-2 cursor-pointer transition-colors">
+<div class="flex justify-between items-start">
+<span class="font-medium text-on-surface font-parent-body-sm">Elisa Vance</span>
+<span class="text-admin-label-xs text-outline font-admin-label-xs">4h ago</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+<span class="font-normal text-on-surface-variant text-[14px] truncate">How to delete old history?</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] font-bold px-2 py-0.5 rounded uppercase">Low</span>
+<span class="text-admin-label-xs text-outline">#TK-2085</span>
+</div>
+</div>
+<!-- Ticket Item -->
+<div class="p-4 border-b border-outline-variant hover:bg-surface-container-high flex flex-col gap-2 cursor-pointer transition-colors">
+<div class="flex justify-between items-start">
+<span class="font-medium text-on-surface font-parent-body-sm">Roberto Gomez</span>
+<span class="text-admin-label-xs text-outline font-admin-label-xs">Yesterday</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[18px]" data-icon="priority_high">priority_high</span>
+<span class="font-normal text-on-surface-variant text-[14px] truncate">Account locked after password reset</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-error-container text-on-error-container text-[10px] font-bold px-2 py-0.5 rounded uppercase">Urgent</span>
+<span class="text-admin-label-xs text-outline">#TK-2080</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Panel: Active Thread -->
+<section class="flex-1 bg-white flex flex-col overflow-hidden relative">
+<!-- Thread Header -->
+<header class="p-6 border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-high overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="close up of a smiling mother in her 30s, warm natural background, high quality portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpfrgxgB5duChMm-sJuPDnaqEoI-7bcyNqQBCRzYAuUJQvAB0dvJHNHm30KLAht-CbAfVwS-jM2oPC7xMmu86TTa0_BCH2hcvdgXxgZvcTs6BHbFJ-Ao3MN-f_Ge4D_LbGA89ygNr-VyeyPwRH5jpQSGF_eFQ1c_Jp8lE9-T51uYhBQjijhVdSilsRo9gQ01ZL_OMQL8-XwzX3rcqqzCu5cqu2RpvPhlnLqQfyFi1WVnnKslPonasqDlFNQZIfod8kqZS0NU1wd0s"/>
+</div>
+<div>
+<h3 class="font-parent-headline-md text-lg leading-tight">Sarah Jenkins</h3>
+<p class="text-admin-label-xs text-outline">User ID: #USR-8821 • Free Tier</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-3 py-2 border-2 border-outline-variant rounded-xl cursor-pointer hover:border-primary transition-all">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-admin-label-xs font-bold uppercase tracking-wide">Open</span>
+<span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined text-outline" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Thread Messages -->
+<div class="flex-1 overflow-y-auto p-8 flex flex-col gap-8 bg-surface-container-lowest">
+<!-- System Message -->
+<div class="flex justify-center">
+<span class="bg-surface-container-high px-4 py-1 rounded-full text-admin-label-xs text-outline">Ticket created March 12, 10:42 AM</span>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-[80%]">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="bg-white border border-outline-variant p-4 rounded-tr-3xl rounded-br-3xl rounded-bl-3xl shadow-sm">
+<p class="text-parent-body-sm text-on-surface">Hello, I recently upgraded to the Plus subscription but when my son tries to access the new reading levels on his iPad, it still says 'Locked'. I've tried logging out and back in but it didn't help. Can you assist?</p>
+</div>
+<span class="text-admin-label-xs text-outline px-1">10:42 AM</span>
+</div>
+</div>
+<!-- Admin Response -->
+<div class="flex gap-4 max-w-[80%] self-end flex-row-reverse">
+<div class="w-10 h-10 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="support_agent">support_agent</span>
+</div>
+<div class="flex flex-col gap-2 items-end">
+<div class="bg-primary text-white p-4 rounded-tl-3xl rounded-bl-3xl rounded-br-3xl shadow-[0_4px_12px_rgba(0,110,28,0.2)]">
+<p class="text-parent-body-sm">Hi Sarah! I'm sorry for the inconvenience. Let me check your account status on our end. Could you please confirm which version of the app you have installed?</p>
+</div>
+<span class="text-admin-label-xs text-outline px-1">11:05 AM • Read</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-[80%]">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="bg-white border border-outline-variant p-4 rounded-tr-3xl rounded-br-3xl rounded-bl-3xl shadow-sm">
+<p class="text-parent-body-sm text-on-surface">I'm on version 2.4.1. I've attached a screenshot of what we see.</p>
+<div class="mt-4 rounded-xl overflow-hidden border-2 border-outline-variant w-48 h-32 relative">
+<img alt="Attached Screenshot" class="w-full h-full object-cover" data-alt="screenshot of a mobile educational app showing locked level icons on a colorful map, playful cartoon aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpIBYyQqL1xkVKavYFkuiOkVqPBLgImbv1eVLxppnRPSRprNvd6y3oapsvykBp7Zd2tbJnlucsIoWKpKnGqX5vA2qz9wBGel8ivIygc38KsnORm-dvUCIJqR7DZAX7_OmIBCWkP3Ps1SYjIxosRLbWyYuOFid9HYYykHs0ZNjVp2nnHvfv4ZoLW36vLD3x7h4ues26oXn13VgmYT7S7yABfQkSXIvnnhVpMXRFQCjf_ZQSe48BRO-cZC29i4GqASB-R8ysSlXvQKY"/>
+<div class="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors cursor-zoom-in"></div>
+</div>
+</div>
+<span class="text-admin-label-xs text-outline px-1">11:15 AM</span>
+</div>
+</div>
+</div>
+<!-- Reply Box -->
+<footer class="p-6 bg-white border-t border-outline-variant">
+<div class="max-w-4xl mx-auto flex flex-col gap-3">
+<div class="flex gap-4 items-center mb-2">
+<button class="flex items-center gap-1.5 text-admin-label-xs font-bold text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="attach_file">attach_file</span>
+                            Attach
+                        </button>
+<button class="flex items-center gap-1.5 text-admin-label-xs font-bold text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
+                            Quick Reply
+                        </button>
+<div class="h-4 w-px bg-outline-variant"></div>
+<button class="flex items-center gap-1.5 text-admin-label-xs font-bold text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="lock">lock</span>
+                            Internal Note
+                        </button>
+</div>
+<div class="relative">
+<textarea class="w-full p-4 bg-surface-container-low border-2 border-outline-variant rounded-2xl text-parent-body-sm focus:border-primary focus:ring-0 transition-all outline-none resize-none" placeholder="Type your reply to Sarah..." rows="4"></textarea>
+<div class="absolute bottom-4 right-4 flex gap-3">
+<button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:brightness-110 active:scale-95 transition-all shadow-md">
+<span>Send Reply</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+</section>
+</main>
+<!-- Navigation Shell Logic for Admin -->
+<nav class="md:hidden flex justify-around items-center px-4 pb-8 pt-4 bg-white border-t border-zinc-100 z-50">
+<div class="flex flex-col items-center justify-center text-zinc-500 px-6 py-2">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-lexend text-[12px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-green-100 text-green-800 rounded-2xl px-6 py-2">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-lexend text-[12px] font-semibold">Support</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 px-6 py-2">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-lexend text-[12px] font-semibold">Profile</span>
+</div>
+</nav>
+</body></html>
