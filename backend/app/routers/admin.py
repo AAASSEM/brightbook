@@ -416,40 +416,72 @@ def get_assessment_questions_stats(admin: Admin = Depends(get_current_admin), se
 # ── AI STATUS ───────────────────────────────────────────────────────────────
 @router.get("/ai-status")
 def get_ai_status(admin: Admin = Depends(get_current_admin), session: Session = Depends(get_session)):
-    """Get AI system status and configuration information from real data"""
+    """Get AI system status — does a real Gemini ping to detect quota/auth issues"""
     try:
         from app.config.settings import settings
         from app.services.ai_metrics import ai_metrics
+        from app.services.ai_service import client, GEMINI_MODEL
 
-        # 1. Configuration Check
+        # 1. Configuration check
         gemini_configured = bool(settings.GEMINI_API_KEY and settings.GEMINI_API_KEY != "")
-        anthropic_configured = bool(settings.ANTHROPIC_API_KEY and settings.ANTHROPIC_API_KEY != "")
 
-        # 2. Real Usage Metrics from in-memory tracker
+        # 2. Real metrics from in-memory tracker
         metrics = ai_metrics.get_metrics()
 
-        # 3. Real Quality Metrics
+        # 3. Real assessment accuracy from DB
         all_assessments = session.exec(select(Assessment)).all()
         total_count = len(all_assessments)
         avg_accuracy = (
-            sum(a.accuracy_percentage for a in all_assessments) / total_count
-            if total_count > 0
-            else 0
+            sum(a.accuracy_percentage for a in all_assessments if a.accuracy_percentage) / total_count
+            if total_count > 0 else 0
         )
 
+        # 4. REAL connectivity check — send a minimal ping to Gemini
+        ai_reachable = False
+        ai_error_message = None
+        ai_error_type = None
+
+        if gemini_configured:
+            try:
+                import time
+                _start = time.perf_counter()
+                client.models.generate_content(
+                    model=GEMINI_MODEL,
+                    contents="Reply with just the word OK"
+                )
+                ai_reachable = True
+                ping_ms = round((time.perf_counter() - _start) * 1000)
+            except Exception as ping_err:
+                err_str = str(ping_err)
+                ai_reachable = False
+                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                    ai_error_type = "quota_exceeded"
+                    ai_error_message = "API quota exhausted — get a new key or wait for daily reset"
+                elif "401" in err_str or "403" in err_str or "API_KEY" in err_str:
+                    ai_error_type = "invalid_key"
+                    ai_error_message = "API key is invalid or revoked"
+                elif "503" in err_str or "unavailable" in err_str.lower():
+                    ai_error_type = "service_down"
+                    ai_error_message = "Gemini service is temporarily unavailable"
+                else:
+                    ai_error_type = "unknown"
+                    ai_error_message = err_str[:200]
+
         return {
-            "api_configured": gemini_configured or anthropic_configured,
-            "ai_provider": "Google Gemini" if gemini_configured else ("Anthropic" if anthropic_configured else "Not configured"),
+            "api_configured": gemini_configured,
+            "ai_reachable": ai_reachable,
+            "ai_error_type": ai_error_type,
+            "ai_error_message": ai_error_message,
+            "ai_provider": "Google Gemini" if gemini_configured else "Not configured",
+            "ai_model": GEMINI_MODEL,
             "api_calls_today": metrics["calls_today"],
             "success_rate": metrics["success_rate"],
+            "failures_today": metrics["failures_today"],
             "assessment_accuracy": round(avg_accuracy, 1),
             "avg_response_time": metrics["avg_response_time"],
             "total_assessments_processed": total_count,
             "total_calls_all_time": metrics["total_calls_all_time"],
-            "failures_today": metrics["failures_today"],
-            "fallback_mode_active": not (gemini_configured or anthropic_configured)
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting AI status: {str(e)}")
-
 

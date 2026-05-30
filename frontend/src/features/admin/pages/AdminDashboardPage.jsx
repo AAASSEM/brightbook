@@ -91,17 +91,49 @@ export default function AdminDashboardPage() {
 
           {aiStatus ? (
             <div className="space-y-3">
-              {/* AI Service Status */}
-              <div className="p-4 rounded-xl flex items-start gap-4" style={{ background: aiStatus.api_configured ? "#f5fced" : "#ffdad6", border: "1px solid #e3ebdc" }}>
-                <span className="material-symbols-outlined" style={{ color: aiStatus.api_configured ? "#4caf50" : "#ba1a1a", marginTop: "2px" }}>
-                  {aiStatus.api_configured ? "check_circle" : "error"}
+              {/* AI Service Status — real ping result */}
+              <div
+                className="p-4 rounded-xl flex items-start gap-4"
+                style={{
+                  background: !aiStatus.api_configured
+                    ? "#ffdad6"
+                    : aiStatus.ai_reachable
+                    ? "#f5fced"
+                    : "#fff3e0",
+                  border: "1px solid #e3ebdc",
+                }}
+              >
+                <span
+                  className="material-symbols-outlined"
+                  style={{
+                    color: !aiStatus.api_configured
+                      ? "#ba1a1a"
+                      : aiStatus.ai_reachable
+                      ? "#4caf50"
+                      : "#e65100",
+                    marginTop: "2px",
+                  }}
+                >
+                  {!aiStatus.api_configured
+                    ? "error"
+                    : aiStatus.ai_reachable
+                    ? "check_circle"
+                    : "warning"}
                 </span>
                 <div className="flex-1">
                   <p className="font-bold text-sm" style={{ color: "#171d14" }}>
-                    {aiStatus.api_configured ? "AI Service: Active" : "AI Service: Not Configured"}
+                    {!aiStatus.api_configured
+                      ? "AI Service: Not Configured"
+                      : aiStatus.ai_reachable
+                      ? `AI Service: Active`
+                      : `AI Service: ${aiStatus.ai_error_type === "quota_exceeded" ? "Quota Exceeded" : aiStatus.ai_error_type === "invalid_key" ? "Invalid Key" : "Unreachable"}`}
                   </p>
                   <p className="text-xs mt-1" style={{ color: "#6f7a6b" }}>
-                    {aiStatus.api_configured ? aiStatus.ai_provider : "Configure API keys to enable AI features"}
+                    {!aiStatus.api_configured
+                      ? "Configure API keys to enable AI features"
+                      : aiStatus.ai_reachable
+                      ? `${aiStatus.ai_provider} · ${aiStatus.ai_model}`
+                      : aiStatus.ai_error_message}
                   </p>
                 </div>
               </div>
@@ -115,8 +147,23 @@ export default function AdminDashboardPage() {
                   </div>
                   <div className="p-3 rounded-xl" style={{ background: "#ffffff", border: "1.5px solid #e3ebdc" }}>
                     <p className="text-xs font-semibold" style={{ color: "#6f7a6b" }}>Success Rate</p>
-                    <p className="text-2xl font-bold" style={{ color: "#006e1c" }}>{aiStatus.success_rate ?? 0}%</p>
+                    <p
+                      className="text-2xl font-bold"
+                      style={{ color: (aiStatus.success_rate ?? 0) >= 80 ? "#006e1c" : (aiStatus.success_rate ?? 0) >= 50 ? "#e65100" : "#ba1a1a" }}
+                    >
+                      {aiStatus.api_calls_today > 0 ? `${aiStatus.success_rate ?? 0}%` : "—"}
+                    </p>
                   </div>
+                </div>
+              )}
+
+              {/* Failures today warning */}
+              {(aiStatus.failures_today || 0) > 0 && (
+                <div className="p-3 rounded-xl flex items-center gap-2" style={{ background: "#fff3e0", border: "1.5px solid #ffcc80" }}>
+                  <span className="material-symbols-outlined" style={{ color: "#e65100", fontSize: "18px" }}>report</span>
+                  <p className="text-xs font-semibold" style={{ color: "#bf360c" }}>
+                    {aiStatus.failures_today} failed AI call{aiStatus.failures_today > 1 ? "s" : ""} today
+                  </p>
                 </div>
               )}
 
@@ -130,12 +177,20 @@ export default function AdminDashboardPage() {
                       <div className="w-24 h-2 rounded-full" style={{ background: "#e3ebdc" }}>
                         <div className="h-2 rounded-full" style={{ background: "#4caf50", width: `${aiStatus.assessment_accuracy ?? 0}%` }}></div>
                       </div>
-                      <span className="text-xs font-bold" style={{ color: "#006e1c" }}>{aiStatus.assessment_accuracy ?? 0}%</span>
+                      <span className="text-xs font-bold" style={{ color: "#006e1c" }}>
+                        {aiStatus.total_assessments_processed > 0 ? `${aiStatus.assessment_accuracy ?? 0}%` : "No data"}
+                      </span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs" style={{ color: "#6f7a6b" }}>Response Time (avg)</span>
-                    <span className="text-xs font-bold" style={{ color: "#006e1c" }}>{aiStatus.avg_response_time ?? 0}s</span>
+                    <span className="text-xs" style={{ color: "#6f7a6b" }}>Avg Response Time</span>
+                    <span className="text-xs font-bold" style={{ color: "#006e1c" }}>
+                      {aiStatus.api_calls_today > 0 ? `${aiStatus.avg_response_time ?? 0}s` : "—"}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs" style={{ color: "#6f7a6b" }}>Total Assessments Processed</span>
+                    <span className="text-xs font-bold" style={{ color: "#006e1c" }}>{aiStatus.total_assessments_processed ?? 0}</span>
                   </div>
                 </div>
               </div>
