@@ -40,9 +40,13 @@ export default function MainLayout() {
       // Open verification modal to unlock
       setIsGateOpen(true);
     } else {
-      // Lock directly and redirect to learn zone
+      // Lock directly
       setChildLock(true);
-      navigate("/learn");
+      
+      // If we are not already in the child learning zone, redirect to /learn
+      if (!location.pathname.startsWith("/learn")) {
+        navigate("/learn");
+      }
     }
   };
 
@@ -98,23 +102,25 @@ export default function MainLayout() {
           {/* Right: User / Actions */}
           <div className="flex items-center gap-2 pr-2">
              {/* Lock Button */}
-             <button
-               onClick={handleLockClick}
-               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-xs border transition-all pointer-events-auto ${
-                 isChildLockActive
-                   ? "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
-                   : "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
-               }`}
-             >
-               <span className="material-symbols-outlined" style={{ fontSize: "16px", fontVariationSettings: "'FILL' 1" }}>
-                 {isChildLockActive ? "lock" : "lock_open"}
-               </span>
-               <span>
-                 {isChildLockActive 
-                   ? (isRtl ? "إلغاء القفل" : "Unlock") 
-                   : (isRtl ? "قفل الطفل" : "Child Lock")}
-               </span>
-             </button>
+             {(isChildLockActive || location.pathname.startsWith("/learn")) && (
+               <button
+                 onClick={handleLockClick}
+                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-xs border transition-all pointer-events-auto ${
+                   isChildLockActive
+                     ? "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
+                     : "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
+                 }`}
+               >
+                 <span className="material-symbols-outlined" style={{ fontSize: "16px", fontVariationSettings: "'FILL' 1" }}>
+                   {isChildLockActive ? "lock" : "lock_open"}
+                 </span>
+                 <span>
+                   {isChildLockActive 
+                     ? (isRtl ? "إلغاء القفل" : "Unlock") 
+                     : (isRtl ? "قفل الطفل" : "Child Lock")}
+                 </span>
+               </button>
+             )}
 
              {!isChildLockActive && (
                <>

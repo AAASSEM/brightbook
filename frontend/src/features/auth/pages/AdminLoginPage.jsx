@@ -105,9 +105,6 @@ export default function AdminLoginPage() {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="label" style={{ marginBottom: 0 }}>Password</label>
-                <button type="button" className="text-xs font-bold" style={{ color: "#006e1c" }}>
-                  Forgot password?
-                </button>
               </div>
               <div className="input-wrap">
                 <span className="material-symbols-outlined">lock</span>

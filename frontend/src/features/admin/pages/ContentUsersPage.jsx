@@ -144,7 +144,6 @@ export default function ContentUsersPage() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold" style={{ color: "#171d14" }}>Parents ({parents.length})</h2>
-            <button className="text-sm font-bold" style={{ color: "#006e1c" }}>Export CSV</button>
           </div>
           <div className="table-wrap" style={{ background: "#ffffff", border: "1.5px solid #e3ebdc" }}>
             <table className="table">

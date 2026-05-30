@@ -69,6 +69,7 @@ export default function AssessmentPage() {
   const navigate = useNavigate();
   const t = useT();
   const lang = useLang();
+  const { setSelectedChild } = useChildStore();
 
   const [current, setCurrent] = useState(0);
   const [questions, setQuestions] = useState([]);
@@ -108,6 +109,7 @@ export default function AssessmentPage() {
       try {
         const cRes = await api.get(`/api/children/${childId}`);
         setChildName(cRes.data.name);
+        setSelectedChild(cRes.data); // Set this child as selected child in the store
       } catch (e) {
         console.warn("Could not fetch child name", e);
       }
@@ -395,11 +397,12 @@ export default function AssessmentPage() {
 
       // Refresh child data to get the updated level and new activities
       try {
-        const { refreshChildren, updateChild } = useChildStore.getState();
+        const { refreshChildren, updateChild, setSelectedChild } = useChildStore.getState();
         // First try to update the specific child's data
         if (res.data.Child_ID) {
           const childRes = await api.get(`/api/children/${res.data.Child_ID}`);
           updateChild(childRes.data);
+          setSelectedChild(childRes.data); // Make sure the child we just assessed is selected!
         }
         // Then refresh all children to ensure we have the latest data
         await refreshChildren(api);
