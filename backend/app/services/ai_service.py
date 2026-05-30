@@ -4,15 +4,18 @@ Analyzes assessments, generates learning paths, and provides parent recommendati
 """
 import os
 import json
+import time
+import logging
 from typing import List, Dict, Any
 from google import genai
 from app.config.settings import settings
 from app.models.enums import DifficultyLevel, ActivityType
 from app.services.ai_metrics import track_ai_call
 
-# Configure Gemini API with working model
+# Configure Gemini API
+# gemini-2.0-flash: 1,500 requests/day on free tier (vs 20/day for older models)
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
-GEMINI_MODEL = "models/gemini-flash-latest"  # Original working model
+GEMINI_MODEL = "models/gemini-2.0-flash"
 
 # ─────────────────────────────────────────────
 # EMOJI & WORD MAPPING FOR AI
@@ -43,7 +46,26 @@ LETTER_EMOJI_MAPPING = {
     'W': [{'word': 'WHALE', 'emoji': '🐋'}, {'word': 'WATER', 'emoji': '💧'}, {'word': 'WORM', 'emoji': '🪱'}, {'word': 'WOLF', 'emoji': '🐺'}, {'word': 'WATERMELON', 'emoji': '🍉'}],
     'X': [{'word': 'X-RAY', 'emoji': '🩻'}, {'word': 'XYLOPHONE', 'emoji': '🎵'}, {'word': 'BOX', 'emoji': '📦'}, {'word': 'FOX', 'emoji': '🦊'}, {'word': 'OXYGEN', 'emoji': '💨'}],
     'Y': [{'word': 'YACHT', 'emoji': '🛥️'}, {'word': 'YOGURT', 'emoji': '🥛'}, {'word': 'YO-YO', 'emoji': '🪀'}, {'word': 'YARN', 'emoji': '🧶'}, {'word': 'YAK', 'emoji': '🐃'}],
-    'Z': [{'word': 'ZEBRA', 'emoji': '🦓'}, {'word': 'ZOO', 'emoji': '🦁'}, {'word': 'ZERO', 'emoji': '0️⃣'}, {'word': 'ZOMBIE', 'emoji': '🧟'}, {'word': 'ZIPPER', 'emoji': '🤐'}]
+    'Z': [{'word': 'ZEBRA', 'emoji': '🦓'}, {'word': 'ZOO', 'emoji': '🦁'}, {'word': 'ZERO', 'emoji': '0️⃣'}, {'word': 'ZOMBIE', 'emoji': '🧟'}, {'word': 'ZIPPER', 'emoji': '🤐'}],
+    
+    # Arabic letters mapping
+    'ا': [{'word': 'أسد', 'emoji': '🦁'}, {'word': 'أرنب', 'emoji': '🐰'}, {'word': 'أناناس', 'emoji': '🍍'}, {'word': 'ألوان', 'emoji': '🎨'}, {'word': 'أم', 'emoji': '👩'}],
+    'ب': [{'word': 'بطة', 'emoji': '🦆'}, {'word': 'باب', 'emoji': '🚪'}, {'word': 'بيت', 'emoji': '🏠'}, {'word': 'بقرة', 'emoji': '🐄'}, {'word': 'برتقال', 'emoji': '🍊'}],
+    'ت': [{'word': 'تمساح', 'emoji': '🐊'}, {'word': 'تفاح', 'emoji': '🍎'}, {'word': 'تاج', 'emoji': '👑'}, {'word': 'تين', 'emoji': '🫐'}, {'word': 'تلفاز', 'emoji': '📺'}],
+    'ث': [{'word': 'ثعلب', 'emoji': '🦊'}, {'word': 'ثعبان', 'emoji': '🐍'}, {'word': 'ثلج', 'emoji': '⛄'}, {'word': 'ثوم', 'emoji': '🧄'}, {'word': 'ثوب', 'emoji': '👗'}],
+    'ن': [{'word': 'نحلة', 'emoji': '🐝'}, {'word': 'نمر', 'emoji': '🐯'}, {'word': 'نجمة', 'emoji': '⭐'}, {'word': 'نار', 'emoji': '🔥'}, {'word': 'نظارة', 'emoji': '👓'}],
+    'ي': [{'word': 'يمامة', 'emoji': '🐦'}, {'word': 'يد', 'emoji': '✋'}, {'word': 'يوسفي', 'emoji': '🍊'}, {'word': 'يخت', 'emoji': '🛥️'}, {'word': 'ياسمين', 'emoji': '🌸'}],
+    'م': [{'word': 'موز', 'emoji': '🍌'}, {'word': 'مفتاح', 'emoji': '🔑'}, {'word': 'مسجد', 'emoji': '🕌'}, {'word': 'مقص', 'emoji': '✂️'}, {'word': 'مدرسة', 'emoji': '🏫'}],
+    'ل': [{'word': 'ليمون', 'emoji': '🍋'}, {'word': 'لعبة', 'emoji': '🧸'}, {'word': 'لسان', 'emoji': '👅'}, {'word': 'لحم', 'emoji': '🥩'}, {'word': 'لصق', 'emoji': '🩹'}],
+    'س': [{'word': 'سمكة', 'emoji': '🐟'}, {'word': 'سيارة', 'emoji': '🚗'}, {'word': 'ساعة', 'emoji': '⌚'}, {'word': 'سرير', 'emoji': '🛏️'}, {'word': 'سفينة', 'emoji': '🚢'}],
+    'ش': [{'word': 'شمس', 'emoji': '☀️'}, {'word': 'شجرة', 'emoji': '🌳'}, {'word': 'شمعة', 'emoji': '🕯️'}, {'word': 'شرطي', 'emoji': '👮'}, {'word': 'شوكة', 'emoji': '🍴'}],
+    'ح': [{'word': 'حصان', 'emoji': '🐴'}, {'word': 'حليب', 'emoji': '🥛'}, {'word': 'حذاء', 'emoji': '👞'}, {'word': 'حوت', 'emoji': '🐳'}, {'word': 'حلوى', 'emoji': '🍬'}],
+    'خ': [{'word': 'خروف', 'emoji': '🐑'}, {'word': 'خبز', 'emoji': '🍞'}, {'word': 'خيمة', 'emoji': '⛺'}, {'word': 'خاتم', 'emoji': '💍'}, {'word': 'خيار', 'emoji': '🥒'}],
+    'ج': [{'word': 'جمل', 'emoji': '🐪'}, {'word': 'جزر', 'emoji': '🥕'}, {'word': 'جرس', 'emoji': '🔔'}, {'word': 'جبل', 'emoji': '⛰️'}, {'word': 'جبن', 'emoji': '🧀'}],
+    'د': [{'word': 'ديك', 'emoji': '🐓'}, {'word': 'دب', 'emoji': '🐻'}, {'word': 'دراجة', 'emoji': '🚲'}, {'word': 'دائرة', 'emoji': '⭕'}, {'word': 'دفتر', 'emoji': '📓'}],
+    'ذ': [{'word': 'ذئب', 'emoji': '🐺'}, {'word': 'ذرة', 'emoji': '🌽'}, {'word': 'ذهب', 'emoji': '🪙'}, {'word': 'ذباب', 'emoji': '🪰'}, {'word': 'ذراع', 'emoji': '💪'}],
+    'ر': [{'word': 'رمان', 'emoji': '🔴'}, {'word': 'ريشة', 'emoji': '🪶'}, {'word': 'رأس', 'emoji': '🗣️'}, {'word': 'رجل', 'emoji': '👨'}, {'word': 'رسالة', 'emoji': '✉️'}],
+    'ز': [{'word': 'زرافة', 'emoji': '🦒'}, {'word': 'زهرة', 'emoji': '🌻'}, {'word': 'زر', 'emoji': '🔘'}, {'word': 'زيتون', 'emoji': '🫒'}, {'word': 'زجاج', 'emoji': '🪟'}]
 }
 
 # ─────────────────────────────────────────────
@@ -554,14 +576,25 @@ def generate_activities_for_child(
         - Fresh, engaging content that builds on previous learning
         """
 
-    # Letter groups based on literacy level
-    letter_groups = {
-        1: ['S', 'A', 'T', 'I', 'P', 'N'],
-        2: ['C', 'K', 'E', 'H', 'R', 'M', 'D'],
-        3: ['G', 'O', 'U', 'L', 'F', 'B'],
-        4: ['J', 'V', 'W', 'X'],
-        5: ['Y', 'Z', 'Q']
-    }
+    is_arabic = native_language and native_language.lower() in ["arabic", "ar"]
+    if is_arabic:
+        letter_groups = {
+            1: ['ا','ب','ت','ث'],
+            2: ['ن','ي','م','ل'],
+            3: ['س','ش'],
+            4: ['ح','خ','ج'],
+            5: ['د','ذ','ر','ز']
+        }
+        activity_group_prefix = "arabic_group_"
+    else:
+        letter_groups = {
+            1: ['S', 'A', 'T', 'I', 'P', 'N'],
+            2: ['C', 'K', 'E', 'H', 'R', 'M', 'D'],
+            3: ['G', 'O', 'U', 'L', 'F', 'B'],
+            4: ['J', 'V', 'W', 'X'],
+            5: ['Y', 'Z', 'Q']
+        }
+        activity_group_prefix = "group_"
 
     current_letters = letter_groups.get(literacy_level, letter_groups[1])
 
@@ -607,7 +640,7 @@ def generate_activities_for_child(
                     "questions": [<list of questions for assessment activities>],
                     "story": "<short story text for story activities>"
                 }},
-                "activity_group": "<letter group like 'group_1' for SATPIN letters>",
+                "activity_group": "{activity_group_prefix}{literacy_level}",
                 "mascot_character": "<fun mascot name>",
                 "is_boss_level": false
             }}
@@ -615,6 +648,8 @@ def generate_activities_for_child(
     }}
 
     Critical Guidelines:
+    - SYSTEM ENUMS MUST REMAIN IN ENGLISH: `activity_type`, `difficulty_level`, `activity_group`, `mascot_character` and ALL JSON keys MUST be exactly as specified in strict English, regardless of native language. Do NOT translate them!
+    - CONTENT IN NATIVE LANGUAGE: The `instruction`, `words`, `story`, `questions` and other text inside `activity_content` should be fully localized to the child's native language ({native_language})!
     - EMOJIS: You MUST include "word_emojis" array in activity_content with matching emojis for each word from the provided mapping
     - Use EXACT words and emojis from the mapping above for the current letter group
     - NEVER repeat exact same activity type + letter combinations
@@ -628,167 +663,56 @@ def generate_activities_for_child(
     - Create activities that build on previous learning but aren't identical
     """
 
-    try:
-        with track_ai_call():
-            response = client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=activity_generation_prompt
-            )
-        result_text = response.text.strip()
+    # Retry up to 3 times with exponential backoff to handle transient API errors
+    last_error = None
+    for attempt in range(3):
+        try:
+            if attempt > 0:
+                wait = 2 ** attempt  # 2s, 4s
+                logging.info(f"Retrying AI generation (attempt {attempt + 1}/3) after {wait}s...")
+                time.sleep(wait)
 
-        # Extract JSON
-        if "```json" in result_text:
-            result_text = result_text.split("```json")[1].split("```")[0].strip()
-        elif "```" in result_text:
-            result_text = result_text.split("```")[1].split("```")[0].strip()
+            with track_ai_call():
+                response = client.models.generate_content(
+                    model=GEMINI_MODEL,
+                    contents=activity_generation_prompt
+                )
+            result_text = response.text.strip()
 
-        ai_result = json.loads(result_text)
+            # Extract JSON from markdown code blocks if present
+            if "```json" in result_text:
+                result_text = result_text.split("```json")[1].split("```")[0].strip()
+            elif "```" in result_text:
+                result_text = result_text.split("```")[1].split("```")[0].strip()
 
-        # Add Child_ID to each activity
-        activities = ai_result.get("activities", [])
-        for activity in activities:
-            activity["Child_ID"] = child_id
-            activity["language"] = native_language
+            ai_result = json.loads(result_text)
 
-        return activities
+            # Handle both {"activities": [...]} and direct [...] responses
+            if isinstance(ai_result, list):
+                activities = ai_result
+            else:
+                activities = ai_result.get("activities", [])
 
-    except Exception as e:
-        # Return basic fallback activities
-        return _generate_fallback_activities(child_id, literacy_level, weak_areas, native_language, completed_activities)
+            if not activities:
+                raise ValueError("AI returned an empty activities list.")
+
+            for activity in activities:
+                activity["Child_ID"] = child_id
+                activity["language"] = native_language
+
+            logging.info(f"AI generated {len(activities)} activities for child {child_id} (attempt {attempt + 1})")
+            return activities
+
+        except Exception as e:
+            last_error = e
+            logging.error(f"AI generation attempt {attempt + 1} failed: {e}")
+
+    # All retries failed — raise so the caller can return a proper HTTP error
+    raise RuntimeError(f"AI activity generation failed after 3 attempts: {last_error}")
 
 
-def _generate_fallback_activities(child_id: int, literacy_level: int, weak_areas: List[str], native_language: str, completed_activities: List[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
-    """Generate basic activities if AI fails - with variety to avoid repetition"""
-    # Letter groups based on literacy level
-    letter_groups = {
-        1: ['S', 'A', 'T', 'I', 'P', 'N'],
-        2: ['C', 'K', 'E', 'H', 'R', 'M', 'D'],
-        3: ['G', 'O', 'U', 'L', 'F', 'B'],
-        4: ['J', 'V', 'W', 'X'],
-        5: ['Y', 'Z', 'Q']
-    }
 
-    letters = letter_groups.get(literacy_level, letter_groups[1])
 
-    # Track what letters/activities have been used to avoid repetition
-    used_combinations = set()
-    if completed_activities:
-        for act in completed_activities:
-            act_type = act.get("activity_type", "")
-            content = act.get("activity_content", {})
-            letter = content.get("letter", "")
-            if act_type and letter:
-                used_combinations.add(f"{act_type}_{letter}")
-
-    # Use emoji mapping for word banks - provides words AND matching emojis
-    word_banks = {}
-    for letter in letters:
-        if letter in LETTER_EMOJI_MAPPING:
-            word_banks[letter] = LETTER_EMOJI_MAPPING[letter]
-        else:
-            # Fallback to basic words if letter not in mapping
-            word_banks[letter] = [{'word': letter.lower() + 'ad', 'emoji': '📝'},
-                                  {'word': letter.lower() + 'ed', 'emoji': '📖'},
-                                  {'word': letter.lower() + 'id', 'emoji': '✏️'}]
-
-    activities = []
-    activity_variations = [
-        ("meet_letter", "beginner", 8, "Let's learn about the letter {letter}!"),
-        ("hear_sound", "beginner", 6, "Listen to the sound that letter {letter} makes!"),
-        ("say_yourself", "easy", 7, "Practice saying the letter {letter} sound!"),
-        ("trace_write", "easy", 10, "Trace and write the letter {letter}!"),
-        ("mini_quest", "medium", 12, "Find the letter {letter} in these words!"),
-        ("action_story", "medium", 10, "Story time with letter {letter} words!"),
-    ]
-
-    # Generate varied activities for each letter
-    for letter in letters:
-        letter_words_data = word_banks.get(letter, [{'word': letter + 'ad', 'emoji': '📝'},
-                                                   {'word': letter + 'ed', 'emoji': '📖'},
-                                                   {'word': letter + 'id', 'emoji': '✏️'}])
-        word_sets = [letter_words_data[i:i+3] for i in range(0, len(letter_words_data), 3)]
-
-        for i, (act_type, difficulty, duration, instruction_template) in enumerate(activity_variations):
-            # Skip if this exact combination was used before
-            combo_key = f"{act_type}_{letter}"
-            if combo_key in used_combinations:
-                # Try a different variation
-                continue
-
-            # Use different word sets for variety
-            word_set_data = word_sets[i % len(word_sets)] if word_sets else letter_words_data[:3]
-            word_set = [item['word'] for item in word_set_data]
-            emoji_set = [item['emoji'] for item in word_set_data]
-
-            activity_content = {
-                "instruction": instruction_template.format(letter=letter),
-                "letter": letter,
-                "words": word_set,
-                "word_emojis": emoji_set
-            }
-
-            activities.append({
-                "activity_name": f"{act_type.replace('_', ' ').title()} {letter}",
-                "activity_type": act_type,
-                "difficulty_level": difficulty,
-                "estimated_duration_minutes": duration,
-                "activity_content": activity_content,
-                "activity_group": f"group_{literacy_level}",
-                "mascot_character": f"Friendly {letter} Guide",
-                "is_boss_level": False,
-                "Child_ID": child_id,
-                "language": native_language
-            })
-
-    # Add some boss level activities (word builders) with variety
-    boss_letters = [l for l in letters if l not in ['G', 'O', 'U', 'L', 'F', 'B'] or l in ['G', 'O', 'U', 'L', 'F', 'B']][:3]  # Select 3 letters for boss levels
-    for letter in boss_letters:
-        combo_key = f"sound_blender_{letter}"
-        if combo_key not in used_combinations:
-            letter_words_data = word_banks.get(letter, [{'word': letter + 'ad', 'emoji': '📝'},
-                                                       {'word': letter + 'ed', 'emoji': '📖'},
-                                                       {'word': letter + 'id', 'emoji': '✏️'}])
-            letter_words = [item['word'] for item in letter_words_data[:5]]
-            letter_emojis = [item['emoji'] for item in letter_words_data[:5]]
-
-            activities.append({
-                "activity_name": f"Sound Blender with {letter} Words",
-                "activity_type": "sound_blender",
-                "difficulty_level": "medium",
-                "estimated_duration_minutes": 12,
-                "activity_content": {
-                    "instruction": f"Let's blend sounds to make {letter} words!",
-                    "letter": letter,
-                    "words": letter_words,
-                    "word_emojis": letter_emojis
-                },
-                "activity_group": f"group_{literacy_level}_words",
-                "mascot_character": f"Word Builder {letter}",
-                "is_boss_level": True,
-                "Child_ID": child_id,
-                "language": native_language
-            })
-
-            # Also add word builder
-            activities.append({
-                "activity_name": f"Word Builder with {letter}",
-                "activity_type": "word_builder",
-                "difficulty_level": "medium",
-                "estimated_duration_minutes": 15,
-                "activity_content": {
-                    "instruction": f"Build words with the letter {letter}!",
-                    "letter": letter,
-                    "words": letter_words,
-                    "word_emojis": letter_emojis
-                },
-                "activity_group": f"group_{literacy_level}_words",
-                "mascot_character": f"Word Expert {letter}",
-                "is_boss_level": True,
-                "Child_ID": child_id,
-                "language": native_language
-            })
-
-    return activities
 
 
 # ─────────────────────────────────────────────

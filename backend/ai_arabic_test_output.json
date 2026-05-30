@@ -1,0 +1,718 @@
+[
+  {
+    "activity_name": "Meet Sound S Journey",
+    "activity_type": "meet_letter",
+    "difficulty_level": "beginner",
+    "estimated_duration_minutes": 5,
+    "activity_content": {
+      "instruction": "مرحباً بك يا بطل! دعنا نتعرف على حرف 'S' وصوته الرائع الذي يشبه فحيح الأفعى 'سسس'. انقر على الكلمات واستمع لنطقها!",
+      "letter": "S",
+      "words": [
+        "SUN",
+        "STAR",
+        "SNAKE"
+      ],
+      "word_emojis": [
+        "☀️",
+        "⭐",
+        "🐍"
+      ],
+      "questions": [
+        "ما هو الحرف المشترك في بداية هذه الكلمات؟",
+        "هل يمكنك نطق صوت حرف S مثل الأفعى؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Hear Sound A Adventure",
+    "activity_type": "hear_sound",
+    "difficulty_level": "beginner",
+    "estimated_duration_minutes": 5,
+    "activity_content": {
+      "instruction": "أهلاً بك! استمع جيداً لصوت الحرف 'A' (أه). انقر على الصور واسمع كيف يبدأ كل اسم بصوت 'أه' المميز!",
+      "letter": "A",
+      "words": [
+        "APPLE",
+        "ANT",
+        "ARROW"
+      ],
+      "word_emojis": [
+        "🍎",
+        "🐜",
+        "➡️"
+      ],
+      "questions": [
+        "كيف ننطق حرف A في كلمة APPLE؟",
+        "هل تسمع صوت الـ 'A' واضحاً في كلمة ANT؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Trace the Tall T",
+    "activity_type": "letter_tracing",
+    "difficulty_level": "beginner",
+    "estimated_duration_minutes": 6,
+    "activity_content": {
+      "instruction": "حان وقت الرسم والمرح! تتبع حرف 'T' بإصبعك على الشاشة لتتعلم كيف نكتبه كخط مستقيم لأسفل ثم خط فوقه.",
+      "letter": "T",
+      "words": [
+        "TREE",
+        "TRAIN",
+        "TURTLE"
+      ],
+      "word_emojis": [
+        "🌳",
+        "🚂",
+        "🐢"
+      ],
+      "questions": [
+        "هل تبدأ كلمة TREE بحرف T؟",
+        "ارسم حرف T في الهواء وصدر صوتاً كصوت القطار الصاخب!"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Phonics Match with Iggy I",
+    "activity_type": "phonics_match",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 7,
+    "activity_content": {
+      "instruction": "لعبة التطابق الذكية! صل كل كلمة تبدأ بحرف 'I' بالصورة المناسبة لها تحت إشراف صديقنا المرح.",
+      "letter": "I",
+      "words": [
+        "IGLOO",
+        "ICE CREAM",
+        "INSECT"
+      ],
+      "word_emojis": [
+        "🏠",
+        "🍦",
+        "🐛"
+      ],
+      "questions": [
+        "أي من هذه الصور تمثل منزل الجليد IGLOO؟",
+        "هل كلمة INSECT تبدأ بحرف I المكسور؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Letter Hunt for Playful P",
+    "activity_type": "letter_hunt",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 8,
+    "activity_content": {
+      "instruction": "رحلة البحث عن الكنز! ابحث عن حرف 'P' اللطيف المختبئ بين الحروف الأخرى الملونة وانقر عليه بسرعة.",
+      "letter": "P",
+      "words": [
+        "PIG",
+        "PENGUIN",
+        "PIZZA"
+      ],
+      "word_emojis": [
+        "🐷",
+        "🐧",
+        "🍕"
+      ],
+      "questions": [
+        "كم حرف P استطعت أن تجد في لوحة الحروف؟",
+        "هل تبدأ كلمة PENGUIN بحرف P المفخم؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Say Yourself N Out Loud",
+    "activity_type": "say_yourself",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 5,
+    "activity_content": {
+      "instruction": "الآن دورك لتتحدث بطلاقة! انظر إلى الصورة، ثم انطق الكلمة بصوت عالٍ وواضح مستخدماً صوت حرف 'N' (ننن).",
+      "letter": "N",
+      "words": [
+        "NEST",
+        "NOSE",
+        "NET"
+      ],
+      "word_emojis": [
+        "🪹",
+        "👃",
+        "🥅"
+      ],
+      "questions": [
+        "هل يمكنك نطق كلمة NOSE بصوت واضح ومرتفع؟",
+        "ما هو الحرف الأول الذي تسمعه في كلمة NEST؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Sound Blender S & A Fusion",
+    "activity_type": "sound_blender",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 8,
+    "activity_content": {
+      "instruction": "دعنا نمزج الأصوات معاً كالسحر! استمع إلى صوت 'S' ثم صوت 'A' لتركيب كلمات جميلة وممتعة وفهمها.",
+      "words": [
+        "SUN",
+        "ANT",
+        "SNAKE"
+      ],
+      "word_emojis": [
+        "☀️",
+        "🐜",
+        "🐍"
+      ],
+      "questions": [
+        "ما هي الكلمة التي نحصل عليها عندما ندمج الأصوات معاً؟",
+        "هل تسمع صوت 'S' وصوت 'A' متتاليين في كلمة SNAKE؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Word Builder T & I Creation",
+    "activity_type": "word_builder",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 9,
+    "activity_content": {
+      "instruction": "يا لك من مهندس كلمات بارع! رتب الحروف المبعثرة بشكل صحيح لبناء الكلمات اللطيفة التي تبدأ بحرفي T و I.",
+      "words": [
+        "TRAIN",
+        "IGLOO",
+        "TACO"
+      ],
+      "word_emojis": [
+        "🚂",
+        "🏠",
+        "🌮"
+      ],
+      "questions": [
+        "كيف نكتب كلمة TRAIN بالترتيب الصحيح؟",
+        "ما هو الحرف المفقود لإكمال كلمة TACO الشهية؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Story Time with SAT Friends",
+    "activity_type": "story_time",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 10,
+    "activity_content": {
+      "instruction": "استمع إلى قصة شيقة وممتعة، وركز بكل حواسك على الكلمات التي تبدأ بالحروف الرائعة S و A و T.",
+      "words": [
+        "SUN",
+        "APPLE",
+        "TIGER"
+      ],
+      "word_emojis": [
+        "☀️",
+        "🍎",
+        "🐯"
+      ],
+      "story": "في يوم مشمس وجميل، سطعت الـ SUN ☀️ في السماء الدافئة لتنشر النور. جلس النمر اللطيف TIGER 🐯 تحت ظل الشجرة الكبيرة يتناول تفاحة حمراء لذيذه وحلوة الطعم APPLE 🍎. قال النمر بسعادة: يا له من يوم مشرق ومميز!",
+      "questions": [
+        "ماذا كان يأكل صديقنا الـ TIGER في هذه القصة اللطيفة؟",
+        "أي كلمة تبدأ بحرف S كانت تلمع وتنير السماء؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Trace and Write Pretty P",
+    "activity_type": "trace_write",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 7,
+    "activity_content": {
+      "instruction": "دعنا نتدرب على مهارة الكتابة اليدوية! تتبع خطوط كتابة حرف 'P' الصغير والكبير، ثم حاول كتابته بمفردك بدقة.",
+      "letter": "P",
+      "words": [
+        "PANDA",
+        "PARROT",
+        "PIZZA"
+      ],
+      "word_emojis": [
+        "🐼",
+        "🦜",
+        "🍕"
+      ],
+      "questions": [
+        "كيف نكتب الذيل الدائري لحرف P الصغير؟",
+        "هل كلمة PANDA اللطيفة تبدأ بحرف P؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Action Story: Space and Earth",
+    "activity_type": "action_story",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 11,
+    "activity_content": {
+      "instruction": "تحرك والعب بنشاط! استمع إلى هذه القصة التفاعلية وقم بتمثيل الحركات البدنية المناسبة عندما تسمع الكلمات المميزة.",
+      "words": [
+        "SNAKE",
+        "ASTRONAUT",
+        "TURTLE"
+      ],
+      "word_emojis": [
+        "🐍",
+        "👨‍🚀",
+        "🐢"
+      ],
+      "story": "تخيل أنك رائد فضاء شجاع للغاية ASTRONAUT 👨‍🚀 يطير ببدلته الكبيرة في الفضاء الفسيح! وفجأة عند هبوطك، رأيت أفعى فضائية ودودة ولطيفة SNAKE 🐍 تمشي ببطء شديد وتلوح لك ببطء كأنها سلحفاة هادئة TURTLE 🐢. لوّح بيدك وحرك جسمك مثلهم!",
+      "questions": [
+        "كيف تحركت الـ TURTLE في القصة؟ قلّد حركتها البطيئة.",
+        "هل يمكنك تقليد حركة الـ SNAKE اللطيفة وهي تلتف بحرية؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Mini Quest: SATPIN Explorer",
+    "activity_type": "mini_quest",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 12,
+    "activity_content": {
+      "instruction": "مهمة سريعة ومثيرة! ساعد صديقنا المستكشف في جمع الكلمات التي تحتوي على حروف مجموعتنا اليوم للوصول إلى خط النهاية بنجاح.",
+      "words": [
+        "SNOWMAN",
+        "AIRPLANE",
+        "NIGHT"
+      ],
+      "word_emojis": [
+        "⛄",
+        "✈️",
+        "🌙"
+      ],
+      "questions": [
+        "أي من هذه الأشياء الرائعة يظهر في الليل NIGHT الهادئ؟",
+        "هل تطير الـ AIRPLANE الكبيرة في أعالي السماء الزرقاء؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Read and Match Adventure",
+    "activity_type": "read_match",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 8,
+    "activity_content": {
+      "instruction": "اقرأ الكلمة الإنجليزية المعروضة أمامك، ثم اختر الصورة المناسبة والمطابقة لها من بين الخيارات المتاحة بذكاء.",
+      "words": [
+        "STRAWBERRY",
+        "ANT",
+        "NEST"
+      ],
+      "word_emojis": [
+        "🍓",
+        "🐜",
+        "🪹"
+      ],
+      "questions": [
+        "أي صورة ملونة تطابق بدقة كلمة الفراولة اللذيذة STRAWBERRY؟",
+        "أين هو عش العصفور الصغير NEST من بين الصور؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Read Aloud Practice Session",
+    "activity_type": "read_aloud",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 7,
+    "activity_content": {
+      "instruction": "افتح الميكروفون الصغير الخاص بك واقرأ الكلمات الإنجليزية المعروضة بثقة وصوت مرتفع وواضح ليسمعك الجميع!",
+      "words": [
+        "NINJA",
+        "INK",
+        "PARROT"
+      ],
+      "word_emojis": [
+        "🥷",
+        "🖋️",
+        "🦜"
+      ],
+      "questions": [
+        "هل نطقت كلمة NINJA القوي بشكل صحيح وسليم؟",
+        "ما هو صوت البداية لحرف I الذي يظهر في كلمة الحبر INK؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Meet Letter T Advanced Exploration",
+    "activity_type": "meet_letter",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 6,
+    "activity_content": {
+      "instruction": "مرحباً بك مجدداً في تحدٍ أرقى مع حرف T! لنستكشف معاً كلمات جديدة وممتعة تبدأ بهذا الحرف الرنان القوي.",
+      "letter": "T",
+      "words": [
+        "TIGER",
+        "TREE",
+        "TACO"
+      ],
+      "word_emojis": [
+        "🐯",
+        "🌳",
+        "🌮"
+      ],
+      "questions": [
+        "أي من هذه الكلمات اللطيفة تعني شجرة مورقة باللغة الإنجليزية؟",
+        "هل تحب تناول طعام الـ TACO المقرمش والشهي؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Phonics Match with Nifty N",
+    "activity_type": "phonics_match",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 8,
+    "activity_content": {
+      "instruction": "لعبة تطابق الأصوات الممتعة! استمع بدقة إلى صوت الحرف الرنان 'N' وصله بكل سهولة بالكلمة التي تبدأ به.",
+      "letter": "N",
+      "words": [
+        "NOSE",
+        "NIGHT",
+        "NEST"
+      ],
+      "word_emojis": [
+        "👃",
+        "🌙",
+        "🪹"
+      ],
+      "questions": [
+        "أي من هذه الكلمات الجميلة تبدأ بصوت النون 'ننن' بوضوح؟",
+        "هل تبدأ كلمة الليل الهادئ NIGHT بحرف N؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Word Builder P & I Mastery",
+    "activity_type": "word_builder",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 10,
+    "activity_content": {
+      "instruction": "لنركب الحروف معاً لنصنع كلمات رائعة! استخدم الحروف الملونة المتاحة أمامك لتكوين كلمات تبدأ بحرفي P و I.",
+      "words": [
+        "PANDA",
+        "INK",
+        "ISLAND"
+      ],
+      "word_emojis": [
+        "🐼",
+        "🖋️",
+        "🏝️"
+      ],
+      "questions": [
+        "كيف نهجئ كلمة حيوان الـ PANDA الجميل خطوة بخطوة؟",
+        "ما هي الحروف المرتبة المكونة لكلمة الجزيرة الممتعة ISLAND؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Sound Blender A & N Fusion",
+    "activity_type": "sound_blender",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 9,
+    "activity_content": {
+      "instruction": "امزج الأصوات السحرية لتكتشف الكلمة السرية المخفية! ركز جيداً في طريقة نطق ومزج الحروف 'A' و 'N'.",
+      "words": [
+        "ASTRONAUT",
+        "NET",
+        "ARROW"
+      ],
+      "word_emojis": [
+        "👨‍🚀",
+        "🥅",
+        "➡️"
+      ],
+      "questions": [
+        "ما هي الكلمة التي تبدأ بصوت A وبها شبكة مرمى رياضية NET؟",
+        "هل يمكنك تهجئة كلمة السهم المتجه للأمام ARROW بطلاقة؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Letter Hunt: Ultimate SATPIN",
+    "activity_type": "letter_hunt",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 11,
+    "activity_content": {
+      "instruction": "التحدي الكبير والأقوى! ابحث عن جميع حروف مجموعة SATPIN المختبئة بذكاء وسط لوحة الرسوم والألوان الجميلة.",
+      "words": [
+        "SNOWMAN",
+        "AIRPLANE",
+        "TURTLE"
+      ],
+      "word_emojis": [
+        "⛄",
+        "✈️",
+        "🐢"
+      ],
+      "questions": [
+        "أين يختبئ رجل الثلج المبتسم SNOWMAN في اللوحة الكبيرة؟",
+        "هل وجدت حرف T القوي بداخل اسم السلحفاة TURTLE؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Story Time: The Brave Ninja",
+    "activity_type": "story_time",
+    "difficulty_level": "hard",
+    "estimated_duration_minutes": 12,
+    "activity_content": {
+      "instruction": "حان وقت القصة الكبرى والأكثر تشويقاً! استمع لقصة بطلنا النينجا الشجاع وأجب عن الأسئلة بذكاء شديد لتفوز بالوسام.",
+      "words": [
+        "NINJA",
+        "NIGHT",
+        "STAR"
+      ],
+      "word_emojis": [
+        "🥷",
+        "🌙",
+        "⭐"
+      ],
+      "story": "في ليلة مظلمة وهادئة ولطيفة NIGHT 🌙، كان النينجا الشجاع والقوي NINJA 🥷 يقف على سطح القصر ليراقب النجوم اللامعة والجميلة STAR ⭐ في السماء الصافية. كان يحمي كل أصدقائه في القرية بكل حب ونشاط دائم.",
+      "questions": [
+        "متى تبدأ أحداث قصة النينجا الشجاع؟ في الـ NIGHT أم في النهار؟",
+        "ماذا كان يراقب بطلنا الـ NINJA في السماء العالية والجميلة؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": true,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Read Aloud: Picnic Party Fun",
+    "activity_type": "read_aloud",
+    "difficulty_level": "medium",
+    "estimated_duration_minutes": 8,
+    "activity_content": {
+      "instruction": "افتح الميكروفون واقرأ هذه الكلمات اللذيذة والجميلة بصوت رائع وكأنك تقضي نزهة صيفية ممتعة في الحديقة مع أصدقائك!",
+      "words": [
+        "PIZZA",
+        "STRAWBERRY",
+        "ICE CREAM"
+      ],
+      "word_emojis": [
+        "🍕",
+        "🍓",
+        "🍦"
+      ],
+      "questions": [
+        "ما هي فاكهتك المفضلة؟ هل تحب الفراولة اللذيذة STRAWBERRY؟",
+        "أيهما تفضل تناوله أولاً في النزهة: الـ PIZZA الساخنة أم الـ ICE CREAM البارد؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Action Story: Secret Island",
+    "activity_type": "action_story",
+    "difficulty_level": "hard",
+    "estimated_duration_minutes": 13,
+    "activity_content": {
+      "instruction": "مغامرة استكشافية حماسية في الجزيرة الغامضة! تحرك وتفاعل بكل نشاط وحيوية مع أحداث هذه القصة المشوقة.",
+      "words": [
+        "ISLAND",
+        "PARROT",
+        "PIG"
+      ],
+      "word_emojis": [
+        "🏝️",
+        "🦜",
+        "🐷"
+      ],
+      "story": "وصلنا أخيراً بمركبنا الصغير إلى جزيرة خضراء غامضة وخلابة ISLAND 🏝️! وهناك رأينا ببغاء ملوناً وجميلاً PARROT 🦜 يتحدث ويردد كلامنا بصوت مضحك للغاية، وبجانبه خنزير وردي صغير ولطيف PIG 🐷 يلعب بسعادة في الرمال الدافئة. دعنا نقلد صوت الببغاء ونقفز مرحاً!",
+      "questions": [
+        "أين تقع أحداث هذه المغامرة المثيرة والاستكشافية؟",
+        "ما هو الحيوان الوردي اللطيف الذي يلعب ويمرح في رمال الـ ISLAND؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Hear Sound I Discovery",
+    "activity_type": "hear_sound",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 6,
+    "activity_content": {
+      "instruction": "مستكشف الأصوات الذكي! استمع بتركيز شديد لصوت حرف الكسرة الخفيفة 'I' وانقر على الصور لتتعرف على طريقة نطقه الصحيحة.",
+      "letter": "I",
+      "words": [
+        "INK",
+        "ISLAND",
+        "INSECT"
+      ],
+      "word_emojis": [
+        "🖋️",
+        "🏝️",
+        "🐛"
+      ],
+      "questions": [
+        "هل تسمع صوت الكسرة الخفيفة بوضوح في بداية نطق كلمة الحشرة INSECT؟",
+        "ما هو الحرف الأول لعلبة الحبر الرائعة INK؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Bella",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Letter Tracing Active A",
+    "activity_type": "letter_tracing",
+    "difficulty_level": "beginner",
+    "estimated_duration_minutes": 5,
+    "activity_content": {
+      "instruction": "خطواتك الأولى نحو الإبداع في الكتابة! تتبع مسار كتابة حرف 'A' المبهج لترسم هرماً صغيراً بيدك على الشاشة الملونة.",
+      "letter": "A",
+      "words": [
+        "ASTRONAUT",
+        "AIRPLANE",
+        "ANT"
+      ],
+      "word_emojis": [
+        "👨‍🚀",
+        "✈️",
+        "🐜"
+      ],
+      "questions": [
+        "كيف نكتب الخط الأفقي الصغير في وسط حرف A الكبير؟",
+        "ارسم خطاً مائلاً لأعلى ثم لأسفل في الهواء لكتابة حرف A المتميز!"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Koko",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  },
+  {
+    "activity_name": "Trace and Write Nifty N",
+    "activity_type": "trace_write",
+    "difficulty_level": "easy",
+    "estimated_duration_minutes": 7,
+    "activity_content": {
+      "instruction": "تدرب على الكتابة بثقة وسهولة! تتبع مسار كتابة حرف 'N' الرنان، ثم حاول كتابته بمفردك على لوحة الكتابة الرقمية الخاصة بك.",
+      "letter": "N",
+      "words": [
+        "NEST",
+        "NOSE",
+        "NET"
+      ],
+      "word_emojis": [
+        "🪹",
+        "👃",
+        "🥅"
+      ],
+      "questions": [
+        "كم خطاً مائلاً نحتاج لرسم حرف N الكبير بشكل صحيح؟",
+        "هل يمكنك كتابة حرف N الصغير بيدك في الهواء بنجاح وسرعة؟"
+      ]
+    },
+    "activity_group": "group_1",
+    "mascot_character": "Zippy",
+    "is_boss_level": false,
+    "Child_ID": 999,
+    "language": "Arabic"
+  }
+]

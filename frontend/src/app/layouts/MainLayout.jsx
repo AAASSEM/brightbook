@@ -33,7 +33,6 @@ export default function MainLayout() {
       }
     }
   }, [isChildLockActive, location.pathname, navigate]);
-
   // Handle lock/unlock actions
   const handleLockClick = () => {
     if (isChildLockActive) {

@@ -174,7 +174,8 @@ def complete_assessment(
                 created_count += 1
 
             except Exception as e:
-                print(f"Error creating activity {activity_data.get('activity_name')}: {e}")
+                import logging
+                logging.error(f"Error creating activity {activity_data.get('activity_name')}: {e}")
                 continue
 
         # Initialize progress records for new activities
@@ -213,10 +214,9 @@ def complete_assessment(
                 session.commit()
 
     except Exception as e:
-        print(f"Error generating activities: {e}")
-        # Don't fail the assessment if activity generation fails
-        import traceback
-        print(traceback.format_exc())
+        import logging, traceback
+        logging.error(f"Error generating activities after assessment: {e}\n{traceback.format_exc()}")
+        # Assessment is still saved — activities will be empty until user retries
 
     return assessment
 

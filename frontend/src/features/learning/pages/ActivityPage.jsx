@@ -5,6 +5,7 @@ import api from "@/shared/services/api";
 import { toast } from "@/shared/stores/uiStore";
 import { useChildStore } from "@/shared/stores/childStore";
 import Spinner from "@/shared/components/ui/Spinner";
+import { useLang, useT } from "@/shared/stores/langStore";
 
 const ACTIVITY_ICONS = {
   letter_hunt: "search",
@@ -24,6 +25,9 @@ export default function ActivityPage() {
   const [score, setScore] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answers, setAnswers] = useState([]);
+  
+  const lang = useLang();
+  const t = useT();
 
   useEffect(() => {
     api.get(`/api/admin/activities`)
@@ -31,12 +35,12 @@ export default function ActivityPage() {
         const act = res.data.find((a) => a.Activity_ID === parseInt(id));
         setActivity(act);
       })
-      .catch(() => toast.error("Activity not found"))
+      .catch(() => toast.error(t("learning.activityNotFound")))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, t]);
 
   if (loading) return <div className="min-h-screen soft-bg flex items-center justify-center"><Spinner size="xl" /></div>;
-  if (!activity) return <div className="min-h-screen soft-bg flex items-center justify-center">Activity not found</div>;
+  if (!activity) return <div className="min-h-screen soft-bg flex items-center justify-center">{t("learning.activityNotFound")}</div>;
 
   const content = activity.activity_content || {};
   const questions = content.questions || [];
@@ -73,7 +77,7 @@ export default function ActivityPage() {
 
   if (score) {
     return (
-      <div className="min-h-screen soft-bg flex items-center justify-center p-4 font-kid" style={{ fontFamily: "Lexend, sans-serif" }}>
+      <div className={`min-h-screen soft-bg flex items-center justify-center p-4 font-kid ${lang === "ar" ? "rtl" : "ltr"}`} style={{ fontFamily: "Lexend, sans-serif" }}>
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="card-kid w-full max-w-md text-center">
           <div className="flex justify-center gap-2 mb-6 mt-4">
             {[...Array(3)].map((_, i) => (
@@ -98,18 +102,18 @@ export default function ActivityPage() {
             ))}
           </div>
           <h2 className="text-3xl font-black mb-2" style={{ color: "#171d14" }}>
-            {score.pct >= 60 ? "Great Job!" : "Keep Practicing!"}
+            {score.pct >= 60 ? t("learning.greatJob") : t("learning.keepPracticing")}
           </h2>
           <p className="text-lg mb-8" style={{ color: "#3f4a3c" }}>
-            {score.correct} of {score.total} correct
+            {lang === "ar" ? `أجبت بشكل صحيح على ${score.correct} من ${score.total}` : `${score.correct} of ${score.total} correct`}
           </p>
           <div className="space-y-3">
             <button className="kid-btn" onClick={() => navigate("/learn")}>
-              Next Activity
+              {t("learning.nextActivity")}
               <span className="material-symbols-outlined ml-2 align-middle">rocket_launch</span>
             </button>
             <button className="btn btn-secondary w-full" style={{ padding: "16px", borderRadius: "20px", fontSize: "18px" }} onClick={() => navigate("/dashboard")}>
-              Parent Dashboard
+              {t("learning.parentDashboard")}
             </button>
           </div>
         </motion.div>
@@ -120,7 +124,7 @@ export default function ActivityPage() {
   // Simple interactive card for no questions
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen soft-bg flex flex-col p-4 font-kid" style={{ fontFamily: "Lexend, sans-serif" }}>
+      <div className={`min-h-screen soft-bg flex flex-col p-4 font-kid ${lang === "ar" ? "rtl" : "ltr"}`} style={{ fontFamily: "Lexend, sans-serif" }}>
         <div className="flex items-center justify-between mb-6 pt-2">
           <button onClick={() => navigate("/learn")} className="flex items-center justify-center w-12 h-12 rounded-full" style={{ background: "#ffffff", color: "#171d14", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
             <span className="material-symbols-outlined">close</span>
@@ -134,9 +138,9 @@ export default function ActivityPage() {
               </span>
             </div>
             <h2 className="text-2xl font-black mb-2" style={{ color: "#171d14" }}>{activity.activity_name}</h2>
-            <p className="text-lg mb-8" style={{ color: "#3f4a3c" }}>{content.instruction || "Complete this activity!"}</p>
+            <p className="text-lg mb-8" style={{ color: "#3f4a3c" }}>{content.instruction || (lang === "ar" ? "أكمل هذا النشاط!" : "Complete this activity!")}</p>
             <button className="kid-btn" onClick={() => setScore({ correct: 5, total: 5, pct: 100, stars: 3 })}>
-              Complete Activity ✅
+              {t("learning.completeActivityBtn")}
             </button>
           </div>
         </div>
@@ -144,10 +148,10 @@ export default function ActivityPage() {
     );
   }
 
-  const OptionLetters = ["A", "B", "C", "D"];
+  const OptionLetters = lang === "ar" ? ["أ", "ب", "ج", "د"] : ["A", "B", "C", "D"];
 
   return (
-    <div className="min-h-screen soft-bg flex flex-col p-4 font-kid" style={{ fontFamily: "Lexend, sans-serif" }}>
+    <div className={`min-h-screen soft-bg flex flex-col p-4 font-kid ${lang === "ar" ? "rtl" : "ltr"}`} style={{ fontFamily: "Lexend, sans-serif" }}>
       {/* Top Bar */}
       <div className="flex items-center gap-4 mb-6 pt-2">
         <button onClick={() => navigate("/learn")} className="flex items-center justify-center w-12 h-12 rounded-full" style={{ background: "#ffffff", color: "#171d14", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
@@ -191,7 +195,7 @@ export default function ActivityPage() {
                       color: isSelected ? "#006e1c" : "#171d14",
                       boxShadow: isSelected ? "0 4px 12px rgba(76,175,80,0.15)" : "0 4px 12px rgba(0,0,0,0.04)",
                     }}>
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center mr-4"
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${lang === "ar" ? "ml-4" : "mr-4"}`}
                       style={{ background: isSelected ? "#4caf50" : "#eff6e7", color: isSelected ? "#ffffff" : "#6f7a6b" }}>
                       {OptionLetters[i]}
                     </div>
@@ -217,7 +221,7 @@ export default function ActivityPage() {
             boxShadow: selectedAnswer ? "0 4px 0 0 #388e3c" : "none",
           }}
         >
-          {step + 1 === questions.length ? "Finish! 🎉" : "Next Question →"}
+          {step + 1 === questions.length ? t("learning.finishBtn") : t("learning.nextQuestion")}
         </button>
       </div>
     </div>

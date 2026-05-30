@@ -6,6 +6,8 @@ import ProtectedRoute from "@/shared/components/common/ProtectedRoute";
 import { PageLoader } from "@/shared/components/ui/Spinner";
 import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import { useChildStore } from "@/shared/stores/childStore";
+import { ChildLanguageContext } from "@/shared/stores/langStore";
 
 // Lazy-loaded pages
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
@@ -52,6 +54,18 @@ const AdminRouteGuard = ({ children }) => {
   return children;
 };
 
+function ChildZoneLangWrapper({ children }) {
+  const { selectedChild } = useChildStore();
+  const childNativeLang = selectedChild?.native_language || "English";
+  const childLang = (childNativeLang.toLowerCase() === "arabic" || childNativeLang.toLowerCase() === "ar") ? "ar" : "en";
+
+  return (
+    <ChildLanguageContext.Provider value={childLang}>
+      {children}
+    </ChildLanguageContext.Provider>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -83,9 +97,9 @@ export default function App() {
             <Route path="/onboarding" element={<OnboardingPage />} />
 
             {/* Child Pages */}
-            <Route path="/learn" element={<ChildDashboardPage />} />
-            <Route path="/learn/activity/:id" element={<ActivityPage />} />
-            <Route path="/learn/assessment/:childId" element={<AssessmentPage />} />
+            <Route path="/learn" element={<ChildZoneLangWrapper><ChildDashboardPage /></ChildZoneLangWrapper>} />
+            <Route path="/learn/activity/:id" element={<ChildZoneLangWrapper><ActivityPage /></ChildZoneLangWrapper>} />
+            <Route path="/learn/assessment/:childId" element={<ChildZoneLangWrapper><AssessmentPage /></ChildZoneLangWrapper>} />
           </Route>
 
           {/* Admin Panel */}

@@ -90,6 +90,7 @@ export default function AssessmentPage() {
   const audioChunksRef = useRef([]);
   const [isStarted, setIsStarted] = useState(false);
   const [childName, setChildName] = useState("");
+  const [assessmentLang, setAssessmentLang] = useState("en");
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -110,6 +111,9 @@ export default function AssessmentPage() {
         const cRes = await api.get(`/api/children/${childId}`);
         setChildName(cRes.data.name);
         setSelectedChild(cRes.data); // Set this child as selected child in the store
+        const childNativeLang = cRes.data.native_language || "English";
+        const targetLang = (childNativeLang.toLowerCase() === "arabic" || childNativeLang.toLowerCase() === "ar") ? "ar" : "en";
+        setAssessmentLang(targetLang);
       } catch (e) {
         console.warn("Could not fetch child name", e);
       }
@@ -182,8 +186,8 @@ export default function AssessmentPage() {
     if (!urlOrKey && !fallbackText) return;
 
     // In Arabic mode, if we have Arabic text provided, prefer TTS over English URLs
-    if (lang === "ar" && fallbackText) {
-      speakText(fallbackText, lang);
+    if (assessmentLang === "ar" && fallbackText) {
+      speakText(fallbackText, assessmentLang);
       return;
     }
 
@@ -198,16 +202,16 @@ export default function AssessmentPage() {
             .pop()
             .replace(/\.[^.]+$/, "")
             .replace(/[_-]/g, " ");
-          speakText(fallback, lang);
+          speakText(fallback, assessmentLang);
         });
       }
     } else {
       const spoken = fallbackText || (urlOrKey || "")
         .replace(/^(letter|word|sound)_/, "")
         .replace(/_/g, " ");
-      speakText(spoken, lang);
+      speakText(spoken, assessmentLang);
     }
-  }, [lang]);
+  }, [assessmentLang]);
 
   // ─── isMultiSelect: Q9 (image_adjective_selection) and Q18 (grammatical_elements_selection)
   const isMultiSelect = (q) =>
@@ -427,12 +431,12 @@ export default function AssessmentPage() {
   // ─── FIX 4: Render the "display" letter (Q1–Q4, Q8)
   const renderDisplayLetter = (display) => {
     const s = q.stimulus;
-    const finalDisplay = (lang === "ar" && s?.display_ar) ? s.display_ar : display;
+    const finalDisplay = (assessmentLang === "ar" && s?.display_ar) ? s.display_ar : display;
     return (
       <div
         className="flex items-center justify-center w-28 h-28 rounded-3xl mx-auto mb-2 cursor-pointer select-none"
         style={{ background: "#e9f0e1", border: "3px solid #c8dfc0" }}
-        onClick={() => speakText(finalDisplay, lang)}
+        onClick={() => speakText(finalDisplay, assessmentLang)}
         title="Click to hear"
       >
         <span className="font-black" style={{ fontSize: "72px", color: "#1b5e20", lineHeight: 1 }}>
@@ -561,7 +565,7 @@ export default function AssessmentPage() {
         {/* ── Parent passage for depends_on questions (Q12-14, Q16-18, Q24-25) ── */}
         {q.depends_on && (() => {
           const parent = qIndex[q.depends_on];
-          const passageText = parent?.stimulus?.[`text_${lang}`] || parent?.stimulus?.text_en;
+          const passageText = parent?.stimulus?.[`text_${assessmentLang}`] || parent?.stimulus?.text_en;
           if (!passageText) return null;
 
           // For word/adjective/grammar location (Q16, Q17, Q18) → interactive text
@@ -569,7 +573,7 @@ export default function AssessmentPage() {
             q.type === "word_location_in_text" ||
             q.type === "adjective_location_in_text"
           ) {
-            const target = s[`target_word_${lang}`] || s[`word_${lang}`] || s?.target_word_en || s?.word_en || q.correct_answer;
+            const target = s[`target_word_${assessmentLang}`] || s[`word_${assessmentLang}`] || s?.target_word_en || s?.word_en || q.correct_answer;
             const wordType = q.type === "adjective_location_in_text" ? "adjective" : "word";
             return (
               <div className="w-full">
@@ -620,7 +624,7 @@ export default function AssessmentPage() {
                 {t("assessment.storyLabel")}
               </p>
               <p className="text-base leading-relaxed" style={{ color: "#374151" }}>
-                {s?.[`text_${lang}`] || s?.text_en || passageText}
+                {s?.[`text_${assessmentLang}`] || s?.text_en || passageText}
               </p>
             </div>
           );
@@ -636,14 +640,14 @@ export default function AssessmentPage() {
             <div
               className="flex items-center justify-center px-8 py-4 rounded-3xl mx-auto mb-2 cursor-pointer select-none"
               style={{ background: "#e9f0e1", border: "3px solid #c8dfc0" }}
-              onClick={() => speakText(s[`word_${lang}`] || s[`target_word_${lang}`] || s.word_en || s.target_word_en, lang)}
+              onClick={() => speakText(s[`word_${assessmentLang}`] || s[`target_word_${assessmentLang}`] || s.word_en || s.target_word_en, assessmentLang)}
               title="Click to hear"
             >
               <span
                 className="font-black"
                 style={{ fontSize: "48px", color: "#1b5e20", lineHeight: 1 }}
               >
-                {s[`word_${lang}`] || s[`target_word_${lang}`] || s[`display_${lang}`] || s.word_en || s.target_word_en || s.display_en}
+                {s[`word_${assessmentLang}`] || s[`target_word_${assessmentLang}`] || s[`display_${assessmentLang}`] || s.word_en || s.target_word_en || s.display_en}
               </span>
             </div>
           )}
@@ -656,7 +660,7 @@ export default function AssessmentPage() {
           <button
             onClick={() => {
               const arabicText = s.spoken_word_ar || s.display_ar || s.word_ar || s.target_word_ar;
-              playAudio(s[`audio_url_${lang}`] || s.audio_url || s.audio_key, arabicText);
+              playAudio(s[`audio_url_${assessmentLang}`] || s.audio_url || s.audio_key, arabicText);
             }}
             className="w-20 h-20 rounded-full flex items-center justify-center shadow-sm hover:scale-105 transition-transform"
             style={{ background: "#d1e4ff", color: "#00355d" }}
@@ -693,7 +697,7 @@ export default function AssessmentPage() {
               </p>
             )}
             <p className="text-xl leading-relaxed text-gray-800 font-medium">
-              {s[`text_${lang}`] || s.text_en}
+              {s[`text_${assessmentLang}`] || s.text_en}
             </p>
           </div>
         )}
@@ -702,14 +706,14 @@ export default function AssessmentPage() {
         {s?.sentence_en && (
           <div className="w-full">
             <p className="text-base font-medium mb-1" style={{ color: "#374151" }}>
-              {s[`sentence_${lang}`] || s.sentence_en}
+              {s[`sentence_${assessmentLang}`] || s.sentence_en}
             </p>
-            {renderSentenceWords(s[`sentence_${lang}`] || s.sentence_en, (w) => setSelected(w))}
+            {renderSentenceWords(s[`sentence_${assessmentLang}`] || s.sentence_en, (w) => setSelected(w))}
           </div>
         )}
 
         {/* ── stimulus.grid_en → letter grid (Q19, Q20) ── */}
-        {(s?.grid_en || s?.grid_ar) && renderLetterGrid(s[`grid_${lang}`] || s.grid_en, s.target_letter, (l) => setSelected(l))}
+        {(s?.grid_en || s?.grid_ar) && renderLetterGrid(s[`grid_${assessmentLang}`] || s.grid_en, s.target_letter, (l) => setSelected(l))}
 
         {/* ── Question title / instruction ── */}
         {q.type !== "reading_timed" &&
@@ -721,7 +725,7 @@ export default function AssessmentPage() {
           q.type !== "adjective_location_in_text" &&
           q.type !== "grammatical_elements_selection" && (
             <h2 className="text-2xl font-black text-gray-900 mt-2">
-              {q[`title_${lang}`] || q[`instruction_${lang}`] || q.title_en || q.instruction_en}
+              {q[`title_${assessmentLang}`] || q[`instruction_${assessmentLang}`] || q.title_en || q.instruction_en}
             </h2>
           )}
 
@@ -731,7 +735,7 @@ export default function AssessmentPage() {
           q.type === "identify_verb_in_sentence" ||
           q.type === "identify_subject_in_sentence") && (
             <h2 className="text-xl font-black text-gray-900">
-              {q[`title_${lang}`] || q[`instruction_${lang}`] || q.title_en || q.instruction_en}
+              {q[`title_${assessmentLang}`] || q[`instruction_${assessmentLang}`] || q.title_en || q.instruction_en}
             </h2>
           )}
       </div>
@@ -944,6 +948,7 @@ export default function AssessmentPage() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
+            dir={assessmentLang === "ar" ? "rtl" : "ltr"}
             className="flex flex-col max-w-lg w-full mx-auto"
           >
             <div className="card-kid mb-6 text-center" style={{ padding: "24px" }}>
@@ -1054,12 +1059,12 @@ export default function AssessmentPage() {
 
                     // Display label for the child
                     const displayLabel =
-                      option[`value_${lang}`] ||
+                      option[`value_${assessmentLang}`] ||
                       option.value_en ||
                       option.value ||
-                      option[`name_${lang}`] ||
+                      option[`name_${assessmentLang}`] ||
                       option.name_en ||
-                      option[`label_${lang}`] ||
+                      option[`label_${assessmentLang}`] ||
                       option.label_en ||
                       (typeof option === "string" ? option : "");
 
@@ -1092,7 +1097,7 @@ export default function AssessmentPage() {
                             color: isSelected ? "#ffffff" : "#6f7a6b",
                           }}
                         >
-                          {multi ? (isSelected ? "✓" : i + 1) : (lang === "ar" ? OptionLettersAr[i] : OptionLettersEn[i])}
+                          {multi ? (isSelected ? "✓" : i + 1) : (assessmentLang === "ar" ? OptionLettersAr[i] : OptionLettersEn[i])}
                         </div>
                         <div className="flex-1 flex items-center gap-3">
                           {option.image_url && (
@@ -1117,7 +1122,7 @@ export default function AssessmentPage() {
                           <span
                             onClick={(e) => {
                               e.stopPropagation();
-                              playAudio(option.audio_url || option.audio_key, option[`word_${lang}`] || option[`name_${lang}`] || option[`label_${lang}`] || option[`value_${lang}`]);
+                              playAudio(option.audio_url || option.audio_key, option[`word_${assessmentLang}`] || option[`name_${assessmentLang}`] || option[`label_${assessmentLang}`] || option[`value_${assessmentLang}`]);
                             }}
                             className="ml-auto w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-200 cursor-pointer"
                             style={{ background: "#d1e4ff" }}
