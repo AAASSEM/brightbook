@@ -11,6 +11,7 @@ import MiniQuestActivity from './MiniQuestActivity';
 import SoundBlenderActivity from './SoundBlenderActivity';
 import WordBuilderActivity from './WordBuilderActivity';
 import ReadMatchActivity from './ReadMatchActivity';
+import SayYourselfActivity from './SayYourselfActivity';
 import { getMascot } from '@/shared/data/mascots';
 import { useLang } from '@/shared/stores/langStore';
 
@@ -91,6 +92,7 @@ export default function ActivityPlayer({ activity, childId, onComplete, onCancel
       case 'sound_blender': return <SoundBlenderActivity content={content} onComplete={handleComplete} />;
       case 'word_builder':  return <WordBuilderActivity content={content} onComplete={handleComplete} />;
       case 'read_match':    return <ReadMatchActivity content={content} onComplete={handleComplete} />;
+      case 'say_yourself':  return <SayYourselfActivity content={content} onComplete={handleComplete} />;
       default:
         return (
           <div className="text-center p-12">

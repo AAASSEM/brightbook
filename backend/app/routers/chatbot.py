@@ -5,14 +5,12 @@ No models or schema changes needed. Uses the existing Gemini client.
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
-from google import genai
-from app.config.settings import settings
 from app.services.ai_metrics import track_ai_call
+from app.services.ai_service import client
 
 router = APIRouter(prefix="/api/chatbot", tags=["chatbot"])
 
-# Reuse the same Gemini client
-client = genai.Client(api_key=settings.GEMINI_API_KEY)
+# Reuse the same dynamic Gemini client
 GEMINI_MODEL = "models/gemini-flash-latest"
 
 # ── BrightBook knowledge base (injected as system context) ──────────────
@@ -22,7 +20,7 @@ literacy learning platform designed to help children with dyslexia.
 
 CORE FACTS ABOUT BRIGHTBOOK:
 1. BrightBook uses AI (Google Gemini) to personalize each child's learning path.
-2. Children take an initial dyslexia assessment (10 questions, ~15 minutes).
+2. Children take an initial dyslexia assessment (25 questions, ~20 minutes).
 3. The AI places them into one of 5 literacy levels based on accuracy.
 4. Each level contains interactive activities: Meet the Letter, Hear the Sound,
    Trace & Write, Mini Quest, Sound Blender, Word Builder, Read & Match, and

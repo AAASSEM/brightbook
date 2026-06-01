@@ -6,7 +6,7 @@ import os
 import json
 import time
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from google import genai
 from app.config.settings import settings
 from app.models.enums import DifficultyLevel, ActivityType
@@ -14,8 +14,41 @@ from app.services.ai_metrics import track_ai_call
 
 # Configure Gemini API
 # gemini-2.0-flash: 1,500 requests/day on free tier (vs 20/day for older models)
-client = genai.Client(api_key=settings.GEMINI_API_KEY)
+_client = None
+_client_api_key = None
+
+
+def get_gemini_client():
+    global _client, _client_api_key
+    from app.config.settings import reload_settings, settings
+
+    # Reload settings dynamically from .env
+    reload_settings()
+
+    current_key = settings.GEMINI_API_KEY
+    if _client is None or _client_api_key != current_key:
+        from google import genai
+
+        _client = genai.Client(api_key=current_key)
+        _client_api_key = current_key
+
+        # Reset the metrics when API key changes
+        from app.services.ai_metrics import ai_metrics
+
+        ai_metrics._reset()
+        logging.info("Gemini client re-initialized with new API key. Metrics reset.")
+
+    return _client
+
+
+class GeminiClientProxy:
+    def __getattr__(self, name):
+        return getattr(get_gemini_client(), name)
+
+
+client = GeminiClientProxy()
 GEMINI_MODEL = "models/gemini-2.0-flash"
+
 
 # ─────────────────────────────────────────────
 # EMOJI & WORD MAPPING FOR AI
@@ -295,25 +328,43 @@ def generate_learning_path(
 # ─────────────────────────────────────────────
 def score_activity(
     activity_type: str,
-    answers: List[str],
-    correct_answers: List[str],
-    time_per_question: List[int],
-    difficulty_level: str,
+    answers: Optional[List[str]] = None,
+    correct_answers: Optional[List[str]] = None,
+    time_per_question: Optional[List[int]] = None,
+    difficulty_level: str = "easy",
+    score: Optional[int] = None,
+    time_spent: Optional[int] = None,
 ) -> Dict[str, Any]:
     """
-    AI-enhanced activity scoring with personalized feedback
+    AI-enhanced activity scoring with personalized feedback.
+    Supports traditional list-based scoring or direct score/time_spent reporting.
     """
-    total = len(correct_answers)
-    if total == 0:
-        return {"score": 0, "passed": False, "stars_earned": 0, "weak_areas": [], "next_difficulty_recommendation": difficulty_level, "ai_feedback": ""}
-
-    correct = sum(1 for a, c in zip(answers, correct_answers) if a.strip().lower() == c.strip().lower())
-    accuracy = (correct / total) * 100
+    if score is not None:
+        accuracy = score
+        # Estimate correct/total if not provided
+        correct = int((score / 100) * 10)
+        total = 10
+        avg_time = (time_spent / 10) if (time_spent is not None) else 30
+    else:
+        answers = answers or []
+        correct_answers = correct_answers or []
+        total = len(correct_answers)
+        if total == 0:
+            return {
+                "score": 0,
+                "passed": False,
+                "stars_earned": 0,
+                "weak_areas": [],
+                "next_difficulty_recommendation": difficulty_level,
+                "ai_feedback": "Great effort!"
+            }
+        correct = sum(1 for a, c in zip(answers, correct_answers) if a.strip().lower() == c.strip().lower())
+        accuracy = (correct / total) * 100
+        avg_time = sum(time_per_question) / len(time_per_question) if time_per_question else 30
 
     # Time bonus calculation
-    avg_time = sum(time_per_question) / len(time_per_question) if time_per_question else 30
     time_bonus = 10 if avg_time < 10 else (5 if avg_time < 20 else 0)
-    score = min(100, int(accuracy) + time_bonus)
+    final_score = min(100, int(accuracy) + time_bonus) if score is None else score
     passed = accuracy >= 60
 
     # Star calculation
@@ -333,7 +384,7 @@ def score_activity(
     # AI Feedback
     feedback_prompt = f"""
     Provide encouraging, age-appropriate feedback for a child who just completed a {activity_type} activity:
-    - Score: {score}/100 ({accuracy:.0f}% accuracy)
+    - Score: {final_score}/100 ({accuracy:.0f}% accuracy)
     - Questions: {correct}/{total} correct
     - Time: {avg_time:.1f}s per question
     - Result: {'Passed!' if passed else 'Keep practicing!'}
@@ -353,7 +404,7 @@ def score_activity(
         ai_feedback = f"Great effort! You got {accuracy:.0f}% correct. " + ("Keep practicing!" if not passed else "You're doing amazing!")
 
     return {
-        "score": score,
+        "score": final_score,
         "passed": passed,
         "stars_earned": stars,
         "weak_areas": [],
@@ -648,8 +699,10 @@ def generate_activities_for_child(
     }}
 
     Critical Guidelines:
-    - SYSTEM ENUMS MUST REMAIN IN ENGLISH: `activity_type`, `difficulty_level`, `activity_group`, `mascot_character` and ALL JSON keys MUST be exactly as specified in strict English, regardless of native language. Do NOT translate them!
-    - CONTENT IN NATIVE LANGUAGE: The `instruction`, `words`, `story`, `questions` and other text inside `activity_content` should be fully localized to the child's native language ({native_language})!
+    - SYSTEM ENUMS MUST REMAIN IN ENGLISH: `activity_type`, `difficulty_level`, `activity_group`, `mascot_character` and 
+      ALL JSON keys MUST be exactly as specified in strict English, regardless of native language. Do NOT translate them!
+    - CONTENT IN NATIVE LANGUAGE: The `instruction`, `words`, `story`, `questions` and other text inside `activity_content` 
+      should be fully localized to the child's native language ({native_language})!
     - EMOJIS: You MUST include "word_emojis" array in activity_content with matching emojis for each word from the provided mapping
     - Use EXACT words and emojis from the mapping above for the current letter group
     - NEVER repeat exact same activity type + letter combinations
@@ -1031,3 +1084,176 @@ def _fallback_boss_level_analysis(performance: Dict[str, Any], current_level: in
         "next_level_suggestion": current_level + 1 if ready else current_level,
         "practice_needed": ["more activities"] if not ready else []
     }
+
+
+# ─────────────────────────────────────────────
+# 8. PRONUNCIATION ANALYSIS
+# ─────────────────────────────────────────────
+def analyze_pronunciation(
+    audio_base64: str,
+    target_word: str,
+    target_letter: str,
+    child_age: int,
+    language: str = "English",
+) -> Dict[str, Any]:
+    """
+    Send a child's recorded audio to Gemini multimodal for pronunciation feedback.
+    Returns: score, is_correct, feedback, phonetic_tip, sounds_like
+    """
+    prompt = f"""
+    You are a friendly children's speech therapist reviewing a young child's pronunciation attempt.
+
+    The child (age {child_age}) was asked to say: "{target_word}" (target letter sound: "{target_letter}")
+    Language context: {language}
+
+    Listen to the attached audio clip and respond ONLY in valid JSON with this exact structure:
+    {{
+        "score": <0-100 pronunciation accuracy score>,
+        "is_correct": <true if the word/sound is clearly recognizable, false otherwise>,
+        "feedback": "<1 short encouraging sentence for the child, e.g. 'Wow, great job saying {target_word}!'>",
+        "phonetic_tip": "<1 simple phonetic improvement tip if score < 70, otherwise empty string>",
+        "sounds_like": "<what you heard, or 'correct' if accurate>"
+    }}
+
+    Important guidelines:
+    - Be very lenient and encouraging — this is a young child learning to read.
+    - Score 80+ if the core sound is recognizable, even with a child accent.
+    - Score 50-79 if partially correct.
+    - Score < 50 only if it sounds completely different.
+    - Keep feedback in simple child-friendly words.
+    - Phonetic tip should be a single actionable sentence.
+    """
+
+    try:
+        with track_ai_call():
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=[
+                    {
+                        "parts": [
+                            {
+                                "inline_data": {
+                                    "mime_type": "audio/webm",
+                                    "data": audio_base64
+                                }
+                            },
+                            {"text": prompt}
+                        ]
+                    }
+                ]
+            )
+        result_text = response.text.strip()
+
+        if "```json" in result_text:
+            result_text = result_text.split("```json")[1].split("```")[0].strip()
+        elif "```" in result_text:
+            result_text = result_text.split("```")[1].split("```")[0].strip()
+
+        result = json.loads(result_text)
+
+        # Ensure all required fields are present
+        result.setdefault("score", 70)
+        result.setdefault("is_correct", result.get("score", 70) >= 60)
+        result.setdefault("feedback", "Great try! Keep practicing!")
+        result.setdefault("phonetic_tip", "")
+        result.setdefault("sounds_like", "unknown")
+
+        return result
+
+    except Exception as e:
+        logging.error(f"Pronunciation analysis error: {e}")
+        return {
+            "score": 65,
+            "is_correct": True,
+            "feedback": "Good try! Keep practicing — you're doing great!",
+            "phonetic_tip": "",
+            "sounds_like": "unknown"
+        }
+
+
+# ─────────────────────────────────────────────
+# 9. HANDWRITING ANALYSIS
+# ─────────────────────────────────────────────
+def analyze_handwriting(
+    image_base64: str,
+    target_letter: str,
+    child_age: int,
+    language: str = "English",
+) -> Dict[str, Any]:
+    """
+    Analyze a child's handwritten letter image using Gemini Vision.
+    Returns: score, is_recognizable, feedback, strengths, improvement_tip, letter_recognized
+    """
+    prompt = f"""
+    You are a friendly children's handwriting specialist reviewing a young child's letter writing.
+
+    The child (age {child_age}) was asked to write the letter: "{target_letter}"
+    Language context: {language}
+
+    Look at the attached image and respond ONLY in valid JSON with this exact structure:
+    {{
+        "score": <0-100 handwriting quality score>,
+        "is_recognizable": <true if the letter shape is clearly recognizable>,
+        "feedback": "<1 short encouraging sentence for the child>",
+        "strengths": ["<1-2 specific things they did well, e.g. 'Good pen pressure', 'Great curve shape'>"],
+        "improvement_tip": "<1 simple specific tip for improvement if score < 80, otherwise empty string>",
+        "letter_recognized": "<what letter shape you see in the image>"
+    }}
+
+    Important guidelines:
+    - Be very lenient and encouraging — this is a young child still developing motor skills.
+    - Score 80+ if the general letter shape is recognizable, even if not perfectly formed.
+    - Score 50-79 if partially correct but identifiable.
+    - Score < 50 only if the shape is completely unrecognizable.
+    - Keep feedback in simple child-friendly language.
+    - Focus strengths on what the child actually drew correctly.
+    - Improvement tip should be one clear, actionable sentence.
+    """
+
+    try:
+        with track_ai_call():
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=[
+                    {
+                        "parts": [
+                            {
+                                "inline_data": {
+                                    "mime_type": "image/png",
+                                    "data": image_base64
+                                }
+                            },
+                            {"text": prompt}
+                        ]
+                    }
+                ]
+            )
+        result_text = response.text.strip()
+
+        if "```json" in result_text:
+            result_text = result_text.split("```json")[1].split("```")[0].strip()
+        elif "```" in result_text:
+            result_text = result_text.split("```")[1].split("```")[0].strip()
+
+        result = json.loads(result_text)
+
+        # Ensure all required fields are present
+        result.setdefault("score", 70)
+        result.setdefault("is_recognizable", result.get("score", 70) >= 50)
+        result.setdefault("feedback", "Great writing! Keep it up!")
+        result.setdefault("strengths", ["Good effort"])
+        result.setdefault("improvement_tip", "")
+        result.setdefault("letter_recognized", target_letter)
+
+        return result
+
+    except Exception as e:
+        logging.error(f"Handwriting analysis error: {e}")
+        return {
+            "score": 70,
+            "is_recognizable": True,
+            "feedback": "Great writing! You're doing amazing!",
+            "strengths": ["Good effort", "Nice try"],
+            "improvement_tip": "",
+            "letter_recognized": target_letter
+        }

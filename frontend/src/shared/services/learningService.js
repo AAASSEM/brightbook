@@ -41,7 +41,25 @@ export const learningService = {
   // Get child achievements
   getAchievements: (childId) => {
     return api.get(`/api/learning/achievements/${childId}`);
-  }
+  },
+
+  // Analyze a child's pronunciation via Gemini AI
+  // formData must contain: audio (File), target_word, target_letter, child_age, language
+  analyzePronunciation: (formData) => {
+    return api.post('/api/learning/pronunciation/analyze', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 30000, // 30s — audio + AI takes longer
+    });
+  },
+
+  // Analyze a child's handwriting via Gemini Vision
+  // formData must contain: image (File/Blob), target_letter, child_age, language
+  analyzeHandwriting: (formData) => {
+    return api.post('/api/learning/handwriting/analyze', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 30000, // 30s — image + AI takes longer
+    });
+  },
 };
 
-export default learningService;
+export default learningService;

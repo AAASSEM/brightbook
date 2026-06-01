@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Form
 from sqlmodel import Session, select
 from typing import List, Dict, Any, Optional
 from app.config.database import get_session
@@ -9,6 +9,7 @@ from app.models.models import (
 from app.models.schemas import MessageResponse, ActivityRead
 from app.services import ai_service
 import json
+import base64
 
 router = APIRouter(prefix="/api/learning", tags=["learning"])
 
@@ -155,7 +156,25 @@ def complete_activity(
         # Calculate performance metrics
         score = data.get("score", 0)
         time_spent = data.get("time_spent", 0)
-        performance = calculate_mastery(score, time_spent)
+
+        # Call AI service to score activity and generate custom feedback
+        try:
+            ai_perf = ai_service.score_activity(
+                activity_type=activity.activity_type,
+                difficulty_level=activity.difficulty_level,
+                score=score,
+                time_spent=time_spent
+            )
+            performance = {
+                "mastery_level": ai_perf["score"],
+                "stars_earned": ai_perf["stars_earned"],
+                "passed": ai_perf["passed"],
+                "ai_feedback": ai_perf["ai_feedback"]
+            }
+        except Exception as e:
+            # Fallback to local calculation if AI fails
+            performance = calculate_mastery(score, time_spent)
+            performance["ai_feedback"] = "Great job!"
 
         # Update activity progress
         activity_progress.completion_status = "completed"
@@ -238,6 +257,7 @@ def complete_activity(
             "stars_earned": performance["stars_earned"],
             "mastery_level": performance["mastery_level"],
             "passed": performance["passed"],
+            "ai_feedback": performance.get("ai_feedback", ""),
             "new_achievements": new_achievements
         }
 
@@ -287,7 +307,25 @@ def complete_activity_child(
         # Calculate performance metrics
         score = data.get("score", 0)
         time_spent = data.get("time_spent", 0)
-        performance = calculate_mastery(score, time_spent)
+
+        # Call AI service to score activity and generate custom feedback
+        try:
+            ai_perf = ai_service.score_activity(
+                activity_type=activity.activity_type,
+                difficulty_level=activity.difficulty_level,
+                score=score,
+                time_spent=time_spent
+            )
+            performance = {
+                "mastery_level": ai_perf["score"],
+                "stars_earned": ai_perf["stars_earned"],
+                "passed": ai_perf["passed"],
+                "ai_feedback": ai_perf["ai_feedback"]
+            }
+        except Exception as e:
+            # Fallback to local calculation if AI fails
+            performance = calculate_mastery(score, time_spent)
+            performance["ai_feedback"] = "Great job!"
 
         # Update activity progress
         activity_progress.completion_status = "completed"
@@ -632,6 +670,7 @@ def complete_activity_child(
             "stars_earned": performance["stars_earned"],
             "mastery_level": performance["mastery_level"],
             "passed": performance["passed"],
+            "ai_feedback": performance.get("ai_feedback", ""),
             "new_achievements": new_achievements
         }
 
@@ -1239,3 +1278,81 @@ def generate_progress_report(
 # ═══════════════════════════════════════════════════════════════════════
 # LEVEL UP LOGIC
 # ═══════════════════════════════════════════════════════════════════════
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# AI PRONUNCIATION ANALYSIS
+# ═══════════════════════════════════════════════════════════════════════
+
+@router.post("/pronunciation/analyze")
+async def analyze_pronunciation(
+    audio: UploadFile = File(...),
+    target_word: str = Form(...),
+    target_letter: str = Form(...),
+    child_age: int = Form(default=7),
+    language: str = Form(default="English"),
+):
+    """
+    Analyze a child's spoken pronunciation using Gemini multimodal AI.
+    Accepts an audio file (webm) and returns pronunciation score + feedback.
+    """
+    try:
+        audio_bytes = await audio.read()
+        if not audio_bytes:
+            raise HTTPException(status_code=400, detail="Empty audio file")
+
+        audio_b64 = base64.b64encode(audio_bytes).decode("utf-8")
+
+        result = ai_service.analyze_pronunciation(
+            audio_base64=audio_b64,
+            target_word=target_word,
+            target_letter=target_letter,
+            child_age=child_age,
+            language=language,
+        )
+        return result
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        print(f"Pronunciation analysis endpoint error: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Pronunciation analysis failed: {str(e)}")
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# AI HANDWRITING ANALYSIS
+# ═══════════════════════════════════════════════════════════════════════
+
+@router.post("/handwriting/analyze")
+async def analyze_handwriting(
+    image: UploadFile = File(...),
+    target_letter: str = Form(...),
+    child_age: int = Form(default=7),
+    language: str = Form(default="English"),
+):
+    """
+    Analyze a child's handwritten letter image using Gemini Vision AI.
+    Accepts a PNG image and returns handwriting quality score + feedback.
+    """
+    try:
+        img_bytes = await image.read()
+        if not img_bytes:
+            raise HTTPException(status_code=400, detail="Empty image file")
+
+        img_b64 = base64.b64encode(img_bytes).decode("utf-8")
+
+        result = ai_service.analyze_handwriting(
+            image_base64=img_b64,
+            target_letter=target_letter,
+            child_age=child_age,
+            language=language,
+        )
+        return result
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        print(f"Handwriting analysis endpoint error: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Handwriting analysis failed: {str(e)}")

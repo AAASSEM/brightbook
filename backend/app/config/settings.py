@@ -45,3 +45,11 @@ def get_settings() -> Settings:
 
 
 settings = get_settings()
+
+
+def reload_settings():
+    """Clear lru_cache and reload Settings from .env file, updating the global settings instance."""
+    get_settings.cache_clear()
+    new_settings = get_settings()
+    for field in Settings.model_fields:
+        setattr(settings, field, getattr(new_settings, field))

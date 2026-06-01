@@ -75,8 +75,16 @@ export default function ChildDashboardPage() {
 
   const handleActivityComplete = (result) => {
     const starsEarned = result.stars_earned || (result.score >= 95 ? 3 : result.score >= 80 ? 2 : result.score >= 70 ? 1 : 0);
-    if (result.error) toast.error(t("learning.activityError"));
-    else toast.success(t("learning.starsEarned", { stars: starsEarned }));
+    if (result.error) {
+      toast.error(t("learning.activityError"));
+    } else {
+      toast.success(t("learning.starsEarned", { stars: starsEarned }));
+      if (result.ai_feedback) {
+        setTimeout(() => {
+          toast(result.ai_feedback, { icon: '🤖' });
+        }, 1500);
+      }
+    }
 
     if (result.new_achievements && result.new_achievements.length > 0) {
       setAchievements(prev => {

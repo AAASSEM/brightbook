@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getMascot } from '@/shared/data/mascots';
+import learningService from '@/shared/services/learningService';
 
 // ═══════════════════════════════════════════════════════════════════════
 // LETTER PATH DEFINITIONS
@@ -314,17 +315,28 @@ export default function TraceWriteActivity({ content, onComplete }) {
   const mascot = getMascot(letter);
   const letterPath = LETTER_PATHS[letter] || LETTER_PATHS.S;
 
-  const [phase, setPhase] = useState('demo'); // demo → guided → light → free → celebrate
+  const [phase, setPhase] = useState('demo'); // demo → guided → light → free → ai_feedback → celebrate
   const [progress, setProgress] = useState(0);
   const [phaseAttempts, setPhaseAttempts] = useState({ guided: 0, light: 0, free: 0 });
   const [phaseScores, setPhaseScores] = useState({ guided: [], light: [], free: [] });
   const [currentStrokeIndex, setCurrentStrokeIndex] = useState(0);
   const [showTryButton, setShowTryButton] = useState(false);
+  const [aiHandwritingResult, setAiHandwritingResult] = useState(null);
+  const [isAnalyzingHandwriting, setIsAnalyzingHandwriting] = useState(false);
+  const freeCanvasRef = useRef(null); // set by TracingPhase when mode===free
 
-  const advancePhase = () => {
-    const phases = ['demo', 'guided', 'light', 'free', 'celebrate'];
+  const advancePhase = (canvasEl) => {
+    const phases = ['demo', 'guided', 'light', 'free', 'ai_feedback', 'celebrate'];
     const currentIdx = phases.indexOf(phase);
     const nextPhase = phases[currentIdx + 1];
+
+    if (nextPhase === 'ai_feedback') {
+      // Trigger AI handwriting analysis using the free-write canvas
+      setPhase('ai_feedback');
+      setProgress(88);
+      runHandwritingAnalysis(canvasEl);
+      return;
+    }
 
     if (nextPhase === 'celebrate') {
       // Calculate final weighted score
@@ -341,10 +353,41 @@ export default function TraceWriteActivity({ content, onComplete }) {
       setTimeout(() => onComplete(finalScore), 3500);
     } else {
       setPhase(nextPhase);
-      setProgress(((currentIdx + 1) / 4) * 100);
+      setProgress(((currentIdx + 1) / 5) * 100);
       setCurrentStrokeIndex(0);
     }
   };
+
+  const runHandwritingAnalysis = async (canvasEl) => {
+    setIsAnalyzingHandwriting(true);
+    try {
+      if (!canvasEl) throw new Error('No canvas');
+      const blob = await new Promise(resolve => canvasEl.toBlob(resolve, 'image/png'));
+      if (!blob || blob.size < 500) throw new Error('Canvas too small or empty');
+
+      const formData = new FormData();
+      formData.append('image', blob, 'handwriting.png');
+      formData.append('target_letter', letter);
+      formData.append('child_age', String(content?.child_age || 7));
+      formData.append('language', /[\u0600-\u06FF]/.test(letter) ? 'Arabic' : 'English');
+
+      const response = await learningService.analyzeHandwriting(formData);
+      setAiHandwritingResult(response.data);
+    } catch (err) {
+      console.error('Handwriting AI error:', err);
+      setAiHandwritingResult({
+        score: 75,
+        is_recognizable: true,
+        feedback: 'Great writing! You did a wonderful job!',
+        strengths: ['Good effort', 'Nice shape'],
+        improvement_tip: '',
+        letter_recognized: letter,
+      });
+    } finally {
+      setIsAnalyzingHandwriting(false);
+    }
+  };
+
 
   const recordAttempt = (score) => {
     if (phase === 'guided') {
@@ -438,7 +481,18 @@ export default function TraceWriteActivity({ content, onComplete }) {
                 attempts={phaseAttempts.free}
                 maxAttempts={1}
                 onRecord={recordAttempt}
-                onContinue={advancePhase}
+                onContinue={(canvasEl) => advancePhase(canvasEl)}
+                exposeCanvas={(el) => { freeCanvasRef.current = el; }}
+              />
+            )}
+            {phase === 'ai_feedback' && (
+              <AIHandwritingFeedbackPhase
+                key="ai_feedback"
+                mascot={mascot}
+                letter={letter}
+                aiResult={aiHandwritingResult}
+                isAnalyzing={isAnalyzingHandwriting}
+                onContinue={() => advancePhase()}
               />
             )}
             {phase === 'celebrate' && (
@@ -583,7 +637,7 @@ function DemoPhase({ mascot, letter, letterPath, onContinue }) {
 // ═══════════════════════════════════════════════════════════════════════
 // TRACING PHASES (Guided, Light, Free)
 // ═══════════════════════════════════════════════════════════════════════
-function TracingPhase({ mascot, letter, letterPath, mode, attempts, maxAttempts, onRecord, onContinue }) {
+function TracingPhase({ mascot, letter, letterPath, mode, attempts, maxAttempts, onRecord, onContinue, exposeCanvas }) {
   const canvasRef = useRef(null);
   const isDrawingRef = useRef(false);
   const drawnPointsRef = useRef([]);
@@ -681,6 +735,8 @@ function TracingPhase({ mascot, letter, letterPath, mode, attempts, maxAttempts,
 
   useEffect(() => {
     drawGuide();
+    // Expose canvas ref to parent for AI analysis (free-write mode only)
+    if (mode === 'free' && exposeCanvas) exposeCanvas(canvasRef.current);
   }, [mode, letter, letterPath]);
 
   const lastPosRef = useRef({ x: 0, y: 0 });
@@ -762,7 +818,8 @@ function TracingPhase({ mascot, letter, letterPath, mode, attempts, maxAttempts,
 
   const handleContinue = () => {
     if (attempts >= maxAttempts - 1) {
-      onContinue();
+      // Pass canvas element when leaving free-write phase so parent can send it for AI analysis
+      onContinue(mode === 'free' ? canvasRef.current : undefined);
     } else {
       handleTryAgain();
     }
@@ -990,3 +1047,108 @@ function CelebratePhase({ mascot, letter, phaseScores }) {
     </motion.div>
   );
 }
+
+// ═══════════════════════════════════════════════════════════════════════
+// AI HANDWRITING FEEDBACK PHASE
+// ═══════════════════════════════════════════════════════════════════════
+function AIHandwritingFeedbackPhase({ mascot, letter, aiResult, isAnalyzing, onContinue }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0 }}
+      className="text-center space-y-6 py-4"
+    >
+      {isAnalyzing || !aiResult ? (
+        /* Loading state */
+        <div className="space-y-6 py-8">
+          <motion.div
+            animate={{ y: [0, -15, 0], rotate: [-5, 5, -5] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="text-8xl"
+          >
+            {mascot.emoji}
+          </motion.div>
+          <h2 className="text-2xl font-black" style={{ color: '#171d14' }}>
+            🤖 AI is checking your writing...
+          </h2>
+          <div className="flex justify-center gap-2">
+            {[0, 1, 2].map(i => (
+              <motion.div
+                key={i}
+                className="w-4 h-4 rounded-full"
+                style={{ background: mascot.color }}
+                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 1, repeat: Infinity, delay: i * 0.3 }}
+              />
+            ))}
+          </div>
+          <p className="text-base font-semibold" style={{ color: '#6f7a6b' }}>
+            Analyzing your letter {letter}...
+          </p>
+        </div>
+      ) : (
+        /* Results */
+        <div className="space-y-5">
+          <h2 className="text-2xl font-black" style={{ color: '#171d14' }}>
+            {aiResult.score >= 70 ? '✏️ Great Writing!' : '✏️ Keep Practicing!'}
+          </h2>
+
+          {/* Score display */}
+          <div className="flex justify-center">
+            <div
+              className="w-28 h-28 rounded-full flex flex-col items-center justify-center shadow-xl"
+              style={{
+                background: aiResult.score >= 70 ? mascot.bgGradient : 'linear-gradient(135deg,#ff9800,#f57c00)',
+                color: 'white'
+              }}
+            >
+              <div className="text-3xl font-black">{aiResult.score}%</div>
+              <div className="text-sm font-semibold opacity-80">
+                {aiResult.score >= 80 ? '⭐⭐⭐' : aiResult.score >= 60 ? '⭐⭐' : '⭐'}
+              </div>
+            </div>
+          </div>
+
+          {/* AI Feedback sentence */}
+          <div
+            className="px-5 py-4 rounded-2xl text-base font-semibold"
+            style={{ background: '#e8f5e9', color: '#1b5e20', border: '2px solid #4caf50' }}
+          >
+            ✨ {aiResult.feedback}
+          </div>
+
+          {/* Strengths */}
+          {aiResult.strengths?.length > 0 && (
+            <div className="text-left px-5 py-4 rounded-2xl" style={{ background: '#f3e5f5', border: '2px solid #9c27b0' }}>
+              <p className="font-black text-sm mb-2" style={{ color: '#4a148c' }}>💪 What you did well:</p>
+              {aiResult.strengths.map((s, i) => (
+                <p key={i} className="text-sm font-semibold" style={{ color: '#6a1b9a' }}>✓ {s}</p>
+              ))}
+            </div>
+          )}
+
+          {/* Improvement tip (only show if score < 80) */}
+          {aiResult.improvement_tip && aiResult.score < 80 && (
+            <div
+              className="px-5 py-4 rounded-2xl text-sm font-semibold text-left"
+              style={{ background: '#fff3e0', color: '#e65100', border: '2px solid #ff9800' }}
+            >
+              💡 Tip: {aiResult.improvement_tip}
+            </div>
+          )}
+
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            onClick={onContinue}
+            className="px-12 py-5 rounded-2xl text-white text-xl font-black shadow-2xl"
+            style={{ background: mascot.bgGradient }}
+          >
+            🎉 See Results!
+          </motion.button>
+        </div>
+      )}
+    </motion.div>
+  );
+}
