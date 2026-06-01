@@ -28,21 +28,99 @@ export const MASCOTS = {
 };
 
 export const MASCOTS_AR = {
-  'ا': { name:'أرنب أمجد', emoji:'🐰', color:'#ef5350', bgGradient:'linear-gradient(135deg,#ef5350 0%,#e53935 100%)', sound:'أ', soundLong:'أ', action:'اقفز كالأرنب', intro:"أهلاً! أنا أرنب أمجد! أقول أ!", examples:[{word:'أرنب',emoji:'🐰',letterIndex:0},{word:'أسد',emoji:'🦁',letterIndex:0}], encouragements:['رائع!','مذهل!','عمل بطل!'] },
-  'ب': { name:'بطة بسمة', emoji:'🦆', color:'#ffb300', bgGradient:'linear-gradient(135deg,#ffd54f 0%,#ff8f00 100%)', sound:'ب', soundLong:'ب', action:'امشِ كالبطة', intro:"أهلاً! أنا بطة بسمة! أقول ب!", examples:[{word:'بطة',emoji:'🦆',letterIndex:0},{word:'باب',emoji:'🚪',letterIndex:0}], encouragements:['ممتاز!','أحسنت!','جميل جداً!'] },
-  'ت': { name:'تمساح تامر', emoji:'🐊', color:'#4caf50', bgGradient:'linear-gradient(135deg,#66bb6a 0%,#388e3c 100%)', sound:'ت', soundLong:'ت', action:'ازحف كالتمساح', intro:"أهلاً! أنا تمساح تامر! أقول ت!", examples:[{word:'تفاحة',emoji:'🍎',letterIndex:0},{word:'تاج',emoji:'👑',letterIndex:0}], encouragements:['بطل!','ذكي!','رائع!'] },
-  'ث': { name:'ثعلب ثائر', emoji:'🦊', color:'#e64a19', bgGradient:'linear-gradient(135deg,#ff7043 0%,#bf360c 100%)', sound:'ث', soundLong:'ث', action:'اركض كالثعلب', intro:"أهلاً! أنا ثعلب ثائر! أقول ث!", examples:[{word:'ثعلب',emoji:'🦊',letterIndex:0},{word:'ثوم',emoji:'🧄',letterIndex:0}], encouragements:['سريع!','حاذق!','مبدع!'] },
-  'ن': { name:'نحلة نورا', emoji:'🐝', color:'#fbc02d', bgGradient:'linear-gradient(135deg,#fff176 0%,#f9a825 100%)', sound:'ن', soundLong:'ن', action:'طر كالنحلة', intro:"أهلاً! أنا نحلة نورا! أقول ن!", examples:[{word:'نحلة',emoji:'🐝',letterIndex:0},{word:'نور',emoji:'💡',letterIndex:0}], encouragements:['نشيط!','عسول!','ممتاز!'] },
-  'ي': { name:'يمامة ياسمين', emoji:'🐦', color:'#90caf9', bgGradient:'linear-gradient(135deg,#bbdefb 0%,#42a5f5 100%)', sound:'ي', soundLong:'ي', action:'رفرف كالييمامة', intro:"أهلاً! أنا يمامة ياسمين! أقول ي!", examples:[{word:'يد',emoji:'✋',letterIndex:0},{word:'يمامة',emoji:'🐦',letterIndex:0}], encouragements:['رقيق!','جميل!','موفق!'] },
-  'م': { name:'مها المها', emoji:'🦌', color:'#8d6e63', bgGradient:'linear-gradient(135deg,#a1887f 0%,#5d4037 100%)', sound:'م', soundLong:'م', action:'اجرِ كالمها', intro:"أهلاً! أنا مها المها! أقول م!", examples:[{word:'موز',emoji:'🍌',letterIndex:0},{word:'ماء',emoji:'💧',letterIndex:0}], encouragements:['سريع!','قوي!','ممتاز!'] },
-  'ل': { name:'ليمون لولو', emoji:'🍋', color:'#cddc39', bgGradient:'linear-gradient(135deg,#dce775 0%,#afb42b 100%)', sound:'ل', soundLong:'ل', action:'تدحرج كالليمون', intro:"أهلاً! أنا ليمون لولو! أقول ل!", examples:[{word:'ليمون',emoji:'🍋',letterIndex:0},{word:'لحم',emoji:'🥩',letterIndex:0}], encouragements:['حامض حلو!','رائع!','ممتاز!'] },
-  'س': { name:'سمكة سلمى', emoji:'🐟', color:'#26c6da', bgGradient:'linear-gradient(135deg,#4dd0e1 0%,#0097a7 100%)', sound:'س', soundLong:'س', action:'اسبح كالسمكة', intro:"أهلاً! أنا سمكة سلمى! أقول س!", examples:[{word:'سمكة',emoji:'🐟',letterIndex:0},{word:'سيارة',emoji:'🚗',letterIndex:0}], encouragements:['سباح ماهر!','رائع!','ذكي!'] },
-  'ش': { name:'شمس شادي', emoji:'☀️', color:'#ffa726', bgGradient:'linear-gradient(135deg,#ffb74d 0%,#f57c00 100%)', sound:'ش', soundLong:'ش', action:'اشرق كالشمس', intro:"أهلاً! أنا شمس شادي! أقول ش!", examples:[{word:'شمس',emoji:'☀️',letterIndex:0},{word:'شجرة',emoji:'🌳',letterIndex:0}], encouragements:['مشرق!','متألق!','بطل!'] },
+  'ا': { name:'أرنب أمجد', emoji:'🐰', color:'#ef5350', bgGradient:'linear-gradient(135deg,#ef5350 0%,#e53935 100%)', sound:'أ', soundLong:'أ', action:'اقفز كالأرنب', intro:"أهلاً! أنا أرنب أمجد! أقول أ!", examples:[{word:'أرنب',emoji:'🐰',letterIndex:0},{word:'أسد',emoji:'🦁',letterIndex:0}], similarLetters:['ل', 'د', 'ر', 'و'], wordSounds:[{word:'أرنب',emoji:'🐰',startsWithLetter:true},{word:'أسد',emoji:'🦁',startsWithLetter:true},{word:'إبريق',emoji:'🫖',startsWithLetter:true},{word:'بطة',emoji:'🦆',startsWithLetter:false},{word:'تفاحة',emoji:'🍎',startsWithLetter:false},{word:'موز',emoji:'🍌',startsWithLetter:false}], encouragements:['رائع!','مذهل!','عمل بطل!'] },
+  'ب': { name:'بطة بسمة', emoji:'🦆', color:'#ffb300', bgGradient:'linear-gradient(135deg,#ffd54f 0%,#ff8f00 100%)', sound:'ب', soundLong:'ب', action:'امشِ كالبطة', intro:"أهلاً! أنا بطة بسمة! أقول ب!", examples:[{word:'بطة',emoji:'🦆',letterIndex:0},{word:'باب',emoji:'🚪',letterIndex:0}], similarLetters:['ت', 'ث', 'ن', 'ي'], wordSounds:[{word:'بطة',emoji:'🦆',startsWithLetter:true},{word:'باب',emoji:'🚪',startsWithLetter:true},{word:'بيت',emoji:'🏠',startsWithLetter:true},{word:'أسد',emoji:'🦁',startsWithLetter:false},{word:'شجرة',emoji:'🌳',startsWithLetter:false},{word:'شمس',emoji:'☀️',startsWithLetter:false}], encouragements:['ممتاز!','أحسنت!','جميل جداً!'] },
+  'ت': { name:'تمساح تامر', emoji:'🐊', color:'#4caf50', bgGradient:'linear-gradient(135deg,#66bb6a 0%,#388e3c 100%)', sound:'ت', soundLong:'ت', action:'ازحف كالتمساح', intro:"أهلاً! أنا تمساح تامر! أقول ت!", examples:[{word:'تفاحة',emoji:'🍎',letterIndex:0},{word:'تاج',emoji:'👑',letterIndex:0}], similarLetters:['ب', 'ث', 'ن', 'ي'], wordSounds:[{word:'تفاحة',emoji:'🍎',startsWithLetter:true},{word:'تاج',emoji:'👑',startsWithLetter:true},{word:'تمساح',emoji:'🐊',startsWithLetter:true},{word:'أرنب',emoji:'🐰',startsWithLetter:false},{word:'شمس',emoji:'☀️',startsWithLetter:false},{word:'موز',emoji:'🍌',startsWithLetter:false}], encouragements:['بطل!','ذكي!','رائع!'] },
+  'ث': { name:'ثعلب ثائر', emoji:'🦊', color:'#e64a19', bgGradient:'linear-gradient(135deg,#ff7043 0%,#bf360c 100%)', sound:'ث', soundLong:'ث', action:'اركض كالثعلب', intro:"أهلاً! أنا ثعلب ثائر! أقول ث!", examples:[{word:'ثعلب',emoji:'🦊',letterIndex:0},{word:'ثوم',emoji:'🧄',letterIndex:0}], similarLetters:['ب', 'ت', 'ن', 'ي'], wordSounds:[{word:'ثعلب',emoji:'🦊',startsWithLetter:true},{word:'ثوم',emoji:'🧄',startsWithLetter:true},{word:'ثعبان',emoji:'🐍',startsWithLetter:true},{word:'باب',emoji:'🚪',startsWithLetter:false},{word:'سمكة',emoji:'🐟',startsWithLetter:false},{word:'ليمون',emoji:'🍋',startsWithLetter:false}], encouragements:['سريع!','حاذق!','مبدع!'] },
+  'ن': { name:'نحلة نورا', emoji:'🐝', color:'#fbc02d', bgGradient:'linear-gradient(135deg,#fff176 0%,#f9a825 100%)', sound:'ن', soundLong:'ن', action:'طر كالنحلة', intro:"أهلاً! أنا نحلة نورا! أقول ن!", examples:[{word:'نحلة',emoji:'🐝',letterIndex:0},{word:'نور',emoji:'💡',letterIndex:0}], similarLetters:['ب', 'ت', 'ث', 'ي'], wordSounds:[{word:'نحلة',emoji:'🐝',startsWithLetter:true},{word:'نور',emoji:'💡',startsWithLetter:true},{word:'نجم',emoji:'⭐',startsWithLetter:true},{word:'تفاحة',emoji:'🍎',startsWithLetter:false},{word:'شجرة',emoji:'🌳',startsWithLetter:false},{word:'موز',emoji:'🍌',startsWithLetter:false}], encouragements:['نشيط!','عسول!','ممتاز!'] },
+  'ي': { name:'يمامة ياسمين', emoji:'🐦', color:'#90caf9', bgGradient:'linear-gradient(135deg,#bbdefb 0%,#42a5f5 100%)', sound:'ي', soundLong:'ي', action:'رفرف كالييمامة', intro:"أهلاً! أنا يمامة ياسمين! أقول ي!", examples:[{word:'يد',emoji:'✋',letterIndex:0},{word:'يمامة',emoji:'🐦',letterIndex:0}], similarLetters:['ب', 'ت', 'ث', 'ن'], wordSounds:[{word:'يد',emoji:'✋',startsWithLetter:true},{word:'يمامة',emoji:'🐦',startsWithLetter:true},{word:'ياسمين',emoji:'🌸',startsWithLetter:true},{word:'بطة',emoji:'🦆',startsWithLetter:false},{word:'شمس',emoji:'☀️',startsWithLetter:false},{word:'سمكة',emoji:'🐟',startsWithLetter:false}], encouragements:['رقيق!','جميل!','موفق!'] },
+  'م': { name:'مها المها', emoji:'🦌', color:'#8d6e63', bgGradient:'linear-gradient(135deg,#a1887f 0%,#5d4037 100%)', sound:'م', soundLong:'م', action:'اجرِ كالمها', intro:"أهلاً! أنا مها المها! أقول م!", examples:[{word:'موز',emoji:'🍌',letterIndex:0},{word:'ماء',emoji:'💧',letterIndex:0}], similarLetters:['و', 'ق', 'ح', 'ع'], wordSounds:[{word:'موز',emoji:'🍌',startsWithLetter:true},{word:'ماء',emoji:'💧',startsWithLetter:true},{word:'مفتاح',emoji:'🔑',startsWithLetter:true},{word:'بطة',emoji:'🦆',startsWithLetter:false},{word:'تفاحة',emoji:'🍎',startsWithLetter:false},{word:'ليمون',emoji:'🍋',startsWithLetter:false}], encouragements:['سريع!','قوي!','ممتاز!'] },
+  'ل': { name:'ليمون لولو', emoji:'🍋', color:'#cddc39', bgGradient:'linear-gradient(135deg,#dce775 0%,#afb42b 100%)', sound:'ل', soundLong:'ل', action:'تدحرج كالليمون', intro:"أهلاً! أنا ليمون لولو! أقول ل!", examples:[{word:'ليمون',emoji:'🍋',letterIndex:0},{word:'لحم',emoji:'🥩',letterIndex:0}], similarLetters:['ا', 'ك', 'ع', 'ج'], wordSounds:[{word:'ليمون',emoji:'🍋',startsWithLetter:true},{word:'لحم',emoji:'🥩',startsWithLetter:true},{word:'لعبة',emoji:'🧸',startsWithLetter:true},{word:'باب',emoji:'🚪',startsWithLetter:false},{word:'شمس',emoji:'☀️',startsWithLetter:false},{word:'تفاحة',emoji:'🍎',startsWithLetter:false}], encouragements:['حامض حلو!','رائع!','ممتاز!'] },
+  'س': { name:'سمكة سلمى', emoji:'🐟', color:'#26c6da', bgGradient:'linear-gradient(135deg,#4dd0e1 0%,#0097a7 100%)', sound:'س', soundLong:'س', action:'اسبح كالسمكة', intro:"أهلاً! أنا سمكة سلمى! أقول س!", examples:[{word:'سمكة',emoji:'🐟',letterIndex:0},{word:'سيارة',emoji:'🚗',letterIndex:0}], similarLetters:['ش', 'ص', 'ض', 'ث'], wordSounds:[{word:'سمكة',emoji:'🐟',startsWithLetter:true},{word:'سيارة',emoji:'🚗',startsWithLetter:true},{word:'ساعة',emoji:'⏰',startsWithLetter:true},{word:'تفاحة',emoji:'🍎',startsWithLetter:false},{word:'باب',emoji:'🚪',startsWithLetter:false},{word:'نجم',emoji:'⭐',startsWithLetter:false}], encouragements:['سباح ماهر!','رائع!','ذكي!'] },
+  'ش': { name:'شمس شادي', emoji:'☀️', color:'#ffa726', bgGradient:'linear-gradient(135deg,#ffb74d 0%,#f57c00 100%)', sound:'ش', soundLong:'ش', action:'اشرق كالشمس', intro:"أهلاً! أنا شمس شادي! أقول ش!", examples:[{word:'شمس',emoji:'☀️',letterIndex:0},{word:'شجرة',emoji:'🌳',letterIndex:0}], similarLetters:['س', 'ص', 'ض', 'ج'], wordSounds:[{word:'شمس',emoji:'☀️',startsWithLetter:true},{word:'شجرة',emoji:'🌳',startsWithLetter:true},{word:'شوكولاتة',emoji:'🍫',startsWithLetter:true},{word:'بطة',emoji:'🦆',startsWithLetter:false},{word:'باب',emoji:'🚪',startsWithLetter:false},{word:'تفاحة',emoji:'🍎',startsWithLetter:false}], encouragements:['مشرق!','متألق!','بطل!'] },
 };
 
 export const getMascot = (letter, lang = 'en') => {
-  const dictionary = lang === 'ar' ? MASCOTS_AR : MASCOTS;
-  return dictionary[letter?.toUpperCase()] || dictionary[letter] || (lang === 'ar' ? MASCOTS_AR['ا'] : MASCOTS.S);
+  const isAr = lang === 'ar' || /[\u0600-\u06FF]/.test(letter);
+  const dictionary = isAr ? MASCOTS_AR : MASCOTS;
+  const key = letter?.toUpperCase() || '';
+  let mascot = dictionary[key] || dictionary[letter];
+
+  if (!mascot) {
+    if (isAr) {
+      mascot = {
+        name: `حرف ${letter}`,
+        emoji: '⭐',
+        color: '#4caf50',
+        bgGradient: 'linear-gradient(135deg,#66bb6a 0%,#388e3c 100%)',
+        sound: letter,
+        soundLong: letter,
+        action: `انطق حرف ${letter}`,
+        intro: `مرحباً! أنا حرف ${letter}!`,
+        examples: [{word: letter, emoji: '⭐', letterIndex: 0}],
+        similarLetters: ['ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ر', 'س', 'م', 'ن'].filter(l => l !== letter).slice(0, 4),
+        wordSounds: [
+          {word: letter, emoji: '⭐', startsWithLetter: true},
+          {word: letter, emoji: '🌟', startsWithLetter: true},
+          {word: letter, emoji: '✨', startsWithLetter: true},
+          {word: 'تفاحة', emoji: '🍎', startsWithLetter: false},
+          {word: 'بيت', emoji: '🏠', startsWithLetter: false},
+          {word: 'ولد', emoji: '👦', startsWithLetter: false}
+        ],
+        encouragements: ['أحسنت!', 'رائع!', 'ممتع!']
+      };
+    } else {
+      mascot = {
+        name: `Letter ${letter}`,
+        emoji: '⭐',
+        color: '#29b6f6',
+        bgGradient: 'linear-gradient(135deg,#29b6f6 0%,#0288d1 100%)',
+        sound: letter,
+        soundLong: letter,
+        action: `say ${letter}`,
+        intro: `Hi! I'm Letter ${letter}!`,
+        examples: [{word: letter, emoji: '⭐', letterIndex: 0}],
+        similarLetters: ['A', 'B', 'C', 'D', 'E', 'F', 'S', 'T'].filter(l => l !== letter).slice(0, 4),
+        wordSounds: [
+          {word: letter, emoji: '⭐', startsWithLetter: true},
+          {word: letter, emoji: '🌟', startsWithLetter: true},
+          {word: letter, emoji: '✨', startsWithLetter: true},
+          {word: 'CAT', emoji: '🐱', startsWithLetter: false},
+          {word: 'DOG', emoji: '🐶', startsWithLetter: false},
+          {word: 'SUN', emoji: '☀️', startsWithLetter: false}
+        ],
+        encouragements: ['Great!', 'Awesome!', 'Nice!']
+      };
+    }
+  }
+
+  // Ensure similarLetters and wordSounds exist and are fully populated arrays on the mascot object
+  if (!mascot.similarLetters || !Array.isArray(mascot.similarLetters) || mascot.similarLetters.length === 0) {
+    mascot.similarLetters = isAr 
+      ? ['ا', 'ب', 'ت', 'ث', 'ج', 'ح'].filter(l => l !== letter).slice(0, 4)
+      : ['A', 'B', 'C', 'D', 'E', 'S'].filter(l => l !== letter).slice(0, 4);
+  }
+  if (!mascot.wordSounds || !Array.isArray(mascot.wordSounds) || mascot.wordSounds.length === 0) {
+    mascot.wordSounds = isAr
+      ? [
+          {word: letter, emoji: '⭐', startsWithLetter: true},
+          {word: letter, emoji: '🌟', startsWithLetter: true},
+          {word: letter, emoji: '✨', startsWithLetter: true},
+          {word: 'تفاحة', emoji: '🍎', startsWithLetter: false},
+          {word: 'بيت', emoji: '🏠', startsWithLetter: false},
+          {word: 'ولد', emoji: '👦', startsWithLetter: false}
+        ]
+      : [
+          {word: letter, emoji: '⭐', startsWithLetter: true},
+          {word: letter, emoji: '🌟', startsWithLetter: true},
+          {word: letter, emoji: '✨', startsWithLetter: true},
+          {word: 'CAT', emoji: '🐱', startsWithLetter: false},
+          {word: 'DOG', emoji: '🐶', startsWithLetter: false},
+          {word: 'SUN', emoji: '☀️', startsWithLetter: false}
+        ];
+  }
+
+  return mascot;
 };
 
 export default MASCOTS;

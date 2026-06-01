@@ -256,7 +256,7 @@ function SoundMatchPhase({ mascot, letter, onContinue, recordAnswer, t }) {
   const totalRounds = 3;
 
   const options = useMemo(() => {
-    const wrongs = [...mascot.similarLetters]
+    const wrongs = [...(mascot.similarLetters || [])]
       .sort(() => Math.random() - 0.5)
       .slice(0, 2);
     return [letter, ...wrongs].sort(() => Math.random() - 0.5);
@@ -400,16 +400,19 @@ function WordSoundPhase({ mascot, letter, onContinue, recordAnswer, t }) {
 
   // Generate word options for this round
   const wordOptions = useMemo(() => {
-    const correctWords = mascot.wordSounds.filter(w => w.startsWithLetter);
-    const wrongWords = mascot.wordSounds.filter(w => !w.startsWithLetter);
+    const correctWords = (mascot.wordSounds || []).filter(w => w.startsWithLetter);
+    const wrongWords = (mascot.wordSounds || []).filter(w => !w.startsWithLetter);
 
-    const correct = correctWords[round % correctWords.length];
+    const correct = correctWords.length ? correctWords[round % correctWords.length] : null;
     const wrongs = [...wrongWords].sort(() => Math.random() - 0.5).slice(0, 2);
 
-    return [correct, ...wrongs].sort(() => Math.random() - 0.5);
+    const result = [];
+    if (correct) result.push(correct);
+    result.push(...wrongs);
+    return result.sort(() => Math.random() - 0.5);
   }, [round, mascot]);
 
-  const correctWord = wordOptions.find(w => w.startsWithLetter);
+  const correctWord = wordOptions.find(w => w?.startsWithLetter);
 
   // Auto-play sound at start
   useEffect(() => {
@@ -549,11 +552,12 @@ function SpeedRoundPhase({ mascot, letter, onContinue, recordAnswer, t }) {
 
   // Sequence: alternates between target letter and similar letters
   const sequence = useMemo(() => {
+    const similar = mascot.similarLetters || [];
     const items = [
       { char: letter, isTarget: true },
-      { char: mascot.similarLetters[0], isTarget: false },
+      { char: similar[0] || 'A', isTarget: false },
       { char: letter, isTarget: true },
-      { char: mascot.similarLetters[1] || mascot.similarLetters[0], isTarget: false },
+      { char: similar[1] || similar[0] || 'B', isTarget: false },
     ];
     return items.sort(() => Math.random() - 0.5);
   }, [letter, mascot]);

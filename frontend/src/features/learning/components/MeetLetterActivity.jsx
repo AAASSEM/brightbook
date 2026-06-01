@@ -273,7 +273,7 @@ function SpotTheLetterPhase({ mascot, letter, onContinue, recordAnswer }) {
   const totalRounds = 3;
 
   const options = useMemo(() => {
-    const wrongs = [...mascot.similarLetters].sort(() => Math.random() - 0.5).slice(0, 2);
+    const wrongs = [...(mascot.similarLetters || [])].sort(() => Math.random() - 0.5).slice(0, 2);
     return [letter, ...wrongs].sort(() => Math.random() - 0.5);
   }, [round, letter, mascot]);
 

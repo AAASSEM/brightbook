@@ -146,14 +146,14 @@ function QuestionBase({ mascot, letter, label, question, options, correctKey, ge
 }
 
 function RecognitionQuestion({ mascot, letter, onAnswer, onContinue, t }) {
-  const options = useMemo(() => { const w = [...mascot.similarLetters].sort(() => Math.random() - 0.5).slice(0, 3); return [letter, ...w].sort(() => Math.random() - 0.5); }, [letter, mascot]);
+  const options = useMemo(() => { const w = [...(mascot.similarLetters || [])].sort(() => Math.random() - 0.5).slice(0, 3); return [letter, ...w].sort(() => Math.random() - 0.5); }, [letter, mascot]);
   const questionText = t('learning.questRecognition', { letter });
   useEffect(() => { setTimeout(() => playSound(questionText), 400); }, [questionText]);
   return <QuestionBase mascot={mascot} letter={letter} label={t('learning.questQuestionOf', { current: 1, total: 4 })} question={questionText} options={options} correctKey={letter} getKey={o => o} onAnswer={onAnswer} onContinue={onContinue} t={t} />;
 }
 
 function SoundQuestion({ mascot, letter, onAnswer, onContinue, t }) {
-  const options = useMemo(() => { const w = [...mascot.similarLetters].sort(() => Math.random() - 0.5).slice(0, 3); return [letter, ...w].sort(() => Math.random() - 0.5); }, [letter, mascot]);
+  const options = useMemo(() => { const w = [...(mascot.similarLetters || [])].sort(() => Math.random() - 0.5).slice(0, 3); return [letter, ...w].sort(() => Math.random() - 0.5); }, [letter, mascot]);
   useEffect(() => { setTimeout(() => playSound(mascot.soundLong), 400); }, [mascot]);
   return (
     <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="text-center space-y-8 py-4">
@@ -227,7 +227,7 @@ function ApplicationQuestion({ mascot, letter, onAnswer, onContinue, t }) {
 }
 
 function DiscriminationQuestion({ mascot, letter, onAnswer, onContinue, t }) {
-  const options = useMemo(() => { const odd = mascot.similarLetters[0]; return [letter, letter, letter, odd].sort(() => Math.random() - 0.5); }, [letter, mascot]);
+  const options = useMemo(() => { const odd = (mascot.similarLetters && mascot.similarLetters[0]) || 'A'; return [letter, letter, letter, odd].sort(() => Math.random() - 0.5); }, [letter, mascot]);
   const oddIdx = options.findIndex(o => o !== letter);
   const questionText = t('learning.questDiscrimination', { letter });
   useEffect(() => { setTimeout(() => playSound(questionText), 400); }, [questionText]);
