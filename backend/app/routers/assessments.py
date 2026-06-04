@@ -132,6 +132,24 @@ def complete_assessment(
     session.commit()
     session.refresh(assessment)
 
+    # Create notification for parent
+    try:
+        from app.services.notification_service import create_parent_notification
+        from app.models.enums import NotificationType
+
+        child_name = child.name if child else "Your child"
+        msg = f"{child_name} has completed the {assessment.assessment_type.value} assessment with {assessment.accuracy_percentage}% accuracy!"
+        create_parent_notification(
+            session=session,
+            parent_id=parent.Parent_ID,
+            notification_type=NotificationType.assessment_result,
+            message=msg,
+            notification_data={"assessment_id": assessment.Assessment_ID, "child_id": assessment.Child_ID}
+        )
+    except Exception as notif_err:
+        import logging
+        logging.error(f"Failed to create assessment notification: {notif_err}")
+
     # 🎯 AUTOMATICALLY GENERATE ACTIVITIES AFTER ASSESSMENT
     try:
         # Generate activities using AI

@@ -196,9 +196,38 @@ def get_notifications(
     parent: Parents = Depends(get_current_parent),
     session: Session = Depends(get_session),
 ):
-    return session.exec(
+    notifs = session.exec(
         select(Notification).where(Notification.Parent_ID == parent.Parent_ID)
     ).all()
+    
+    if not notifs:
+        # Seed some helpful welcome notifications
+        from app.services.notification_service import create_parent_notification
+        from app.models.enums import NotificationType
+        
+        # 1. Welcome Notification
+        create_parent_notification(
+            session=session,
+            parent_id=parent.Parent_ID,
+            notification_type=NotificationType.support_reply,
+            message="Welcome to BrightBook! Create a child profile to begin their learning journey.",
+            notification_data={}
+        )
+        # 2. Get Started Assessment
+        create_parent_notification(
+            session=session,
+            parent_id=parent.Parent_ID,
+            notification_type=NotificationType.assessment_result,
+            message="Tip: Have your child take the diagnostic assessment to personalize their learning activities.",
+            notification_data={}
+        )
+        
+        # Re-fetch seeded notifications
+        notifs = session.exec(
+            select(Notification).where(Notification.Parent_ID == parent.Parent_ID)
+        ).all()
+        
+    return notifs
 
 
 @router.put("/notifications/{notif_id}/read", response_model=MessageResponse)

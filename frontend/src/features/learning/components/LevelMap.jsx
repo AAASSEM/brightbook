@@ -42,7 +42,7 @@ export function buildLevelList(activities, activityProgress, lang = 'en') {
           // Check for exact letter match and group match
           const letterMatch = content?.letter === letter;
           const groupMatch = a.activity_group === groupKey;
-          const typeMatch = ['meet_letter','hear_sound','trace_write','mini_quest'].includes(a.activity_type);
+          const typeMatch = ['meet_letter','hear_sound','say_yourself','trace_write','mini_quest'].includes(a.activity_type);
           return letterMatch && groupMatch && typeMatch;
         }
       );
@@ -330,7 +330,7 @@ export default function LevelMap({ activities, activityProgress, onSelectActivit
                             const p = activityProgress?.[act.Activity_ID];
                             const done = p?.completion_status === 'completed';
                             const stars = p?.stars_earned || 0;
-                            const typeEmojis = { meet_letter:'👋', hear_sound:'👂', trace_write:'✏️', mini_quest:'⭐', sound_blender:'🎵', word_builder:'🧱', read_match:'📖' };
+                            const typeEmojis = { meet_letter:'👋', hear_sound:'👂', say_yourself:'🎤', trace_write:'✏️', mini_quest:'⭐', sound_blender:'🎵', word_builder:'🧱', read_match:'📖' };
 
                             // Localize name
                             const content = parseContent(act.activity_content);

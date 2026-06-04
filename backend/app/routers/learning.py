@@ -445,6 +445,22 @@ def complete_activity_child(
 
                             print(f"🎉 Child {activity.Child_ID} advanced to level {next_level} based on AI analysis")
 
+                            # Create parent notification for level up
+                            try:
+                                from app.services.notification_service import create_parent_notification
+                                from app.models.enums import NotificationType
+
+                                msg = f"🎉 Great news! {child.name} has advanced to Level {next_level}!"
+                                create_parent_notification(
+                                    session=session,
+                                    parent_id=child.Parent_ID,
+                                    notification_type=NotificationType.level_up,
+                                    message=msg,
+                                    notification_data={"child_id": child.Child_ID, "old_level": current_level, "new_level": next_level}
+                                )
+                            except Exception as notif_err:
+                                print(f"Error creating level-up notification: {notif_err}")
+
                             # 🎯 Generate next level activities using AI
                             try:
                                 print(f"🤖 Generating level {next_level} activities for child {activity.Child_ID}...")
@@ -808,6 +824,23 @@ def check_and_award_achievements(session: Session, child_id: int):
 
     if new_achievements:
         session.commit()
+        try:
+            from app.services.notification_service import create_parent_notification
+            from app.models.enums import NotificationType
+
+            child = session.get(Child, child_id)
+            if child:
+                for ach in new_achievements:
+                    msg = f"🏆 Amazing! {child.name} has unlocked the '{ach.achievement_name}' achievement!"
+                    create_parent_notification(
+                        session=session,
+                        parent_id=child.Parent_ID,
+                        notification_type=NotificationType.achievement_earned,
+                        message=msg,
+                        notification_data={"child_id": child_id, "achievement_name": ach.achievement_name}
+                    )
+        except Exception as notif_err:
+            print(f"Error creating achievement notifications: {notif_err}")
 
     return [{"name": a.achievement_name, "icon": a.badge_icon} for a in new_achievements]
 
