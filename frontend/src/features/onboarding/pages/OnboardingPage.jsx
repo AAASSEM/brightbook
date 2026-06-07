@@ -8,6 +8,39 @@ import { toast } from "@/shared/stores/uiStore";
 import { useT } from "@/shared/stores/langStore";
 import Spinner from "@/shared/components/ui/Spinner";
 
+const getBirthdateLimits = () => {
+  const today = new Date();
+  const maxDate = new Date(today);
+  maxDate.setFullYear(today.getFullYear() - 3);
+  const minDate = new Date(today);
+  minDate.setFullYear(today.getFullYear() - 9);
+  minDate.setDate(minDate.getDate() + 1);
+
+  const formatDate = (d) => {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  return {
+    min: formatDate(minDate),
+    max: formatDate(maxDate),
+  };
+};
+
+const calculateAge = (birthdateStr) => {
+  if (!birthdateStr) return 0;
+  const today = new Date();
+  const birthDate = new Date(birthdateStr);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
 export default function OnboardingPage() {
   const [step, setStep] = useState(0);
   const [child, setChild] = useState(null);
@@ -17,6 +50,7 @@ export default function OnboardingPage() {
   const { setChildren, setSelectedChild } = useChildStore();
   const { register, handleSubmit, formState: { errors, isSubmitting }, setValue } = useForm();
   const t = useT();
+  const limits = getBirthdateLimits();
 
   const STEPS = [
     t("onboarding.createChild"), 
@@ -119,8 +153,24 @@ export default function OnboardingPage() {
                     <label className="label">{t("onboarding.birthday") || "Birthday"}</label>
                     <div className="input-wrap">
                       <span className="material-symbols-outlined">calendar_today</span>
-                      <input {...register("date_of_birth", { required: true })} type="date" className="input" />
+                      <input 
+                        {...register("date_of_birth", { 
+                          required: "Birthday is required",
+                          validate: (val) => {
+                            const age = calculateAge(val);
+                            if (age < 3 || age > 8) {
+                              return t("onboarding.ageLimitError") || "Child must be between 3 and 8 years old";
+                            }
+                            return true;
+                          }
+                        })} 
+                        type="date" 
+                        className="input" 
+                        min={limits.min}
+                        max={limits.max}
+                      />
                     </div>
+                    {errors.date_of_birth && <p className="text-xs mt-1" style={{ color: "#ba1a1a", fontWeight: "bold" }}>{errors.date_of_birth.message}</p>}
                   </div>
                   <div>
                     <label className="label">{t("onboarding.nativeLanguage")}</label>

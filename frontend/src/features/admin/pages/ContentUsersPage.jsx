@@ -282,7 +282,10 @@ export default function ContentUsersPage() {
                       </td>
                       <td>
                         <span className="badge" style={{ background: "#ffdf9e", color: "#785900" }}>
-                          Child #{a.Child_ID}
+                          {(() => {
+                            const child = children.find(c => c.Child_ID === a.Child_ID);
+                            return child ? `${child.name} (#${a.Child_ID})` : `Child #${a.Child_ID}`;
+                          })()}
                         </span>
                       </td>
                       <td>

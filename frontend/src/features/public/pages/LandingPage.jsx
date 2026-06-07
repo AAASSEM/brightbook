@@ -175,7 +175,7 @@ export default function LandingPage() {
               {t("landing.login")}
             </button>
             <button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/login", { state: { tab: "register" } })}
               className="bg-[#006e1c] text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-green-700/20 hover:bg-[#005215] hover:scale-105 active:scale-95 transition-all"
             >
               {t("landing.joinNow")}
@@ -210,7 +210,7 @@ export default function LandingPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
             <button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/login", { state: { tab: "register" } })}
               className="kid-btn text-xl py-4.5 px-10 shadow-xl shadow-green-700/20 hover:scale-105 active:scale-98 transition-all"
             >
               {t("landing.getStarted")}
@@ -473,7 +473,7 @@ export default function LandingPage() {
             </p>
             <div>
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/login", { state: { tab: "register" } })}
                 className="bg-white text-[#17305a] px-10 py-5 rounded-full font-black text-lg sm:text-xl hover:scale-105 active:scale-97 transition-all shadow-xl hover:bg-blue-50/90"
               >
                 {t("landing.startFreeTrial")}

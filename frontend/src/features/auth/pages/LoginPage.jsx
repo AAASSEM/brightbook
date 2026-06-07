@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
@@ -26,7 +26,9 @@ const registerSchema = z.object({
 });
 
 export default function LoginPage() {
-  const [tab, setTab] = useState("login");
+  const location = useLocation();
+  const initialTab = location.state?.tab || "login";
+  const [tab, setTab] = useState(initialTab);
   const navigate = useNavigate();
   const { login } = useAuthStore();
   const t = useT();

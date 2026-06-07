@@ -164,6 +164,7 @@ class ActivityRead(BaseModel):
     activity_group: Optional[str] = None
     mascot_character: Optional[str] = None
     is_boss_level: bool = False
+    Child_ID: Optional[int] = None
 
     @field_validator('activity_content', mode='before')
     @classmethod

@@ -43,6 +43,9 @@ def create_child(
             (today.month, today.day) < (data.date_of_birth.month, data.date_of_birth.day)
         )
 
+    if age is None or age < 3 or age > 8:
+        raise HTTPException(status_code=400, detail="Child age must be between 3 and 8 years old.")
+
     child = Child(
         name=data.name,
         date_of_birth=data.date_of_birth,
@@ -103,8 +106,29 @@ def update_child(
     if not child or child.Parent_ID != parent.Parent_ID:
         raise HTTPException(status_code=404, detail="Child not found")
 
+    # Validate age requirements if date_of_birth or age are updated
+    temp_dob = data.date_of_birth if data.date_of_birth is not None else child.date_of_birth
+    if temp_dob:
+        from datetime import date
+        today = date.today()
+        calculated_age = today.year - temp_dob.year - (
+            (today.month, today.day) < (temp_dob.month, temp_dob.day)
+        )
+        if calculated_age < 3 or calculated_age > 8:
+            raise HTTPException(status_code=400, detail="Child age must be between 3 and 8 years old.")
+        child.age = calculated_age
+    elif data.age is not None:
+        if data.age < 3 or data.age > 8:
+            raise HTTPException(status_code=400, detail="Child age must be between 3 and 8 years old.")
+        child.age = data.age
+
     for field, value in data.model_dump(exclude_unset=True).items():
+        if field in ("age", "date_of_birth"):
+            continue
         setattr(child, field, value)
+
+    if data.date_of_birth is not None:
+        child.date_of_birth = data.date_of_birth
 
     session.add(child)
     session.commit()

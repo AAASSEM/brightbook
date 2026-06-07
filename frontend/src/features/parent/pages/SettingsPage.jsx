@@ -9,6 +9,39 @@ import { useNavigate } from "react-router-dom";
 import Spinner from "@/shared/components/ui/Spinner";
 import ConfirmationModal from "@/shared/components/ui/ConfirmationModal";
 
+const getBirthdateLimits = () => {
+  const today = new Date();
+  const maxDate = new Date(today);
+  maxDate.setFullYear(today.getFullYear() - 3);
+  const minDate = new Date(today);
+  minDate.setFullYear(today.getFullYear() - 9);
+  minDate.setDate(minDate.getDate() + 1);
+
+  const formatDate = (d) => {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  return {
+    min: formatDate(minDate),
+    max: formatDate(maxDate),
+  };
+};
+
+const calculateAge = (birthdateStr) => {
+  if (!birthdateStr) return 0;
+  const today = new Date();
+  const birthDate = new Date(birthdateStr);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
 export default function SettingsPage() {
   const [tab, setTab] = useState("account");
   const [children, setChildren] = useState([]);
@@ -19,6 +52,7 @@ export default function SettingsPage() {
   const navigate = useNavigate();
   const t = useT();
   const { lang, setLang } = useLangStore();
+  const limits = getBirthdateLimits();
 
   // Notification states
   const [notificationPrefs, setNotificationPrefs] = useState(null);
@@ -153,6 +187,10 @@ export default function SettingsPage() {
   const handleCreateChild = async () => {
     if (!newChildForm.name || !newChildForm.date_of_birth) {
       return toast.error("Name and Date of Birth are required");
+    }
+    const age = calculateAge(newChildForm.date_of_birth);
+    if (age < 3 || age > 8) {
+      return toast.error(t("onboarding.ageLimitError") || "Child must be between 3 and 8 years old");
     }
     try {
       const res = await api.post("/api/children/", newChildForm);
@@ -537,6 +575,8 @@ export default function SettingsPage() {
                     className="input" 
                     value={newChildForm.date_of_birth} 
                     onChange={(e) => setNewChildForm({ ...newChildForm, date_of_birth: e.target.value })} 
+                    min={limits.min}
+                    max={limits.max}
                   />
                 </div>
                 <div>
