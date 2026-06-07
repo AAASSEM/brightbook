@@ -174,6 +174,9 @@ def complete_assessment(
                 difficulty_str = activity_data.get("difficulty_level", "beginner")
                 difficulty_level = DifficultyLevel(difficulty_str)
 
+                is_arabic = (child.native_language if child else "English").lower() in ["arabic", "ar"]
+                expected_group = f"arabic_group_{ai_result['dyslexia_level']}" if is_arabic else f"group_{ai_result['dyslexia_level']}"
+
                 new_activity = Activity(
                     activity_name=activity_data["activity_name"],
                     activity_type=activity_type,
@@ -182,7 +185,7 @@ def complete_assessment(
                     activity_content=activity_data.get("activity_content", {}),
                     estimated_duration_minutes=activity_data.get("estimated_duration_minutes", 10),
                     Child_ID=activity_data["Child_ID"],
-                    activity_group=activity_data.get("activity_group", "group_1"),
+                    activity_group=expected_group,
                     mascot_character=activity_data.get("mascot_character", "Learning Friend"),
                     is_boss_level=activity_data.get("is_boss_level", False)
                 )

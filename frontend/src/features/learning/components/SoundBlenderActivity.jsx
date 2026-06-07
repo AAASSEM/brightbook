@@ -101,7 +101,7 @@ export default function SoundBlenderActivity({ content, onComplete }) {
 }
 
 function SBIntroPhase({ mascot, word, onContinue, t }) {
-  useEffect(() => { setTimeout(() => playSound(t('learning.blenderTitle')), 400); }, [t]);
+  useEffect(() => { setTimeout(() => playSound(t('learning.blenderTitle')), 400); }, []);
   return (
     <motion.div initial={{opacity:0,scale:0.9}} animate={{opacity:1,scale:1}} exit={{opacity:0}} className="text-center space-y-8 py-8">
       <motion.div animate={{y:[0,-20,0]}} transition={{duration:2,repeat:Infinity}} className="text-9xl">{mascot.emoji}</motion.div>

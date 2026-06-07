@@ -114,7 +114,7 @@ export default function ActivityPlayer({ activity, childId, onComplete, onCancel
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
-        className="bg-white rounded-[32px] max-w-4xl w-full h-[85vh] overflow-hidden shadow-2xl flex flex-col mx-4"
+        className="bg-white rounded-none sm:rounded-[32px] max-w-4xl w-full h-full sm:h-[85vh] overflow-hidden shadow-2xl flex flex-col sm:mx-4"
       >
         {/* Header */}
         <div className="flex items-center gap-4 p-4 border-b-2" style={{ borderColor: "#eff6e7" }}>

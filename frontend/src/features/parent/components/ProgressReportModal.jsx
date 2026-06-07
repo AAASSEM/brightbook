@@ -80,7 +80,9 @@ export default function ProgressReportModal({ child, onClose }) {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.get(`/api/learning/progress-report/${child.Child_ID}`);
+      const response = await api.get(`/api/learning/progress-report/${child.Child_ID}`, {
+        timeout: 60000 // 60 seconds timeout for AI generation
+      });
       setReport(response.data);
     } catch (err) {
       console.error("Error loading progress report:", err);
@@ -118,7 +120,7 @@ export default function ProgressReportModal({ child, onClose }) {
             className="px-6 py-3 rounded-xl font-semibold"
             style={{ background: "#006e1c", color: "white" }}
           >
-            {t("onboarding.close")}
+            {t("common.back")}
           </button>
         </div>
       </div>

@@ -66,7 +66,7 @@ class ClaudeModels:
             messages.append({"role": "user", "content": str(contents)})
 
         # Standard Claude Model
-        claude_model = "claude-3-haiku-20240307"
+        claude_model = "claude-haiku-4-5"
         
         headers = {
             "x-api-key": self.api_key,
@@ -117,7 +117,7 @@ def get_gemini_client():
     # Reload settings dynamically from .env
     reload_settings()
 
-    current_key = settings.GEMINI_API_KEY
+    current_key = settings.ANTHROPIC_API_KEY or settings.GEMINI_API_KEY
     if _client is None or _client_api_key != current_key:
         if current_key and current_key.strip().startswith("sk-"):
             _client = ClaudeClient(current_key.strip())
@@ -769,12 +769,12 @@ def generate_activities_for_child(
 
     {completed_summary}
 
-    Available Activity Types: {', '.join([t.value for t in ActivityType])}
+    Available Activity Types: 'meet_letter', 'hear_sound', 'trace_write', 'mini_quest', 'sound_blender', 'word_builder', 'read_match', 'say_yourself'
 
     EMOJI MAPPING FOR CURRENT LETTERS (CRITICAL - USE THESE EXACT EMOJIS):
     {json.dumps(emoji_mapping, indent=2)}
 
-    Create 20-30 specific learning activities personalized for this child. Focus on VARIETY and NO Repetition.
+    Create 5-8 specific learning activities personalized for this child. Focus on VARIETY and NO Repetition.
 
     Respond ONLY in valid JSON format:
     {{

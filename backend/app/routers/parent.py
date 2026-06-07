@@ -114,14 +114,41 @@ def get_dashboard(
             for a in achievements[-5:]
         ]
 
-        # Weekly scores (simplified — last 7 assessments)
-        assessments = session.exec(
-            select(Assessment).where(Assessment.Child_ID == child_id)
-        ).all()
-        weekly_scores = [
-            {"date": str(a.assessment_date), "score": int(a.accuracy_percentage)}
-            for a in assessments[-7:]
-        ]
+        # Weekly activity data — count completed activities per day of the current week
+        from datetime import date, timedelta
+        today = date.today()
+        # Monday of the current week
+        monday = today - timedelta(days=today.weekday())
+
+        weekly_scores = []
+        if progress_read:
+            from app.models.models import ActivityProgress as AP
+            completed_aps = session.exec(
+                select(AP).where(
+                    AP.progress_id == child_prog.progress_id,
+                    AP.completion_status == "completed"
+                )
+            ).all()
+
+            # Build per-day counts for the current week (Mon–Sun)
+            for day_offset in range(7):
+                day = monday + timedelta(days=day_offset)
+                # Count activities completed on this date
+                day_count = sum(
+                    1 for ap in completed_aps
+                    if getattr(ap, "completed_at", None) and str(getattr(ap, "completed_at", ""))[:10] == str(day)
+                )
+                weekly_scores.append({"date": str(day), "score": day_count})
+
+        # If no activity-level dates stored, fall back to assessment scores
+        if not any(ws["score"] > 0 for ws in weekly_scores):
+            assessments = session.exec(
+                select(Assessment).where(Assessment.Child_ID == child_id)
+            ).all()
+            weekly_scores = [
+                {"date": str(a.assessment_date), "score": int(a.accuracy_percentage)}
+                for a in assessments[-7:]
+            ]
 
         # AI recommendations removed from dashboard load to make it fast
         recommendations = []

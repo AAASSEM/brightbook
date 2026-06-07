@@ -152,11 +152,22 @@ export default function ParentDashboardPage() {
   const { child, progress, recent_achievements, weekly_scores } = dashboard;
 
   // Build weekly chart data - properly map assessment dates to days of the week
-  const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
-  const dayMapping = { 0: "S", 1: "M", 2: "T", 3: "W", 4: "T", 5: "F", 6: "S" };
+  // Use full day names as unique keys to avoid JS object duplicate-key collisions (e.g. two "T"s, two "S"s)
+  const weekConfig = [
+    { key: "Mon", label: "M" },
+    { key: "Tue", label: "T" },
+    { key: "Wed", label: "W" },
+    { key: "Thu", label: "T" },
+    { key: "Fri", label: "F" },
+    { key: "Sat", label: "S" },
+    { key: "Sun", label: "S" },
+  ];
+  // dayOfWeek index (0=Sun..6=Sat) → weekConfig index
+  const jsToWeekIdx = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 0: 6 };
 
-  // Create a map to store scores by day of the week
-  const scoresByDay = { "M": 0, "T": 0, "W": 0, "T": 0, "F": 0, "S": 0, "S": 0 };
+  // Initialise scores per unique day key
+  const scoresByDay = {};
+  weekConfig.forEach(d => { scoresByDay[d.key] = 0; });
 
   // Map weekly_scores to the correct day based on assessment date
   if (weekly_scores && Array.isArray(weekly_scores)) {
@@ -164,13 +175,11 @@ export default function ParentDashboardPage() {
       if (scoreEntry.date) {
         try {
           const assessmentDate = new Date(scoreEntry.date);
-          const dayOfWeek = assessmentDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
-
-          // Map the day index to our week day letter
-          const dayLetter = dayMapping[dayOfWeek];
-          if (dayLetter && scoresByDay.hasOwnProperty(dayLetter)) {
-            // For duplicate days, use the higher score
-            scoresByDay[dayLetter] = Math.max(scoresByDay[dayLetter], scoreEntry.score || 0);
+          const dayOfWeek = assessmentDate.getDay(); // 0 = Sunday … 6 = Saturday
+          const idx = jsToWeekIdx[dayOfWeek];
+          if (idx !== undefined) {
+            const dayKey = weekConfig[idx].key;
+            scoresByDay[dayKey] = Math.max(scoresByDay[dayKey], scoreEntry.score || 0);
           }
         } catch (e) {
           console.error("Invalid date format:", scoreEntry.date);
@@ -179,9 +188,9 @@ export default function ParentDashboardPage() {
     });
   }
 
-  const chartData = weekDays.map((day) => ({
-    day,
-    score: scoresByDay[day] ?? 0,
+  const chartData = weekConfig.map(d => ({
+    day: d.label,
+    score: scoresByDay[d.key] ?? 0,
   }));
 
 
@@ -228,7 +237,7 @@ export default function ParentDashboardPage() {
         {/* Left Column (Main Stats) */}
         <div className="lg:col-span-2 space-y-6">
           {/* Stats cards */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               {
                 icon: "local_fire_department",

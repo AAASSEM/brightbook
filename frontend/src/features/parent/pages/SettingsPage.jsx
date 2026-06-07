@@ -548,8 +548,6 @@ export default function SettingsPage() {
                   >
                     <option value="English">English</option>
                     <option value="Arabic">Arabic</option>
-                    <option value="Spanish">Spanish</option>
-                    <option value="French">French</option>
                   </select>
                 </div>
                 <div className="flex gap-3 pt-2">
@@ -589,7 +587,7 @@ export default function SettingsPage() {
                     {subscription.subscription_status}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{t("settings.startDate")}</p>
                     <p className="text-sm font-semibold">{subscription.startDate || "—"}</p>

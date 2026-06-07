@@ -366,27 +366,29 @@ def complete_activity_child(
                     child_progress.current_letter_group = activity.activity_group
 
         # 🚀 BOSS LEVEL / EVALUATION LOGIC - AI DRIVEN
-        if activity.is_boss_level and performance["passed"]:
-            # Check if all activities in this group are completed
-            all_group_activities = session.exec(
+        is_completed_activity_boss = activity.is_boss_level or activity.activity_type in ["sound_blender", "word_builder", "read_match"]
+        if is_completed_activity_boss and performance["passed"]:
+            # Find all boss activities in this group (aligned with frontend's boss definition)
+            boss_activities = session.exec(
                 select(Activity).where(
                     Activity.Child_ID == activity.Child_ID,
-                    Activity.activity_group == activity.activity_group
+                    Activity.activity_group == activity.activity_group,
+                    Activity.activity_type.in_(["sound_blender", "word_builder", "read_match"])
                 )
             ).all()
 
-            activity_ids = [a.Activity_ID for a in all_group_activities]
+            boss_activity_ids = [a.Activity_ID for a in boss_activities]
 
-            completed_progress = session.exec(
+            completed_boss_progress = session.exec(
                 select(ActivityProgress).where(
                     ActivityProgress.progress_id == progress.progress_id,
-                    ActivityProgress.activity_id.in_(activity_ids),
+                    ActivityProgress.activity_id.in_(boss_activity_ids),
                     ActivityProgress.completion_status == "completed"
                 )
             ).all()
 
-            # If all activities in the group are completed, use AI to decide next steps
-            if len(completed_progress) >= len(activity_ids):
+            # If all boss activities in the group are completed, use AI to decide next steps
+            if len(boss_activity_ids) > 0 and len(completed_boss_progress) >= len(boss_activity_ids):
                 current_group = activity.activity_group
 
                 try:
@@ -738,9 +740,9 @@ def check_and_award_achievements(session: Session, child_id: int):
     # ACHIEVEMENT BADGES (5) - Based on completing stages/levels
     # ═══════════════════════════════════════════════════════════════════════
 
-    # 🌱 First Steps: Complete Level 1
-    if "First Steps" not in current_names and current_level >= 2:
-        ach = Achievement(achievement_name="First Steps", description="Complete Level 1", badge_icon="🌱", Child_ID=child_id)
+    # 🌱 First Steps: Complete first activity
+    if "First Steps" not in current_names and total_completed >= 1:
+        ach = Achievement(achievement_name="First Steps", description="Complete first activity", badge_icon="🌱", Child_ID=child_id)
         session.add(ach)
         new_achievements.append(ach)
 

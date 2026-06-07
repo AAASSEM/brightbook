@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { translations } from "../i18n/translations";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useCallback } from "react";
 
 export const ChildLanguageContext = createContext(null);
 
@@ -18,11 +18,8 @@ export const useLangStore = create(
 
       // t("auth.login") -> "Log In" or "تسجيل الدخول"
       t: (key, vars = {}, fallback = null) => {
-        const { lang } = get();
         const parts = key.split(".");
-        
-        // 1. Try current language
-        let obj = translations[lang];
+        let obj = translations[get().lang];
         if (obj) {
           for (const part of parts) {
             obj = obj?.[part];
@@ -30,8 +27,7 @@ export const useLangStore = create(
           }
         }
 
-        // 2. Fallback to English if not found and current is not English
-        if (obj === undefined && lang !== "en") {
+        if (obj === undefined && get().lang !== "en") {
           obj = translations["en"];
           for (const part of parts) {
             obj = obj?.[part];
@@ -46,19 +42,12 @@ export const useLangStore = create(
           });
           return res;
         }
-        
-        // 3. Use provided fallback or return the key itself
+
         return fallback || key;
       },
     }),
     {
       name: "brightbook-lang",
-      onRehydrateStorage: () => (state) => {
-        if (state?.lang) {
-          document.documentElement.dir = state.lang === "ar" ? "rtl" : "ltr";
-          document.documentElement.lang = state.lang;
-        }
-      },
     }
   )
 );
@@ -76,39 +65,42 @@ export const useT = () => {
   const storeT = useLangStore((s) => s.t);
   const childLang = useContext(ChildLanguageContext);
 
-  if (childLang) {
-    return (key, vars = {}, fallback = null) => {
-      const parts = key.split(".");
-      
-      // 1. Try child language
-      let obj = translations[childLang];
-      if (obj) {
-        for (const part of parts) {
-          obj = obj?.[part];
-          if (obj === undefined) break;
+  return useCallback(
+    (key, vars = {}, fallback = null) => {
+      if (childLang) {
+        const parts = key.split(".");
+        
+        // 1. Try child language
+        let obj = translations[childLang];
+        if (obj) {
+          for (const part of parts) {
+            obj = obj?.[part];
+            if (obj === undefined) break;
+          }
         }
-      }
 
-      // 2. Fallback to English
-      if (obj === undefined && childLang !== "en") {
-        obj = translations["en"];
-        for (const part of parts) {
-          obj = obj?.[part];
-          if (obj === undefined) break;
+        // 2. Fallback to English
+        if (obj === undefined && childLang !== "en") {
+          obj = translations["en"];
+          for (const part of parts) {
+            obj = obj?.[part];
+            if (obj === undefined) break;
+          }
         }
+
+        if (typeof obj === "string") {
+          let res = obj;
+          Object.entries(vars).forEach(([k, v]) => {
+            res = res.replace(`{${k}}`, v);
+          });
+          return res;
+        }
+        
+        return fallback || key;
       }
 
-      if (typeof obj === "string") {
-        let res = obj;
-        Object.entries(vars).forEach(([k, v]) => {
-          res = res.replace(`{${k}}`, v);
-        });
-        return res;
-      }
-      
-      return fallback || key;
-    };
-  }
-
-  return storeT;
+      return storeT(key, vars, fallback);
+    },
+    [storeT, childLang]
+  );
 };

@@ -102,19 +102,31 @@ export const translations = {
       achievementsList: {
         // Achievement Badges (5)
         firstSteps: "First Steps",
+        firstStepsDesc: "Complete first activity",
         letterHero: "Letter Hero",
+        letterHeroDesc: "Complete Stage 1",
         soundDetective: "Sound Detective",
+        soundDetectiveDesc: "Complete Stage 2",
         wordBuilder: "Word Builder",
+        wordBuilderDesc: "Complete Stage 3",
         readingStar: "Reading Star",
+        readingStarDesc: "Complete Stage 4",
         // Performance Badges (4)
         speedReader: "Speed Reader",
+        speedReaderDesc: "3 levels with fastest tier",
         perfectScore: "Perfect Score",
+        perfectScoreDesc: "5 levels with ⭐⭐⭐",
         sharpShooter: "Sharp Shooter",
+        sharpShooterDesc: "10 questions correct in a row",
         wiseOwl: "Wise Owl",
+        wiseOwlDesc: "3-star rating on stage evaluation",
         // Habit Badges (3)
         threeDayStreak: "3-Day Streak",
+        threeDayStreakDesc: "Play 3 days in a row",
         weeklyWarrior: "Weekly Warrior",
-        dedicatedLearner: "Dedicated Learner"
+        weeklyWarriorDesc: "Play 7 days in a row",
+        dedicatedLearner: "Dedicated Learner",
+        dedicatedLearnerDesc: "Play 20 total days"
       }
     },
     parent: {
@@ -614,19 +626,31 @@ export const translations = {
       achievementsList: {
         // Achievement Badges (5)
         firstSteps: "الخطوات الأولى",
+        firstStepsDesc: "أكمل النشاط الأول",
         letterHero: "بطل الحروف",
+        letterHeroDesc: "أكمل المرحلة الأولى",
         soundDetective: "محقق الأصوات",
+        soundDetectiveDesc: "أكمل المرحلة الثانية",
         wordBuilder: "بانِي الكلمات",
+        wordBuilderDesc: "أكمل المرحلة الثالثة",
         readingStar: "نجم القراءة",
+        readingStarDesc: "أكمل المرحلة الرابعة",
         // Performance Badges (4)
         speedReader: "قارئ سريع",
+        speedReaderDesc: "٣ مستويات مع أسرع فئة",
         perfectScore: "نتيجة مثالية",
+        perfectScoreDesc: "٥ مستويات مع ⭐⭐⭐",
         sharpShooter: "قناص ماهر",
+        sharpShooterDesc: "١٠ أسئلة صحيحة متتالية",
         wiseOwl: "بوم حكيم",
+        wiseOwlDesc: "تقييم ٣ نجوم في تقييم المرحلة",
         // Habit Badges (3)
         threeDayStreak: "إنجاز 3 أيام",
+        threeDayStreakDesc: "العب ٣ أيام متتالية",
         weeklyWarrior: "محارب أسبوعي",
-        dedicatedLearner: "متعلم مdedicated"
+        weeklyWarriorDesc: "العب ٧ أيام متتالية",
+        dedicatedLearner: "متعلم مdedicated",
+        dedicatedLearnerDesc: "العب ٢٠ يوماً في المجموع"
       }
     },
     parent: {

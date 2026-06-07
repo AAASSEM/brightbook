@@ -30,29 +30,33 @@ export default function ChildDashboardPage() {
 
   const ALL_ACHIEVEMENTS = [
     // Achievement Badges (5)
-    { name: t("child.achievementsList.firstSteps"), emoji: "🌱", color: "#ffdf9e", iconColor: "#785900", description: "Complete Level 1" },
-    { name: t("child.achievementsList.letterHero"), emoji: "🔤", color: "#e8f5e9", iconColor: "#2e7d32", description: "Complete Stage 1" },
-    { name: t("child.achievementsList.soundDetective"), emoji: "🔊", color: "#d1e4ff", iconColor: "#0061a4", description: "Complete Stage 2" },
-    { name: t("child.achievementsList.wordBuilder"), emoji: "🧱", color: "#f3e5f5", iconColor: "#ab47bc", description: "Complete Stage 3" },
-    { name: t("child.achievementsList.readingStar"), emoji: "⭐", color: "#fff9c4", iconColor: "#ff6d00", description: "Complete Stage 4" },
+    { name: t("child.achievementsList.firstSteps"), emoji: "🌱", color: "#ffdf9e", iconColor: "#785900", description: t("child.achievementsList.firstStepsDesc") },
+    { name: t("child.achievementsList.letterHero"), emoji: "🔤", color: "#e8f5e9", iconColor: "#2e7d32", description: t("child.achievementsList.letterHeroDesc") },
+    { name: t("child.achievementsList.soundDetective"), emoji: "🔊", color: "#d1e4ff", iconColor: "#0061a4", description: t("child.achievementsList.soundDetectiveDesc") },
+    { name: t("child.achievementsList.wordBuilder"), emoji: "🧱", color: "#f3e5f5", iconColor: "#ab47bc", description: t("child.achievementsList.wordBuilderDesc") },
+    { name: t("child.achievementsList.readingStar"), emoji: "⭐", color: "#fff9c4", iconColor: "#ff6d00", description: t("child.achievementsList.readingStarDesc") },
     // Performance Badges (4)
-    { name: t("child.achievementsList.speedReader"), emoji: "⚡", color: "#ffecb3", iconColor: "#ff8f00", description: "3 levels with fastest tier" },
-    { name: t("child.achievementsList.perfectScore"), emoji: "💯", color: "#c8e6c9", iconColor: "#388e3c", description: "5 levels with ⭐⭐⭐" },
-    { name: t("child.achievementsList.sharpShooter"), emoji: "🎯", color: "#b39ddb", iconColor: "#5e35b1", description: "10 questions correct in a row" },
-    { name: t("child.achievementsList.wiseOwl"), emoji: "🦉", color: "#b3e5fc", iconColor: "#0277bd", description: "3-star rating on stage evaluation" },
+    { name: t("child.achievementsList.speedReader"), emoji: "⚡", color: "#ffecb3", iconColor: "#ff8f00", description: t("child.achievementsList.speedReaderDesc") },
+    { name: t("child.achievementsList.perfectScore"), emoji: "💯", color: "#c8e6c9", iconColor: "#388e3c", description: t("child.achievementsList.perfectScoreDesc") },
+    { name: t("child.achievementsList.sharpShooter"), emoji: "🎯", color: "#b39ddb", iconColor: "#5e35b1", description: t("child.achievementsList.sharpShooterDesc") },
+    { name: t("child.achievementsList.wiseOwl"), emoji: "🦉", color: "#b3e5fc", iconColor: "#0277bd", description: t("child.achievementsList.wiseOwlDesc") },
     // Habit Badges (3)
-    { name: t("child.achievementsList.threeDayStreak"), emoji: "🔥", color: "#ffccbc", iconColor: "#d84315", description: "Play 3 days in a row" },
-    { name: t("child.achievementsList.weeklyWarrior"), emoji: "📅", color: "#ffccbc", iconColor: "#d84315", description: "Play 7 days in a row" },
-    { name: t("child.achievementsList.dedicatedLearner"), emoji: "💎", color: "#e1bee7", iconColor: "#7b1fa2", description: "Play 20 total days" },
+    { name: t("child.achievementsList.threeDayStreak"), emoji: "🔥", color: "#ffccbc", iconColor: "#d84315", description: t("child.achievementsList.threeDayStreakDesc") },
+    { name: t("child.achievementsList.weeklyWarrior"), emoji: "📅", color: "#ffccbc", iconColor: "#d84315", description: t("child.achievementsList.weeklyWarriorDesc") },
+    { name: t("child.achievementsList.dedicatedLearner"), emoji: "💎", color: "#e1bee7", iconColor: "#7b1fa2", description: t("child.achievementsList.dedicatedLearnerDesc") },
   ];
 
   useEffect(() => {
     if (selectedChild) loadData();
-  }, [selectedChild]);
+  }, [selectedChild?.Child_ID]);
 
   const loadData = async () => {
     setLoading(true);
     try {
+      // Refresh child profile to keep level/name/age in sync with database
+      const childRes = await api.get(`/api/children/${selectedChild.Child_ID}`);
+      useChildStore.getState().updateChild(childRes.data);
+
       const [activitiesRes, progressRes, achievementsRes] = await Promise.allSettled([
         learningService.getChildActivities(selectedChild.Child_ID),
         learningService.getChildProgress(selectedChild.Child_ID),

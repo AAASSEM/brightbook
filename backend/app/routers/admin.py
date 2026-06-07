@@ -420,10 +420,17 @@ def get_ai_status(admin: Admin = Depends(get_current_admin), session: Session = 
     try:
         from app.config.settings import settings
         from app.services.ai_metrics import ai_metrics
-        from app.services.ai_service import client, GEMINI_MODEL
+        from app.services.ai_service import client, get_gemini_client
 
         # 1. Configuration check
-        gemini_configured = bool(settings.GEMINI_API_KEY and settings.GEMINI_API_KEY != "")
+        anthropic_configured = bool(settings.ANTHROPIC_API_KEY and settings.ANTHROPIC_API_KEY.strip() != "")
+        gemini_configured = bool(settings.GEMINI_API_KEY and settings.GEMINI_API_KEY.strip() != "")
+        ai_configured = anthropic_configured or gemini_configured
+        
+        provider = "Anthropic Claude" if anthropic_configured else ("Google Gemini" if gemini_configured else "Not configured")
+        
+        # Determine the model being used
+        active_model = "claude-haiku-4-5" if anthropic_configured else "models/gemini-2.0-flash"
 
         # 2. Real metrics from in-memory tracker
         metrics = ai_metrics.get_metrics()
@@ -441,12 +448,12 @@ def get_ai_status(admin: Admin = Depends(get_current_admin), session: Session = 
         ai_error_message = None
         ai_error_type = None
 
-        if gemini_configured:
+        if ai_configured:
             try:
                 import time
                 _start = time.perf_counter()
                 client.models.generate_content(
-                    model=GEMINI_MODEL,
+                    model=active_model,
                     contents="Reply with just the word OK"
                 )
                 ai_reachable = True
@@ -468,12 +475,12 @@ def get_ai_status(admin: Admin = Depends(get_current_admin), session: Session = 
                     ai_error_message = err_str[:200]
 
         return {
-            "api_configured": gemini_configured,
+            "api_configured": ai_configured,
             "ai_reachable": ai_reachable,
             "ai_error_type": ai_error_type,
             "ai_error_message": ai_error_message,
-            "ai_provider": "Google Gemini" if gemini_configured else "Not configured",
-            "ai_model": GEMINI_MODEL,
+            "ai_provider": provider,
+            "ai_model": active_model,
             "api_calls_today": metrics["calls_today"],
             "success_rate": metrics["success_rate"],
             "failures_today": metrics["failures_today"],
@@ -485,3 +492,39 @@ def get_ai_status(admin: Admin = Depends(get_current_admin), session: Session = 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting AI status: {str(e)}")
 
+
+from pydantic import BaseModel
+from typing import Optional
+
+class APIKeysConfig(BaseModel):
+    anthropic_api_key: Optional[str] = None
+    gemini_api_key: Optional[str] = None
+
+@router.post("/config/api-keys")
+def update_api_keys(config: APIKeysConfig, admin: Admin = Depends(get_current_admin)):
+    """Update API keys in the .env file and reload settings."""
+    try:
+        from dotenv import set_key
+        from pathlib import Path
+        import os
+        from app.config.settings import reload_settings
+        from app.services.ai_service import get_gemini_client
+        
+        env_path = Path(".env")
+        if not env_path.exists():
+            env_path.touch()
+            
+        if config.anthropic_api_key is not None:
+            set_key(str(env_path), "ANTHROPIC_API_KEY", config.anthropic_api_key.strip())
+        if config.gemini_api_key is not None:
+            set_key(str(env_path), "GEMINI_API_KEY", config.gemini_api_key.strip())
+            
+        # Reload settings into memory
+        reload_settings()
+        
+        # Force recreation of AI client with new keys
+        get_gemini_client()
+        
+        return {"success": True, "message": "API keys updated successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update API keys: {str(e)}")

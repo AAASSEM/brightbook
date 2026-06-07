@@ -167,7 +167,7 @@ function BuildChallenge({ mascot, challenge, difficulty, onComplete, t, lang }) 
     setAvailable(allLetters);
     setAttempts(0); setHintsUsed(0); setIsCorrect(false); setShowWrong(false);
     setTimeout(() => playSound(t('learning.buildWord')), 400);
-  }, [challenge, difficulty, t]);
+  }, [challenge, difficulty]);
 
   const handleLetterTap = (lo) => {
     if (lo.used || isCorrect) return;

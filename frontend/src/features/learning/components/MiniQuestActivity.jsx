@@ -84,7 +84,7 @@ export default function MiniQuestActivity({ content, onComplete }) {
 }
 
 function IntroPhase({ mascot, letter, onContinue, t }) {
-  useEffect(() => { const timer = setTimeout(() => playSound(t('learning.readyStarChallenge')), 400); return () => clearTimeout(timer); }, [t]);
+  useEffect(() => { const timer = setTimeout(() => playSound(t('learning.readyStarChallenge')), 400); return () => clearTimeout(timer); }, []);
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }} className="text-center space-y-8 py-8">
       <motion.div animate={{ y: [0, -20, 0], rotate: [-5, 5, -5] }} transition={{ duration: 2, repeat: Infinity }} className="text-9xl">{mascot.emoji}</motion.div>
@@ -177,7 +177,7 @@ function ApplicationQuestion({ mascot, letter, onAnswer, onContinue, t }) {
     return [cw, ...ww].sort(() => Math.random() - 0.5);
   }, [mascot]);
 
-  useEffect(() => { setTimeout(() => playSound(t('learning.questApplication', { sound: mascot.sound })), 400); }, [mascot, t]);
+  useEffect(() => { setTimeout(() => playSound(t('learning.questApplication', { sound: mascot.sound })), 400); }, [mascot]);
 
   const [feedback, setFeedback] = useState(null);
   const [attempts, setAttempts] = useState(0);

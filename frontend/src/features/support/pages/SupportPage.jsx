@@ -89,7 +89,7 @@ export default function SupportPage() {
       </div>
 
       {/* Stats Summary */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="stat-card flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ background: "#ffdf9e" }}>
             <span className="material-symbols-outlined" style={{ color: "#785900", fontSize: "28px", fontVariationSettings: "'FILL' 1" }}>support_agent</span>
@@ -128,7 +128,7 @@ export default function SupportPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="label">{t("support.category")}</label>
                   <div className="input-wrap">

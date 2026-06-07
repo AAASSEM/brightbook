@@ -69,9 +69,9 @@ export default function OnboardingPage() {
   };
 
   const plans = [
-    { id: "basic", name: "Basic", price: "$9.99/mo", features: ["1 child", "All activities", "Progress tracking"], color: "#becab9", bg: "#ffffff" },
-    { id: "family", name: "Family", price: "$14.99/mo", features: ["Up to 4 children", "AI tips", "Priority support"], popular: true, color: "#4caf50", bg: "#f5fced" },
-    { id: "annual", name: "Annual", price: "$99.99/yr", features: ["All features", "Save 44%", "PDF reports"], color: "#006e1c", bg: "#e9f0e1" },
+    { id: "basic", name: "Basic", price: "250 EGP/mo", features: ["1 child", "All activities", "7-day free trial"], color: "#becab9", bg: "#ffffff" },
+    { id: "family", name: "Family", price: "450 EGP/mo", features: ["Up to 3 children", "AI tips", "7-day free trial"], popular: true, color: "#4caf50", bg: "#f5fced" },
+    { id: "annual", name: "Annual", price: "4,800 EGP/yr", features: ["All features", "~11% saving", "7-day free trial"], color: "#006e1c", bg: "#e9f0e1" },
   ];
 
   return (
@@ -129,8 +129,6 @@ export default function OnboardingPage() {
                       <select {...register("native_language")} className="input" style={{ appearance: "none", cursor: "pointer" }}>
                         <option value="English">English</option>
                         <option value="Arabic">Arabic</option>
-                        <option value="French">French</option>
-                        <option value="Spanish">Spanish</option>
                       </select>
                       <span className="material-symbols-outlined" style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>expand_more</span>
                     </div>

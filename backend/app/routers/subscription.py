@@ -11,9 +11,9 @@ from app.models.enums import PlanType, SubscriptionStatus
 router = APIRouter(prefix="/api/subscription", tags=["subscription"])
 
 PLAN_PRICES = {
-    PlanType.basic: 9.99,
-    PlanType.family: 14.99,
-    PlanType.annual: 99.99,
+    PlanType.basic: 250.0,
+    PlanType.family: 450.0,
+    PlanType.annual: 4800.0,
 }
 PLAN_DAYS = {
     PlanType.basic: 30,
@@ -29,26 +29,26 @@ def get_plans():
         {
             "id": "basic",
             "name": "Basic",
-            "price": 9.99,
-            "currency": "USD",
+            "price": 250.0,
+            "currency": "EGP",
             "period": "month",
-            "features": ["1 child profile", "All activity types", "Progress tracking", "Email support"],
+            "features": ["1 child profile", "All activity types", "Progress tracking", "7-day free trial"],
         },
         {
             "id": "family",
             "name": "Family",
-            "price": 14.99,
-            "currency": "USD",
+            "price": 450.0,
+            "currency": "EGP",
             "period": "month",
-            "features": ["Up to 4 children", "All activity types", "Advanced progress charts", "AI recommendations", "Priority support"],
+            "features": ["Up to 3 children", "All activity types", "Advanced progress charts", "AI recommendations", "7-day free trial"],
         },
         {
             "id": "annual",
             "name": "Annual",
-            "price": 99.99,
-            "currency": "USD",
+            "price": 4800.0,
+            "currency": "EGP",
             "period": "year",
-            "features": ["Up to 4 children", "All features", "PDF progress reports", "Save 44% vs monthly", "Priority support"],
+            "features": ["Up to 3 children", "All features", "PDF progress reports", "~11% saving", "7-day free trial"],
         },
     ]
 

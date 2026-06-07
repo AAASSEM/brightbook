@@ -5,12 +5,23 @@ import api from "@/shared/services/api";
 import { toast } from "@/shared/stores/uiStore";
 import { useT } from "@/shared/stores/langStore";
 import Spinner from "@/shared/components/ui/Spinner";
+import ApiConfigModal from "../components/ApiConfigModal";
 
 export default function AdminDashboardPage() {
   const [health, setHealth] = useState(null);
   const [aiStatus, setAiStatus] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
   const t = useT();
+
+  const fetchAiStatus = async () => {
+    try {
+      const res = await api.get("/api/admin/ai-status");
+      setAiStatus(res.data);
+    } catch (err) {
+      toast.error("Failed to load AI status");
+    }
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -196,7 +207,10 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* Configuration Button */}
-              <button className="btn btn-secondary w-full text-sm">
+              <button 
+                onClick={() => setIsConfigModalOpen(true)}
+                className="btn btn-secondary w-full text-sm"
+              >
                 <span className="material-symbols-outlined mr-1" style={{ fontSize: "16px" }}>settings</span>
                 Configure API Keys
               </button>
@@ -250,6 +264,12 @@ export default function AdminDashboardPage() {
           </div>
         </div>
       </div>
+
+      <ApiConfigModal 
+        isOpen={isConfigModalOpen} 
+        onClose={() => setIsConfigModalOpen(false)} 
+        onSaved={fetchAiStatus} 
+      />
     </div>
   );
 }

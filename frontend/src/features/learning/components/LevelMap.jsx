@@ -121,24 +121,21 @@ export function buildLevelList(activities, activityProgress, lang = 'en') {
   });
 
   // Unlock logic: handle missing groups intelligently
-  // Find first group with activities and unlock it
-  let firstGroupWithActivities = true;
+  let lastActiveLevel = null;
   for (let i = 0; i < levels.length; i++) {
     const level = levels[i];
-    const hasActivities = level.totalActivities > 0;
+    if (level.totalActivities === 0) continue;
 
-    if (hasActivities && firstGroupWithActivities) {
-      // First group with activities gets unlocked
+    if (lastActiveLevel === null) {
+      // First level with activities gets unlocked
       level.status = level.status === 'locked' ? 'current' : level.status;
-      firstGroupWithActivities = false;
-    } else if (hasActivities && !firstGroupWithActivities) {
-      // Subsequent groups follow normal completion logic
-      const prev = levels[i - 1];
-      if (level.status === 'locked' && prev.status === 'completed') {
+    } else {
+      // Subsequent levels unlock if the previous active level is completed
+      if (level.status === 'locked' && lastActiveLevel.status === 'completed') {
         level.status = 'current';
       }
     }
-    // Groups with no activities stay locked
+    lastActiveLevel = level;
   }
 
   return levels;
@@ -227,13 +224,13 @@ export default function LevelMap({ activities, activityProgress, onSelectActivit
                       cursor: isLocked ? 'not-allowed' : 'pointer',
                     }}
                   >
-                    <div className="flex items-center gap-5 p-5">
+                    <div className="flex items-center gap-3 sm:gap-5 p-4 sm:p-5">
                       {/* Level number + emoji */}
                       <div className="relative flex-shrink-0">
                         <motion.div
                           animate={isCurrent ? { scale: [1,1.08,1] } : {}}
                           transition={{ duration: 2, repeat: Infinity }}
-                          className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl font-black shadow-sm"
+                          className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl font-black shadow-sm"
                           style={{
                             background: isLocked ? '#e0e0e0' : level.isBoss ? 'linear-gradient(135deg,#ffd700,#ff9800)' : level.groupColor + '20',
                             border: `3px solid ${isLocked ? '#ccc' : level.groupColor}`,

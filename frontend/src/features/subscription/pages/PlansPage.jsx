@@ -26,18 +26,18 @@ export default function PlansPage() {
 
   const plans = [
     {
-      id: "basic", name: "Basic", price: 9.99, period: t("plans.monthly"), color: "#becab9", bg: "#ffffff",
-      features: ["1 child profile", "All 5 activity types", "Progress tracking", "Email support"],
+      id: "basic", name: "Basic", price: 250, period: t("plans.monthly"), color: "#becab9", bg: "#ffffff",
+      features: ["1 child profile", "All 5 activity types", "Progress tracking", "7-day free trial"],
     },
     {
-      id: "family", name: "Family", price: 14.99, period: t("plans.monthly"), color: "#4caf50", bg: "#f5fced",
+      id: "family", name: "Family", price: 450, period: t("plans.monthly"), color: "#4caf50", bg: "#f5fced",
       popular: true,
-      features: ["Up to 4 children", "All 5 activity types", "Advanced charts", "AI recommendations", "Priority support"],
+      features: ["Up to 3 children", "All 5 activity types", "Advanced charts", "AI recommendations", "7-day free trial"],
     },
     {
-      id: "annual", name: "Annual", price: 99.99, period: t("plans.annual"), color: "#006e1c", bg: "#e9f0e1",
-      features: ["Up to 4 children", "All features included", "PDF progress reports", "Save 44% vs monthly", "Dedicated support"],
-      savings: "Save $79.89/yr",
+      id: "annual", name: "Annual", price: 4800, period: t("plans.annual"), color: "#006e1c", bg: "#e9f0e1",
+      features: ["Up to 3 children", "All features included", "PDF progress reports", "~11% saving", "7-day free trial"],
+      savings: "Save 600 EGP/yr",
     },
   ];
 
@@ -84,8 +84,9 @@ export default function PlansPage() {
               <h2 className="text-xl font-bold mb-1" style={{ color: "#171d14" }}>{plan.name}</h2>
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-black" style={{ color: "#171d14", fontFamily: "Lexend, sans-serif" }}>
-                  ${plan.price}
+                  {plan.price.toLocaleString()}
                 </span>
+                <span className="text-sm font-bold uppercase ml-1" style={{ color: "#171d14" }}>EGP</span>
                 <span className="text-sm font-semibold" style={{ color: "#3f4a3c" }}>/{plan.period}</span>
               </div>
             </div>
